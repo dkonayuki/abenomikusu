@@ -2,8 +2,27 @@
 #{extends 'Application/main.html' /}
 <div id="blanket" style="display:none"></div>
 <div id="upLoadPopUp" style="display:none">
-<button>Select</button>
-Title<textarea rows="1"></textarea>
-<button onclick="popup('upLoadPopUp')">Close</button>
+<form role="form">
+  <div class="form-group">
+    <input type="file" class="btn btn-primary btn-lg">
+    <img src="..." alt="..." class="img-rounded">
+  </div>
+  <div class="form-group">
+	<div class="input-group">
+	  <span class="input-group-addon">Tittle</span>
+	  <input type="text" class="form-control" placeholder="Title">
+	</div>
+	<div class="input-group">
+	  <span class="input-group-addon">Tags</span>
+	  <input type="text" class="form-control" placeholder="Tags">
+	</div>
+	<div class="form-group">
+    <label for="caption">Caption</label>
+    <input type="text" class="form-control" id="caption">
+  </div>
+  </div>
+  <button onclick="popup('upLoadPopUp')" type="submit" class="btn btn-default">Upload</button>
+  <button onclick="popup('upLoadPopUp')" type="button" class="btn btn-default">Cancel</button>
+</form>
 </div>
-<button onclick="popup('upLoadPopUp')">Upload</button>
+<button onclick="popup('upLoadPopUp')" type="button" class="btn btn-default">Upload</button>
