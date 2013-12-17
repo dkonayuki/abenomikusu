@@ -1,0 +1,11 @@
+#login_signup{
+	position absolute;
+	width: 60%;
+	min-height:500px; 
+	hight: 100%;
+	margin:50px auto;
+}
+
+#login_signup .tab-content{
+	padding: 45px;
+}
