@@ -14,4 +14,16 @@ public class Application extends Controller {
     public static void index() {
         render();
     }
+    
+    public static void main() {
+    	render();
+    }
+    
+    public static void profile(){
+    	render();
+    }
+    
+    public static void editProfile(){
+    	System.out.println("送信されました");
+    }
 }
