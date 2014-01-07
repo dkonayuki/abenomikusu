@@ -13,4 +13,11 @@ function ChangeTab_login_signup(tabname) {
 		document.getElementById(tabname).style.display = 'block';
 	}
 }
-	
+
+function showThumbNail() {
+	document.getElementById('thumbnail').style.display = "block";
+}
+
+function hideThumbNail() {
+	document.getElementById('thumbnail').style.display = "none";
+}
