@@ -1,12 +1,10 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import java.io.File;
 
-import models.*;
-
-import javax.persistence.*;
-import java.util.*;
+import models.User;
+import play.mvc.Controller;
+import play.mvc.Http;
 
 
 public class Application extends Controller {
@@ -34,20 +32,21 @@ public class Application extends Controller {
     	render(user);
     }
     
-    public static void postEditProfile(){
+    public static void postEditProfile(File file){
     	Long id = Long.parseLong(session.get("id"));
     	User user = User.find("id = ?", id).first();
     	String username = params.get("username");
     	String profile  = params.get("profile");
-    	System.out.println("\n\n");
-    	System.out.println(profile);
-    	System.out.println(params);
-    	//System.out.println(params.get("avatarInput"));
-    	System.out.println("\n\n");
     	user.username = username;
     	user.profile = profile;
     	user.save();
+    	
+    	System.out.println("\n\n");
+    	//System.out.println(params.get("uploadAvatar"));
+    	System.out.println("\n\n");
+    	
     	profile();
+    	
     }
     public static void toppage() {
     	render();
