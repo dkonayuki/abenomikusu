@@ -1,8 +1,12 @@
 package controllers;
 
+
 import play.*;
 import play.mvc.*;
 import sun.misc.BASE64Encoder;
+
+import java.io.File;
+
 
 import models.*;
 
@@ -11,6 +15,11 @@ import javax.persistence.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+
+import models.User;
+import play.mvc.Controller;
+import play.mvc.Http;
+
 
 
 public class Application extends Controller {
@@ -50,11 +59,32 @@ public class Application extends Controller {
     }
     
     public static void profile(){
-    	render();
+    	/*
+    	User user = new User("夏目漱石", "1234");
+    	user.avatar = "/public/default.png";
+    	user.profile = "吾輩は猫である　名前は既にある";
+    	user.save();
+    	*/
+    	session.put("id", 1L);
+    	User user = User.find("id = ?", Long.parseLong(session.get("id"))).first();
+    	render(user);
     }
     
-    public static void editProfile(){
-    	System.out.println("送信されました");
+    public static void postEditProfile(File file){
+    	Long id = Long.parseLong(session.get("id"));
+    	User user = User.find("id = ?", id).first();
+    	String username = params.get("username");
+    	String profile  = params.get("profile");
+    	user.set_username(username);
+    	user.set_profile(profile);
+    	user.save();
+    	
+    	System.out.println("\n\n");
+    	//System.out.println(params.get("uploadAvatar"));
+    	System.out.println("\n\n");
+    	
+    	profile();
+    	
     }
     public static void toppage() {
     	render();

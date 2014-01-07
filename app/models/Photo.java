@@ -10,6 +10,7 @@ import java.util.*;
 @Entity
 public class Photo extends Model{
     //public static int id; //	auto make, auto increment
+
 	private String url;
 	private String title;
 	private String caption;
@@ -18,6 +19,7 @@ public class Photo extends Model{
 //  private List<Comment> comments;
     private Date date;
     private HashMap<Long,Integer> rank;//<userid,point>
+
     
     public void put_rank(long user_id,int point){
     	this.rank.put(user_id, point);
@@ -52,9 +54,7 @@ public class Photo extends Model{
     	this.url=url;
     	this.title=title;
     	this.caption=caption;
-//    	this.tag=new ArrayList<String>();
     	this.user=user;
-//    	this.comments=new ArrayList<Comment>();
     	this.date=new Date();
     	this.rank=new HashMap<Long,Integer>();
     }

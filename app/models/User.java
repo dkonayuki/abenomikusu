@@ -12,6 +12,7 @@ import java.util.*;
 
 
 //TODO 画像のアップロードetc
+
 @Entity
 public class User extends Model{
     //public static int id; //	auto make, auto increment
@@ -23,6 +24,7 @@ public class User extends Model{
 //    private List<User> folower;
 //    private List<Photo> photos;
     private HashMap<Long,User> folower;//List<user_id>
+
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
     public boolean compare_pass(String pass) throws NoSuchAlgorithmException{
@@ -75,5 +77,6 @@ public class User extends Model{
 			passDigest = b64digest.trim();
 		}
 		return passDigest;
+
     }
 }
