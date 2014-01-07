@@ -10,7 +10,8 @@
             <img class="sn-avatar-mask" height="110" width="110" src="http://farm4.staticflickr.com/3717/buddyicons/12521320@N08_r.jpg?1386337584#12521320@N08">
         </div>
         <div class="person">
-             <h1><span class="character-name-holder">
+             <h1>
+             	<span class="character-name-holder">
                 Nam Nguyen Hoai
                 </span>
             </h1>
@@ -50,6 +51,7 @@
         </div>
     </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -60,28 +62,31 @@
       </div> -->
             <div class="modal-body">
                 <form role="form">
-                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                        <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
-                        <div> <span class="btn btn-file">
-			    	<span class="fileupload-new">Select Image</span>
-					<span class="fileupload-exists">Change</span>
-
-                            <input type="file" />
-                            </span> <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-
+                    <div class="fileinput fileinput-new" data-provides="fileinput" style="width: 100%; height:100%;">
+                    	<div class="fileinput-preview thumbnail" data-trigger="fileinput">
+                    	</div>
+                        
+                        <div> 
+                        	<span class="btn btn-default btn-file">
+                        		<span class="fileinput-new">Select image</span>
+                        		<span class="fileinput-exists">Change</span>
+                        		<input type="file" name="...">
+                            </span> 
+                            
+                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="input-group" style="margin-top: 20px"> <span class="input-group-addon">Tittle</span>
+                        <div class="input-group" style="margin-top: 10px"> <span class="input-group-addon">Tittle</span>
 
                             <input type="text" class="form-control" placeholder="Title">
                         </div>
-                        <div class="input-group" style="margin-top: 20px"> <span class="input-group-addon">Tags</span>
+                        <div class="input-group" style="margin-top: 10px"> <span class="input-group-addon">Tags</span>
 
                             <input type="text" class="form-control" placeholder="Tags">
                         </div>
-                        <div class="form-group" style="margin-top: 20px">
-                            <label for="caption" style="margin-bottom: 20px">Caption</label>
+                        <div class="form-group" style="margin-top: 10px">
+                            <label for="caption" style="margin-bottom: 10px">Caption</label>
                             <input type="text" class="form-control" id="caption">
                         </div>
                     </div>
