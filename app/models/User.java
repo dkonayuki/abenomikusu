@@ -6,6 +6,7 @@ import play.db.jpa.*;
 import javax.persistence.*;
 import java.util.*;
 
+@Entity
 public class User extends Model{
     //public static int id; //	auto make, auto increment
     public String pass;//digested
@@ -13,8 +14,8 @@ public class User extends Model{
     public String profile;
     public String avatar;//URL
     public String cover;//URL
-    public List<User> folower;
-    public List<Photo> photos;
+    //public List<User> folower;
+    //public List<Photo> photos;
     
     public User(String username, String pass) {
     	this.username=username;
@@ -22,7 +23,7 @@ public class User extends Model{
     	this.profile="よろしくお願いします。";
     	this.avatar="";//default icon URL
     	this.cover="";//default cover URL
-    	this.folower=new ArrayList<User>();
-    	this.photos=new ArrayList<Photo>();
+    	//this.folower=new ArrayList<User>();
+    	//this.photos=new ArrayList<Photo>();
     }
 }
