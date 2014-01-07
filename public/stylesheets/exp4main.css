@@ -10,7 +10,29 @@
 	padding: 45px;
 }
 
+
 #profileEditPage{
 	width:90%;
+}
+.btn-file {
 	
+	.buttonBackground(@primaryButtonBackground, spin(@primaryButtonBackground, 20));
+
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: center;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: #FF0000;
+    cursor: inherit;
+    display: block;
 }

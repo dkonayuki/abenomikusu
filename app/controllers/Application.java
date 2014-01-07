@@ -29,6 +29,7 @@ public class Application extends Controller {
         render();
     }
     
+
     public static void login_signup(){render();}
     
     public static void post_login_info(){}
@@ -57,7 +58,7 @@ public class Application extends Controller {
         map.put("result", "OK");
         renderJSON(map);
     }
-    
+
     public static void profile(){
     	/*
     	User user = new User("夏目漱石", "1234");
@@ -84,8 +85,12 @@ public class Application extends Controller {
     	System.out.println("\n\n");
     	
     	profile();
-    	
     }
+    
+    public static void editProfile() {
+    	System.out.println("送信されました");
+    }
+    
     public static void toppage() {
     	render();
     }
