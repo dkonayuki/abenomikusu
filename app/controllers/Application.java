@@ -2,10 +2,13 @@ package controllers;
 
 import play.*;
 import play.mvc.*;
-
 import models.*;
 
 import javax.persistence.*;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
 import java.util.*;
 
 
@@ -34,5 +37,17 @@ public class Application extends Controller {
     
     public static void toppage() {
     	render();
+    }
+    
+    public static void upload(String title, String tags, File photo) {
+        if (photo != null) {
+            String targetPath = "public/" + photo.getName();
+            photo.renameTo(new File(targetPath));
+            //FileUtils.moveFile(photo, new File("public/images/products", photo.getName()));
+            System.out.println("File saved in " + targetPath);
+        } else {
+            System.out.println("File not found");
+        }  
+        toppage();
     }
 }
