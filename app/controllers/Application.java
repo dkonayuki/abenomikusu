@@ -39,6 +39,10 @@ public class Application extends Controller {
     	render();
     }
     
+    public static void home() {
+    	render();
+    }
+    
     public static void upload(String title, String tags, File photo) {
         if (photo != null) {
             String targetPath = "public/" + photo.getName();
