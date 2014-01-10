@@ -458,6 +458,7 @@
     border-right:1px solid black;
     border-left:1px solid rgba(255, 255, 255, 0.2);
     width:auto;
+    display:inline;
     text-align:center;
     padding:0;
     color:#FFF;
@@ -477,7 +478,6 @@
     font-size:inherit;
     float:left;
 }
-
 
 .subnav-refresh .subnav-middle ul.nav-links li.sn-navitem a {
     text-shadow:1px 1px 2px #000;
@@ -520,7 +520,19 @@
     border:0
 }
 .subnav-refresh .subnav-middle ul.nav-links.nav-links-tools li.sn-navitem {
-    padding:0;
+	padding:0;
     border-right:0;
     border-left:1px solid black
+}
+
+/* search */
+
+.subnav-refresh .subnav-middle ul.nav-links li.search { 
+	float:right;
+	padding:6px 30px 6px 30px;
+	margin:auto;
+	height:100%;
+	border-radius:15px;
+	-moz-border-radius:15px; 
+	-webkit-border-radius:15px;
 }
