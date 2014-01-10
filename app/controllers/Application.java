@@ -29,6 +29,7 @@ public class Application extends Controller {
         render();
     }
     
+
     public static void login_signup(){render();}
     
     public static void post_login_info(){}
@@ -56,6 +57,7 @@ public class Application extends Controller {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("result", "OK");
         renderJSON(map);
+
     }
     
     public static void profile(){
@@ -84,8 +86,17 @@ public class Application extends Controller {
     	System.out.println("\n\n");
     	
     	profile();
-    	
+    }    	
+
+    public static void avatars(){
+    	//List<UploadPhoto> uploadphotos = Photo.findAll();
+        //render(UploadPhotos);
     }
+    
+    public static void editProfile() {
+    	System.out.println("送信されました");
+    }
+    
     public static void toppage() {
     	render();
     }
