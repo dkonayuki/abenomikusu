@@ -86,13 +86,6 @@ public class Application extends Controller {
     }
 
     public static void profile(){
-    	/*
-    	User user = new User("夏目漱石", "1234");
-    	user.avatar = "/public/default.png";
-    	user.profile = "吾輩は猫である　名前は既にある";
-    	user.save();
-    	*/
-    	//session.put("id", 1L);
     	Long id = Long.parseLong(session.get("login_user"));
     	User user = User.find("id = ?", id).first();
     	render(user);
@@ -100,7 +93,6 @@ public class Application extends Controller {
     
     public static void postEditProfile(File uploadAvatar){
     	Long id = Long.parseLong(session.get("login_user"));
-    	
     	User user = User.find("id = ?", id).first();
     	String username = params.get("username");
     	String profile  = params.get("profile");
@@ -125,7 +117,7 @@ public class Application extends Controller {
      * avatar content
      */
     public static void avatarContent(String name) {
-        Avatar avatar = Avatar.findByName(name);
+    	Avatar avatar = Avatar.findByName(name);
         renderBinary(avatar.file);
     }
 

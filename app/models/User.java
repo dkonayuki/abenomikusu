@@ -58,7 +58,7 @@ public class User extends Model{
     	this.username=username;
     	this.pass=digest(pass);
     	this.profile="よろしくお願いします。";
-    	this.avatar="";//default icon URL
+    	this.avatar="/public/images/default.png";//default icon URL
     	this.cover="";//default cover URL
 //    	this.folower=new TreeSet<Integer>();
 //    	this.photos=new ArrayList<Photo>();
