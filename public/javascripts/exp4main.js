@@ -14,6 +14,13 @@ function ChangeTab_login_signup(tabname) {
 	}
 }
 
+function showThumbNail() {
+	document.getElementById('thumbnail').style.display = "block";
+}
+
+function hideThumbNail() {
+	document.getElementById('thumbnail').style.display = "none";
+}
 function login_check(){//TODO toppageに行くときにUser情報を何かしらの方法で保存しておく
 	var name=document.login.inputName_login.value;
 	var pass=document.login.inputPassword_login.value;
@@ -117,4 +124,3 @@ function signup_check(){//TODO toppageに行くときにUser情報を何かし�
 function enc(s) {
     return encodeURIComponent(s).replace(/%20/g, '+');
 }
-	
