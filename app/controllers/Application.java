@@ -101,11 +101,7 @@ public class Application extends Controller {
         Avatar avatar = Avatar.findByName(name);
         renderBinary(avatar.file);
     }
-    
-    public static void newAvatar() {
-        render();
-    }
-    
+
     public static void toppage() {
     	render();
     }
