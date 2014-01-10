@@ -103,6 +103,7 @@ public class Application extends Controller {
     
     public static void home() {
     	List<Photo> photos = Photo.all().fetch();
+    	
     	render(photos);
     }
     
