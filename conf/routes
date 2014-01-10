@@ -7,6 +7,8 @@ GET     /robots.txt                             404
 
 # /app/static/ に置かれた静的リソースを /public/ で公開
 GET     /public/                                staticDir:public
+GET     /uploads/								staticDir:uploads
+
 
 # exp4main
 GET     /                                       Application.index
@@ -15,3 +17,7 @@ GET     /                                       Application.index
 # 上記以外のリクエストをすべて受け取る
 *       /{controller}/                          {controller}.index
 *       /{controller}/{action}                  {controller}.{action}
+
+
+GET    /{name}/content							Application.photoContent
+POST    /										Application.uploadAvatar

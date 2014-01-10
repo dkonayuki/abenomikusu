@@ -8,21 +8,3 @@ function avatarChange(obj) {
 	}
 	reader.readAsDataURL(obj.files[0]);
 }
-
-
-/*
-jQuery(document).ready(function(){
-    // ボタンが押されたとき
-    jQuery("#cancel").click(function(){
-    	console.log("ボタンが押された");
-        jQuery('#avatarInput').upload(
-           '@{postEditProfile()}',    // 送信先
-            {type:'photo'},     // 同時にPOSTするデータ
-            function (result) {
-                jQuery("#results").html(result);
-            },
-            'text'       // 戻り値の種類
-        );
-    });
-});
-*/
