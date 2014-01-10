@@ -72,29 +72,38 @@ public class Application extends Controller {
     	render(user);
     }
     
-    public static void postEditProfile(File file){
+    public static void postEditProfile(File uploadAvatar){
     	Long id = Long.parseLong(session.get("id"));
+    	
     	User user = User.find("id = ?", id).first();
     	String username = params.get("username");
     	String profile  = params.get("profile");
     	user.set_username(username);
     	user.set_profile(profile);
     	user.save();
-    	
-    	System.out.println("\n\n");
-    	//System.out.println(params.get("uploadAvatar"));
-    	System.out.println("\n\n");
+    	Avatar.create(uploadAvatar, id);
     	
     	profile();
     }    	
 
+    /*
+     * アバターの一覧表示(for debug)
+     */
     public static void avatars(){
-    	//List<UploadPhoto> uploadphotos = Photo.findAll();
-        //render(UploadPhotos);
+    	List<Avatar> avatars = Avatar.findAll();
+        render(avatars);
     }
     
-    public static void editProfile() {
-    	System.out.println("送信されました");
+    /*
+     * avatar content
+     */
+    public static void avatarContent(String name) {
+        Avatar avatar = Avatar.findByName(name);
+        renderBinary(avatar.file);
+    }
+    
+    public static void newAvatar() {
+        render();
     }
     
     public static void toppage() {
@@ -102,6 +111,7 @@ public class Application extends Controller {
     }
     
     public static void home() {
+    	//render();
     	List<Photo> photos = Photo.all().fetch();
     	
     	render(photos);

@@ -1,0 +1,14 @@
+#{extends 'Application/main.html' /}
+#{set title:'All photos' /}
+
+<h1>${avatars.size() ?: 'No'} photo(s) found</h1>
+
+#{list items:avatars, as:'avatar'}
+<div class="avatar">
+    <img src="@{Application.avatarContent(avatar.name)}" height="100" />
+    <div>
+        <span class="name">${avatar.name}</span>
+        <span class="size">${avatar.size}</span>
+    </div>
+</div>
+#{/list}
