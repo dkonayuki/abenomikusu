@@ -54,7 +54,7 @@ function login_check(){//TODO toppageに行くときにUser情報を何かしら
 	        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
 	        var data = eval("(" + body + ")");
 	        if(data.result=="OK"){
-	        	document.location = "/toppage";
+	        	document.location = "/home";
 	        }else{
 	        	alert("名前かパスワードが間違っています");
 	            document.getElementById("inputName_login").value = "";
@@ -107,7 +107,7 @@ function signup_check(){//TODO toppageに行くときにUser情報を何かし�
 	        var data = eval("(" + body + ")");
 	        if(data.result=="OK"){
 	        	alert("登録が完了しました。");
-	        	document.location = "/toppage";
+	        	document.location = "/home";
 	        }else{
 	        	alert("その名前は既に使われています");
 	            document.getElementById("inputName_signup").value = "";
