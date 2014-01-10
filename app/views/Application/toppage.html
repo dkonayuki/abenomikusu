@@ -1,57 +1,6 @@
 *{<meta charset="utf-8">}*
-#{extends 'Application/main.html' /}
+#{extends 'Application/header.html' /}
 <!-- Button trigger modal -->
-<div class="subnav-refresh subnav-view subnav-state-ready" id="subnav-refresh" style="left: 0px; width: auto; ">
-    <div class="cover-photo-holder">
-        <div id="cover-photo" class="cover-photo wviewvert" style="background-image: url(http://farm6.staticflickr.com/5477/coverphoto/12521320@N08_h.jpg?1376067409#12521320@N08); top: -35px; "></div>
-    </div>
-    <div class="subnav-middle">
-        <div class="sn-avatar sn-avatar-size-300 sn-avatar-editable">
-            <img class="sn-avatar-mask" height="110" width="110" src="http://farm4.staticflickr.com/3717/buddyicons/12521320@N08_r.jpg?1386337584#12521320@N08">
-        </div>
-        <div class="person">
-             <h1>
-             	<span class="character-name-holder">
-                Nam Nguyen Hoai
-                </span>
-            </h1>
-
-             <h2>
-                e n e i m ™
-            </h2>
-
-        </div>
-        <div class="stats">
-            <div class="stat statcount">
-                 <h1>
-                    512
-                </h1>
-
-                 <h2>
-                    Photos
-                </h2>
-
-            </div>
-        </div>
-        <div class="subnav-holder">
-            <ul class="nav-links">
-                <li class="sn-navitem" data-toggle="modal" data-target="#myModal"><a href="#">Upload</a>
-
-                </li>
-                <li class="sn-navitem"><a href="@{home()}">Home</a>
-
-                </li>
-                <li class="sn-navitem"><a href="#">Timeline</a>
-
-                </li>
-                <li class="sn-navitem"><a href="#">Follower</a>
-
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -59,17 +8,16 @@
 						<form action="@{upload()}" method="post" enctype="multipart/form-data">
             		<div class="modal-body">
                     <div class="fileinput fileinput-new" data-provides="fileinput" style="width: 100%; height:100%;">
-                    	<div class="fileinput-preview thumbnail" data-trigger="fileinput">
+                    	<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="display:none;" id="thumbnail">
                     	</div>
                         
                         <div> 
-                        	<span class="btn btn-default btn-file">
+                        	<span class="btn btn-default btn-file" onclick="showThumbNail()">
                         		<span class="fileinput-new">Select image</span>
                         		<span class="fileinput-exists">Change</span>
                         		<input type="file" name="image">
                             </span> 
-                            
-                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput" onclick="hideThumbNail()">Remove</a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -83,7 +31,7 @@
                         </div>
                         <div class="form-group" style="margin-top: 10px">
                             <label for="caption" style="margin-bottom: 10px">Caption</label>
-                            <input type="text" class="form-control" id="caption">
+                            <input type="text" class="form-control" id="caption" name="caption">
                         </div>
                     </div>
             		</div>

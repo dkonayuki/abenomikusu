@@ -10,11 +10,9 @@
 	padding: 45px;
 }
 
-<<<<<<< HEAD
 #profileEditPage{
 	width:90%;
 	
-=======
 .btn-file {
 	
 	.buttonBackground(@primaryButtonBackground, spin(@primaryButtonBackground, 20));
@@ -36,5 +34,4 @@
     background: #FF0000;
     cursor: inherit;
     display: block;
->>>>>>> branch 'master' of http://www.se.cs.titech.ac.jp/lecture/exp4/git/abeno.git
 }

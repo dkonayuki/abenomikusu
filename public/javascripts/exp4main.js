@@ -14,6 +14,13 @@ function ChangeTab_login_signup(tabname) {
 	}
 }
 
+function showThumbNail() {
+	document.getElementById('thumbnail').style.display = "block";
+}
+
+function hideThumbNail() {
+	document.getElementById('thumbnail').style.display = "none";
+}
 function signup_check(){
 	var name=document.signup.inputName_signup.value;
 	var pass1=document.signup.inputPassword_signup1.value;
@@ -66,4 +73,3 @@ function signup_check(){
 function enc(s) {
     return encodeURIComponent(s).replace(/%20/g, '+');
 }
-	

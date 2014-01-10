@@ -111,15 +111,17 @@ public class Application extends Controller {
     }
     
     public static void home() {
-    	render();
+    	//render();
+    	List<Photo> photos = Photo.all().fetch();
+    	render(photos);
     }
     
-    public static void upload(String title, String tags, File image) {
+    public static void upload(String title, String tags, String caption, File image) {
         if (image != null) {
             String targetPath = "public/" + image.getName();
             image.renameTo(new File(targetPath));
-        	Photo photo = new Photo(targetPath, "", title, null);
-        	//photo.save();
+        	Photo photo = new Photo(targetPath, title, caption, null);
+        	photo.save();
             System.out.println("File saved in " + targetPath);
         } else {
             System.out.println("File not found");
