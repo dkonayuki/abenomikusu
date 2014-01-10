@@ -11,11 +11,10 @@
         </div>
         <div class="person">
              <h1>
-             	<span class="character-name-holder">
-                Nam Nguyen Hoai
+             	<span class="character-name-holder">  
+             	${user.username}
                 </span>
             </h1>
-
              <h2>
                 e n e i m ™
             </h2>
@@ -34,18 +33,20 @@
             </div>
         </div>
         <div class="subnav-holder">
-            <ul class="nav-links">
+            <ul class="nav-links" style="position:relative;">
                 <li class="sn-navitem" data-toggle="modal" data-target="#myModal"><a href="#">Upload</a>
-
                 </li>
                 <li class="sn-navitem"><a href="@{home()}">Home</a>
-
                 </li>
                 <li class="sn-navitem"><a href="#">Timeline</a>
-
                 </li>
                 <li class="sn-navitem"><a href="#">Follower</a>
-
+                </li>
+                <li class="sn-navitem"><a href="@{profile()}">Profile</a>
+                </li>
+                
+                <li class="search">
+					<span><input type="text"  placeholder="Search..." ></span>
                 </li>
             </ul>
         </div>
