@@ -46,7 +46,7 @@ public class Application extends Controller {
         }else{
         	if(users.get(0).compare_pass(pass)){
             	map.put("result", "OK");
-                session.put("login_user", users.get(0));
+                session.put("login_user", users.get(0).id);
         	}else{
         		map.put("result", "Error: wrong password");
         	}
@@ -79,7 +79,7 @@ public class Application extends Controller {
             // ID番号を取得している． 
             renderArgs.put("user", user);
             
-            session.put("login_user", user);
+            session.put("login_user", user.id);
         }
         // Map に結果を蓄え，JSON として出力
         renderJSON(map);
@@ -92,13 +92,14 @@ public class Application extends Controller {
     	user.profile = "吾輩は猫である　名前は既にある";
     	user.save();
     	*/
-    	session.put("id", 1L);
-    	User user = User.find("id = ?", Long.parseLong(session.get("id"))).first();
+    	//session.put("id", 1L);
+    	Long id = Long.parseLong(session.get("login_user"));
+    	User user = User.find("id = ?", id).first();
     	render(user);
     }
     
     public static void postEditProfile(File uploadAvatar){
-    	Long id = Long.parseLong(session.get("id"));
+    	Long id = Long.parseLong(session.get("login_user"));
     	
     	User user = User.find("id = ?", id).first();
     	String username = params.get("username");
@@ -106,8 +107,9 @@ public class Application extends Controller {
     	user.set_username(username);
     	user.set_profile(profile);
     	user.save();
-    	Avatar.create(uploadAvatar, id);
-    	
+    	if(uploadAvatar != null){
+    		Avatar.create(uploadAvatar, id);
+    	}    	
     	profile();
     }    	
 
@@ -126,7 +128,7 @@ public class Application extends Controller {
         Avatar avatar = Avatar.findByName(name);
         renderBinary(avatar.file);
     }
-    
+
     public static void toppage() {
     	render();
     }
