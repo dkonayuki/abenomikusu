@@ -118,7 +118,6 @@ public class Application extends Controller {
     }
     
     public static void toppage() {
-    	System.out.println("1234567890-");
     	render();
     }
 }
