@@ -3,55 +3,55 @@
 
 <div id="login_signup" class="well">
 	<ul class="nav nav-tabs" id="myTab">
-		<li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-		<li><a href="#signup" data-toggle="tab">Signup</a></li>
+		<li class="active"><a href="#login_tab" data-toggle="tab">Login</a></li>
+		<li><a href="#signup_tab" data-toggle="tab">Signup</a></li>
 	</ul>
 	
 	<div class="tab-content">
-		<div class="tab-pane active" id="login">
-			<form class="form-horizontal" role="form">
+		<div class="tab-pane active" id="login_tab">
+			<form class="form-horizontal" role="form" name="login">
 	 			<div class="form-group">
-	    			<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+	    			<label for="inputName_login" class="col-sm-2 control-label">Name</label>
 	    			<div class="col-sm-10">
-	      				<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+	      				<input type="text" class="form-control" id="inputName_login" name="inputName_login" placeholder="Name">
 	    			</div>
 	  			</div>
 	  			<div class="form-group">
-	    			<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+	    			<label for="inputPassword_login" class="col-sm-2 control-label">Password</label>
 	    			<div class="col-sm-10">
-	      				<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+	      				<input type="password" class="form-control" id="inputPassword_login" name="inputPassword_login" placeholder="Password">
 	    			</div>
 	 			 </div>
 	  			<div class="form-group">
 	    			<div class="col-sm-offset-2 col-sm-10">
-	     				<button type="submit" class="btn btn-default">Sign in</button>
+	     				<button type="submit" class="btn btn-default">Login</button>
 	    			</div>
 	  			</div>
 			</form>
 		</div>
-		<div class="tab-pane" id="signup">
-			<form class="form-horizontal" role="form">
+		<div class="tab-pane" id="signup_tab">
+			<form class="form-horizontal" role="form" name="signup">
 	 			<div class="form-group">
-	    			<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+	    			<label for="inputName_signup" class="col-sm-2 control-label">Name</label>
 	    			<div class="col-sm-10">
-	      				<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+	      				<input type="text" class="form-control" id="inputName_signup" name="inputName_signup" placeholder="Name">
 	    			</div>
 	  			</div>
 	  			<div class="form-group">
-	    			<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+	    			<label for="inputPassword_signup1" class="col-sm-2 control-label">Password</label>
 	    			<div class="col-sm-10">
-	      				<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+	      				<input type="password" class="form-control" id="inputPassword_signup1" name="inputPassword_signup1" placeholder="Password">
 	    			</div>
 	 			 </div>
 	 			 <div class="form-group">
-	    			<label for="inputPassword3" class="col-sm-2 control-label">Password2</label>
+	    			<label for="inputPassword_signup2" class="col-sm-2 control-label"></label>
 	    			<div class="col-sm-10">
-	      				<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+	      				<input type="password" class="form-control" id="inputPassword_signup2" name="inputPassword_signup2" placeholder="Password(identify)">
 	    			</div>
 	 			 </div>
 	  			<div class="form-group">
 	    			<div class="col-sm-offset-2 col-sm-10">
-	     				<button type="submit" class="btn btn-default">Sign in</button>
+	     				<button type="submit" class="btn btn-default" onclick="signup_check(); return false;">Sign up</button>
 	    			</div>
 	  			</div>
 			</form>
