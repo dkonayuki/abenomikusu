@@ -49,7 +49,7 @@ public class Application extends Controller {
             String targetPath = "public/" + image.getName();
             image.renameTo(new File(targetPath));
         	Photo photo = new Photo(targetPath, "", title, null);
-        	//photo.save();
+        	photo.save();
             System.out.println("File saved in " + targetPath);
         } else {
             System.out.println("File not found");
