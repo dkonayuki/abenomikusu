@@ -130,14 +130,20 @@ public class Application extends Controller {
     }
 
     public static void toppage() {
-    	render();
+    	User user = getCurrentUser();
+    	render(user);
+    }
+    
+    public static User getCurrentUser() {
+    	Long id = Long.parseLong(session.get("login_user"));
+    	User user = User.find("id = ?", id).first();
+    	return user;
     }
     
     public static void home() {
-    	//render();
     	List<Photo> photos = Photo.all().fetch();
-    	
-    	render(photos);
+    	User user = getCurrentUser();
+    	render(photos, user);    
     }
     
     public static void upload(String title, String tags, String caption, File image) {
