@@ -21,6 +21,7 @@ public class User extends Model{
     private String profile;
     private String avatar;//URL
     private String cover;//URL
+    //nickname , username wo wakete
 //    private List<User> folower;
 //    private List<Photo> photos;
     private HashMap<Long,User> folower;//List<user_id>
