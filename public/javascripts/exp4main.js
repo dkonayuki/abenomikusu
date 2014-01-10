@@ -24,7 +24,7 @@ function hideThumbNail() {
 function login_check(){//TODO toppageに行くときにUser情報を何かしらの方法で保存しておく
 	var name=document.login.inputName_login.value;
 	var pass=document.login.inputPassword_login.value;
-	alert("name: "+name+"\npass: "+pass);
+	//alert("name: "+name+"\npass: "+pass);
 	if(name==""){
 		alert("名前を入力してください");
 	}else if(pass==""){

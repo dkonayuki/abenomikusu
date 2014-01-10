@@ -46,7 +46,7 @@ public class Application extends Controller {
         }else{
         	if(users.get(0).compare_pass(pass)){
             	map.put("result", "OK");
-                session.put("login_user", users.get(0));
+                session.put("login_user", users.get(0).id);
         	}else{
         		map.put("result", "Error: wrong password");
         	}
@@ -79,7 +79,7 @@ public class Application extends Controller {
             // ID番号を取得している． 
             renderArgs.put("user", user);
             
-            session.put("login_user", user);
+            session.put("login_user", user.id);
         }
         // Map に結果を蓄え，JSON として出力
         renderJSON(map);
