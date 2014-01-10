@@ -10,6 +10,9 @@
 	padding: 45px;
 }
 
+#profileEditPage{
+	width:90%;
+	
 .btn-file {
 	
 	.buttonBackground(@primaryButtonBackground, spin(@primaryButtonBackground, 20));
@@ -32,4 +35,3 @@
     cursor: inherit;
     display: block;
 }
-
