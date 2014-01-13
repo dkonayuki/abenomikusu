@@ -4,10 +4,13 @@
 #{list items: photos, as: 'photo'}
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src=${photo.url} alt="...">
-      <div class="caption">
-        <h3>${photo.title}</h3>
+      <img src=${photo.url} alt="..."/>
+      <div class="caption" style="left:25px; position: absolute;">
+      	<h3>${photo.title}</h3>
         <p>${photo.caption}</p>
+      </div>
+      
+      <div class="deletebutton" onclick="onDeletePhoto()" style="right: 20px; position: absolute;">
       </div>
     </div>
   </div>

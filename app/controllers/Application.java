@@ -156,6 +156,10 @@ public class Application extends Controller {
         } else {
             System.out.println("File not found");
         }  
-        toppage();
+        home();
+    }
+    
+    public static void delete() {
+    	
     }
 }

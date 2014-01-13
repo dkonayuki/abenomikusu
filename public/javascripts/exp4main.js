@@ -21,6 +21,11 @@ function showThumbNail() {
 function hideThumbNail() {
 	document.getElementById('thumbnail').style.display = "none";
 }
+
+function onDeletePhoto() {
+	alert("will delete this photo later");
+}
+
 function login_check(){//TODO toppageに行くときにUser情報を何かしらの方法で保存しておく
 	var name=document.login.inputName_login.value;
 	var pass=document.login.inputPassword_login.value;
