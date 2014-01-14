@@ -3,28 +3,13 @@
 <div id="portfolio">
 <ul>
 #{list items: photos, as: 'photo'}
-<<<<<<< HEAD
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src=${photo.url} alt="..."/>
-      <div class="caption" style="left:25px; position: absolute;">
-      	<h3>${photo.title}</h3>
-        <p>${photo.caption}</p>
-      </div>
-      
-      <div class="deletebutton" onclick="onDeletePhoto()" style="right: 20px; position: absolute;">
-      </div>
-    </div>
-  </div>
-=======
-	<li id="item">
+        <li id="item">
       <img src=${photo.url} alt="...">
       <div class="caption">
         <h3>${photo.title}</h3>
         <p>${photo.caption}</p>
       </div>
   </li>
->>>>>>> 2ddbe08a8b0ca9de8a159954cad1ef52e7e8a55d
 #{/list}
 </ul>
 </div>

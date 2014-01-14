@@ -35,12 +35,21 @@
     display: block;
 }
 
-.thumbnail .caption {
-	width: 100%;
+#portfolio ul li:hover {
+	border-color: #428bca;
 }
 
-.thumbnail .deletebutton {
-	width: 25px;
+#portfolio ul li .caption {
+	
+}
+
+#portfolio ul li .caption #texter {
+	width: 75%;
+	position: absolute;
+}
+
+#portfolio ul li .caption #deleter {
+	width: 25%;
 	height: 25px;
 	margin-top: 20px;
 	right: 25px;
@@ -62,7 +71,6 @@
     transition-timing: ease-out
 }
 
-.thumbnail:hover .deletebutton {
+#portfolio ul li:hover .caption #deleter {
 	opacity: 1;
-	border-color: #428bca;
 }
