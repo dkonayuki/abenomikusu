@@ -27,8 +27,7 @@ public class Application extends Controller {
     public static void index() {
     	session.clear();
         render();
-    }
-    
+    }    
 
     public static void login_signup(){render();}
     
@@ -123,10 +122,17 @@ public class Application extends Controller {
 
     public static void toppage() {
     	User user = getCurrentUser();
-    	render(user);
+    	if (user == null)
+    		login_signup();
+    	else
+    		render(user);
     }
     
     public static User getCurrentUser() {
+    	String userId = session.get("login_user");
+    	if (userId == null)
+    		return null;
+    	
     	Long id = Long.parseLong(session.get("login_user"));
     	User user = User.find("id = ?", id).first();
     	if(user.get_avatar() == null || user.get_avatar().equals("")){
@@ -139,7 +145,10 @@ public class Application extends Controller {
     public static void home() {
     	User user = getCurrentUser();
     	List<Photo> photos = Photo.all().fetch();
-    	render(photos, user);    
+    	if (user == null)
+    		login_signup();
+    	else
+    	render(photos, user);
     }
     
     public static void upload(String title, String tags, String caption, File image) {
