@@ -24,7 +24,7 @@ public class User extends Model{
     //nickname , username wo wakete
 //    private List<User> folower;
 //    private List<Photo> photos;
-    private HashMap<Long,User> folower;//List<user_id>
+    private HashMap<Long,User> folower;//HashMap<user_id,user>
 
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
