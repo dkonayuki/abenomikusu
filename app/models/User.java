@@ -23,7 +23,8 @@ public class User extends Model{
     private String cover;//URL
     //nickname , username wo wakete
 //    private List<User> folower;
-//    private List<Photo> photos;
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+    private List<Photo> photos;
     private HashMap<Long,User> folower;//List<user_id>
 
     

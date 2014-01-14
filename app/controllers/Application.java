@@ -85,8 +85,7 @@ public class Application extends Controller {
     }
 
     public static void profile(){
-    	Long id = Long.parseLong(session.get("login_user"));
-    	User user = User.find("id = ?", id).first();
+    	User user = getCurrentUser();
     	render(user);
     }
     
