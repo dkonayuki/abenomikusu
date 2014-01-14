@@ -22,7 +22,7 @@ public class Avatar {
     public Long getSize() {
         return file.length();
     }
-
+    
     public static List<Avatar> findAll() {
         List<Avatar> all = new ArrayList<Avatar>();
         for (File file : Play.getFile(location).listFiles()) {
