@@ -11,4 +11,9 @@
 .classpath
 .project
 .settings
+!/public/
 /public/*
+!/public/fonts/
+!/public/images/
+!/public/javascripts/
+!/public/stylesheets/

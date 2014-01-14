@@ -15,8 +15,10 @@ public class Photo extends Model{
 	private String title;
 	private String caption;
 //	private List<String> tag;
+	@ManyToOne
     private User user;
-//  private List<Comment> comments;
+	@OneToMany(mappedBy="photo", cascade=CascadeType.ALL)
+	private List<Comment> comments;
     private Date date;
     private HashMap<Long,Integer> rank;//<userid,point>
 
@@ -49,6 +51,9 @@ public class Photo extends Model{
     public void set_date(Date date){this.date=date;}
     public Date get_date(){return this.date;}
     
+    public void addComment(Comment comment)	{
+    	this.comments.add(comment);
+    }
     
     public Photo(String url ,String title ,String caption ,User user){
     	this.url=url;
@@ -57,5 +62,6 @@ public class Photo extends Model{
     	this.user=user;
     	this.date=new Date();
     	this.rank=new HashMap<Long,Integer>();
+    	this.comments = new ArrayList<Comment>();
     }
 }

@@ -7,7 +7,10 @@
     </div>
     <div class="subnav-middle">
         <div class="sn-avatar sn-avatar-size-300">
-            <img class="sn-avatar-mask" height="110" width="110" src="http://farm4.staticflickr.com/3717/buddyicons/12521320@N08_r.jpg?1386337584#12521320@N08">
+        	<!--
+           	<img class="sn-avatar-mask" height="110" width="110" src="http://farm4.staticflickr.com/3717/buddyicons/12521320@N08_r.jpg?1386337584#12521320@N08">
+            -->
+            <img class="sn-avatar-mask" height="110" width="110" src="${user.avatar}">
         </div>
         <div class="person">
              <h1>
@@ -44,7 +47,8 @@
                 </li>
                 <li class="sn-navitem"><a href="@{profile()}">Profile</a>
                 </li>
-                
+                <li class="sn-navitem"><a href="@{logout()}">ログアウト</a>
+                </li>                
                 <li class="search">
 					<span><input type="text"  placeholder="Search..." ></span>
                 </li>
@@ -67,7 +71,7 @@
                         	<span class="btn btn-default btn-file" onclick="showThumbNail()">
                         		<span class="fileinput-new">Select image</span>
                         		<span class="fileinput-exists">Change</span>
-                        		<input type="file" name="image">
+                        		<input type="file" name="image" accept="image/*">
                             </span> 
                             <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput" onclick="hideThumbNail()">Remove</a>
                         </div>
