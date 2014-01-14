@@ -4,6 +4,9 @@ function submitStop(e){//Enterでの画面遷移防止
         return false;
 }
 
+function imgClicked() {
+	alert("clicked");
+}
 
 function ChangeTab_login_signup(tabname) {
 	// 全部消す
