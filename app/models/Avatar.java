@@ -9,7 +9,7 @@ import play.libs.Files;
 public class Avatar {
     
     public File file;
-    private final static String location = "/public/uploads/avatars/";
+    private final static String location = "public/uploads/avatars/";
     
     public Avatar(File file) {
         this.file = file;
@@ -38,10 +38,15 @@ public class Avatar {
     
     public static Avatar create(File file, Long id) {
         //File to = Play.getFile("uploads/avatar/" + file.getName());
-    	File to = Play.getFile(location + id + ".png");
+    	String location2 = location + id;
+    	File dir = new File(location2);
+    	if(!dir.exists()){
+    		dir.mkdir();
+    	}
+    	File to = Play.getFile(location2 + "/avatar.png");
         Files.copy(file, to);
         User user = User.find("id = ?", id).first();
-    	user.set_avatar(location + id + ".png");
+    	user.set_avatar(location2 + "/avatar.png");
 		user.save();
         return new Avatar(to);
     }

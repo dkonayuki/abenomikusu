@@ -86,6 +86,7 @@ public class Application extends Controller {
 
 	public static void profile(){
 		User user = getCurrentUser();
+		//File
 		render(user);
 	}
 
