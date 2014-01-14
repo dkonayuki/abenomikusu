@@ -5,9 +5,14 @@
 #{list items: photos, as: 'photo'}
 	<li id="item">
       <img src=${photo.url} alt="...">
+      
       <div class="caption">
+      	<div id="texter">
         <h3>${photo.title}</h3>
         <p>${photo.caption}</p>
+        </div>
+        <div id="deleter">
+      </div>
       </div>
  	</li>
 #{/list}
