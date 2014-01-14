@@ -62,7 +62,11 @@ public class User extends Model{
     	this.avatar="/public/images/default.png";//default icon URL
     	this.cover="";//default cover URL
 //    	this.folower=new TreeSet<Integer>();
-//    	this.photos=new ArrayList<Photo>();
+    	this.photos=new ArrayList<Photo>();
+    }
+    
+    public void addPhoto(Photo photo) {
+    	this.photos.add(photo);
     }
     
     private static  String digest (String password) throws NoSuchAlgorithmException{
