@@ -169,4 +169,8 @@ public class Application extends Controller {
         home();
     }
 
+    public static void logout(){
+    	session.clear();
+    	login_signup();
+    }
 }
