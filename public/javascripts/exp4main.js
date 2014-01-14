@@ -4,6 +4,7 @@ function submitStop(e){//Enterでの画面遷移防止
         return false;
 }
 
+
 function ChangeTab_login_signup(tabname) {
 	// 全部消す
 	document.getElementById('login').style.display = 'none';
