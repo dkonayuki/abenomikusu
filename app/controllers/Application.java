@@ -129,6 +129,10 @@ public class Application extends Controller {
     public static User getCurrentUser() {
     	Long id = Long.parseLong(session.get("login_user"));
     	User user = User.find("id = ?", id).first();
+    	if(user.get_avatar() == null || user.get_avatar().equals("")){
+    		user.set_avatar("/public/images/default.png");
+    		user.save();
+    	}
     	return user;
     }
     
