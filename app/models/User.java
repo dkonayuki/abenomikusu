@@ -25,8 +25,7 @@ public class User extends Model{
 //    private List<User> folower;
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Photo> photos;
-    private HashMap<Long,User> folower;//List<user_id>
-
+    private HashMap<Long,User> folower;//HashMap<user_id,user>
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
     public boolean compare_pass(String pass) throws NoSuchAlgorithmException{
