@@ -137,8 +137,8 @@ public class Application extends Controller {
     }
     
     public static void home() {
-    	List<Photo> photos = Photo.all().fetch();
     	User user = getCurrentUser();
+    	List<Photo> photos = Photo.all().fetch();
     	render(photos, user);    
     }
     
