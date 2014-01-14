@@ -27,8 +27,7 @@ public class Application extends Controller {
     public static void index() {
     	session.clear();
         render();
-    }
-    
+    }    
 
     public static void login_signup(){render();}
     
@@ -123,10 +122,17 @@ public class Application extends Controller {
 
     public static void toppage() {
     	User user = getCurrentUser();
-    	render(user);
+    	if (user == null)
+    		login_signup();
+    	else
+    		render(user);
     }
     
     public static User getCurrentUser() {
+    	String userId = session.get("login_user");
+    	if (userId == null)
+    		return null;
+    	
     	Long id = Long.parseLong(session.get("login_user"));
     	User user = User.find("id = ?", id).first();
     	if(user.get_avatar() == null || user.get_avatar().equals("")){
@@ -137,9 +143,12 @@ public class Application extends Controller {
     }
     
     public static void home() {
-    	List<Photo> photos = Photo.all().fetch();
     	User user = getCurrentUser();
-    	render(photos, user);    
+    	List<Photo> photos = Photo.find("user = ?", user).fetch();
+    	if (user == null)
+    		login_signup();
+    	else
+    	render(photos, user);
     }
     
     public static void upload(String title, String tags, String caption, File image) {
@@ -151,7 +160,7 @@ public class Application extends Controller {
         	}
             String targetPath = "public/" + user.get_username().toString() + "/" + image.getName();
             image.renameTo(new File(targetPath));
-        	Photo photo = new Photo(targetPath, title, caption, null);
+        	Photo photo = new Photo(targetPath, title, caption, user);
         	photo.save();
             System.out.println("File saved in " + targetPath);
         } else {

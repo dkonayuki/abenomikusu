@@ -15,6 +15,7 @@ public class Photo extends Model{
 	private String title;
 	private String caption;
 //	private List<String> tag;
+	@ManyToOne
     private User user;
 //  private List<Comment> comments;
     private Date date;
