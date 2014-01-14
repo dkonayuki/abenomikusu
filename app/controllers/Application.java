@@ -156,11 +156,12 @@ public class Application extends Controller {
 	public static void upload(String title, String tags, String caption, File image) {
 		if (image != null) {
 			User user = getCurrentUser();
-			File dir = new File("public/" + user.get_username().toString());
+			String targetPath = "public/" + user.get_username().toString() + "/photos";
+			File dir = new File(targetPath);
 			if (!dir.exists()) {
 				dir.mkdir();
 			}
-			String targetPath = "public/" + user.get_username().toString() + "/" + image.getName();
+			targetPath += "/" + image.getName();
 			image.renameTo(new File(targetPath));
 			Photo photo = new Photo(targetPath, title, caption, user);
 			photo.save();
