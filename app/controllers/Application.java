@@ -144,7 +144,7 @@ public class Application extends Controller {
     
     public static void home() {
     	User user = getCurrentUser();
-    	List<Photo> photos = Photo.all().fetch();
+    	List<Photo> photos = Photo.find("user = ?", user).fetch();
     	if (user == null)
     		login_signup();
     	else
@@ -160,7 +160,7 @@ public class Application extends Controller {
         	}
             String targetPath = "public/" + user.get_username().toString() + "/" + image.getName();
             image.renameTo(new File(targetPath));
-        	Photo photo = new Photo(targetPath, title, caption, null);
+        	Photo photo = new Photo(targetPath, title, caption, user);
         	photo.save();
             System.out.println("File saved in " + targetPath);
         } else {
