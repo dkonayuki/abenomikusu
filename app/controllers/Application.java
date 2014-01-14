@@ -168,6 +168,10 @@ public class Application extends Controller {
         }  
         home();
     }
+    
+    public static void delete() {
+
+    }
 
     public static void logout(){
     	session.clear();
