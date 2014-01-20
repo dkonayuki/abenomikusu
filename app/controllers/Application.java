@@ -160,7 +160,7 @@ public class Application extends Controller {
 			String targetPath = "public/" + user.get_username().toString() + "/photos";
 			File dir = new File(targetPath);
 			if (!dir.exists()) {
-				dir.mkdir();
+				dir.mkdirs();
 			}
 			targetPath += "/" + image.getName();
 			image.renameTo(new File(targetPath));
