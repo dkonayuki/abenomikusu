@@ -72,6 +72,7 @@ public class Application extends Controller {
 			User user = new User(name, pass);
 			user.save();
 
+			
 			// 埋め込むべき変数をテンプレートに渡す．
 			// テンプレートからはキー名で参照できる．
 			// テンプレートからは，${entry.id} として該当データで自動生成された
@@ -158,9 +159,10 @@ public class Application extends Controller {
 		if (image != null) {
 			User user = getCurrentUser();
 			String targetPath = "public/" + user.get_username().toString() + "/photos";
+			//String targetPath = "public";
 			File dir = new File(targetPath);
 			if (!dir.exists()) {
-				dir.mkdir();
+				dir.mkdirs();
 			}
 			targetPath += "/" + image.getName();
 			image.renameTo(new File(targetPath));
