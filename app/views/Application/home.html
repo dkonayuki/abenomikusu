@@ -4,7 +4,9 @@
 <ul>
 #{list items: photos, as: 'photo'}
 	<li id="item">
-      <img src=${photo.url} alt="..." onclick="imgClicked()">
+      <p><a class='iframe' href="http://wikipedia.com" onclick='imgClicked()'>
+         <img src=${photo.url} alt="...">
+      </a></p>
       
       <div class="caption">
       	<div id="texter">
