@@ -1,4 +1,36 @@
 *{<meta charset="utf-8">}*
-<div>
-	<img src=${photo.url}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	
+  	  <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/colorbox.css'}">
+  	
+  <!--
+  	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/photostyle.css'}">
+	-->
+	
+	<script type="text/javascript" src="@{'/public/javascripts/jquery-1.10.2.js'}"></script>
+  <script type="text/javascript" src="@{'/public/javascripts/bootstrap.js'}"></script>
+  <script type="text/javascript" src="@{'/public/javascripts/jquery.colorbox.js'}"></script>
+  <script type="text/javascript" src="@{'/public/javascripts/jquery.wookmark.js'}"></script>
+  <script type="text/javascript" src="@{'/public/javascripts/jqueryplugin.js'}"></script>
+  <script type="text/javascript" src="@{'/public/javascripts/exp4main.js'}"></script>
+  
+	<title>${photo.title}</title>
+</head>
+<body>
+<div class='photoview'>
+	<a href="@{photoViewer(photo.url)}"><img src=${photo.url}></a>
 </div>
+
+<script>
+$(function(){
+    parent.$.colorbox.resize({
+        innerWidth:$('body').width(),
+        innerHeight:$('body').height()
+    });
+});
+</script>
+</body>
