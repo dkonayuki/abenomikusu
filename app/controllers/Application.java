@@ -175,4 +175,10 @@ public class Application extends Controller {
 		session.clear();
 		login_signup();
 	}
+	
+	public static void follower(){
+		User user = getCurrentUser();
+		//List<User> follower = user.get_folower();
+		render(user);
+	}
 }
