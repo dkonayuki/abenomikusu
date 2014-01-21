@@ -186,9 +186,13 @@ public class Application extends Controller {
 		 * get photo from parent
 		 */
 		
+		User user = getCurrentUser();
 		Photo photo = Photo.find("url = ?", url).first();
 		// render
-		render(photo);
+		if (user == null)
+			render(photo);
+		else
+			render(photo, user);
 	}
 	
 	public static void user(long id) {

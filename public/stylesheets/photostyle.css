@@ -58,7 +58,7 @@
 	top:0;
 	left:0;
 	width:100%;
-	height:100%
+	height:100%;
 }
 
 .ui-widget{
@@ -1854,7 +1854,7 @@ blockquote small{
 }
 
 blockquote small:before{
-	content:'— '
+	content:'窶�'
 }
 
 blockquote.pull-right{
@@ -1874,7 +1874,7 @@ blockquote.pull-right small:before{
 }
 
 blockquote.pull-right small:after{
-	content:' —'
+	content:' 窶�
 }
 
 q:before,q:after,blockquote:before,blockquote:after{
@@ -6826,7 +6826,7 @@ body{
 }
 
 .loginFormHeader div{
-	font-family:"微软雅黑";
+	font-family:"蠕ｮ霓ｯ髮�ｻ�;
 	position:absolute;
 	top:5px;
 	left:8px;
@@ -6933,7 +6933,7 @@ body{
 }
 
 .ui-tooltip:after,.ui-tooltip-top:after,.ui-tooltip-right:after,.ui-tooltip-bottom:after,.ui-tooltip-left:after{
-	content:"▸";
+	content:"笆ｸ";
 	display:block;
 	font-size:2em;
 	height:0;
@@ -8404,7 +8404,7 @@ html{
 body{
 	-webkit-text-size-adjust:none;
 	margin:0;
-	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif,"微软雅黑";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif,"蠕ｮ霓ｯ髮�ｻ�;
 	font-size:12px;
 	line-height:18px;
 	color:#333;
@@ -8830,9 +8830,7 @@ image{
 }
 
 .profilePicture img{
-	-webkit-border-radius:43px;
-	-moz-border-radius:43px;
-	border-radius:43px
+	
 }
 
 .profileUpper{
@@ -9812,24 +9810,6 @@ S .smallBrick .brickActionCommentText{
 	background:#000
 }
 
-#mediaDetail.modal{
-	width:960px;
-	height:640px;
-	margin:0 0 0 -480px;
-	top:0;
-	border-top-left-radius:0;
-	border-top-right-radius:0;
-	border:solid 1px #777;
-	border-top:none
-}
-
-#mediaDetail .modal-body{
-	height:640px;
-	max-height:640px;
-	padding:0;
-	overflow:hidden
-}
-
 .mediaDetailContainer{
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
@@ -9872,7 +9852,7 @@ S .smallBrick .brickActionCommentText{
 }
 
 .bigPhoto{
-	position:absolute;
+	position:relative;
 	top:14px;
 	left:14px;
 	width:612px;
@@ -9882,20 +9862,11 @@ S .smallBrick .brickActionCommentText{
 	overflow:hidden
 }
 
-.bigPhoto img{
+.bigPhoto img{	
 	width:612px;
 	height:612px;
 	display:block;
 	cursor:pointer
-}
-
-.videoPlayer{
-	position:absolute;
-	top:0;
-	left:0;
-	width:612px;
-	height:612px;
-	z-index:8009
 }
 
 .fp-embed{
@@ -10032,7 +10003,7 @@ S .smallBrick .brickActionCommentText{
 	min-height:100px;
 	z-index:8007;
 	text-align:left;
-	height:626px
+	
 }
 
 .userInfoBar{
@@ -10054,9 +10025,7 @@ S .smallBrick .brickActionCommentText{
 	width:50px;
 	height:50px;
 	display:block;
-	-moz-border-radius:25px;
-	-webkit-border-radius:25px;
-	border-radius:25px
+	
 }
 
 .userRightInfo{
