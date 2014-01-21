@@ -167,6 +167,8 @@ public class Application extends Controller {
 			image.renameTo(new File(targetPath));
 			Photo photo = new Photo(targetPath, title, caption, user);
 			photo.save();
+			user.addPhoto(photo);
+			user.save();
 			System.out.println("File saved in " + targetPath);
 		} else {
 			System.out.println("File not found");
