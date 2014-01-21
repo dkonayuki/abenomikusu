@@ -150,7 +150,6 @@ public class Application extends Controller {
 			login_signup();
 		else{	
 			List<Photo> photos = Photo.find("user = ?", user).fetch();
-
 			render(photos, user);
 		}
 	}
@@ -188,5 +187,15 @@ public class Application extends Controller {
 		Photo photo = Photo.find("url = ?", url).first();
 		// render
 		render(photo);
+	}
+	
+	public static void user(long id) {
+		User user = User.find("id = ?", id).first();
+		if (user == null)
+			home();
+		else{
+			List<Photo> photos = Photo.find("user = ?", user).fetch();
+			render(photos, user);
+		}
 	}
 }
