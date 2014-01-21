@@ -27,6 +27,7 @@ public class User extends Model{
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Photo> photos;
     private HashMap<Long,User> follower;//HashMap<user_id,user>
+
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
     public boolean compare_pass(String pass) throws NoSuchAlgorithmException{
@@ -51,6 +52,7 @@ public class User extends Model{
     public void add_follower(User user){
     	this.follower.put(user.id,user);
     }
+
     public void delete_folower(User user){
     	this.follower.remove(user.id);
     }

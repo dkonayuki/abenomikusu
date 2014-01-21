@@ -180,6 +180,7 @@ public class Application extends Controller {
 		login_signup();
 	}
 	
+
 	public static void photoviewer(String url) {
 		/* 
 		 * get photo from parent
@@ -197,6 +198,12 @@ public class Application extends Controller {
 		else{
 			List<Photo> photos = Photo.find("user = ?", user).fetch();
 			render(photos, user);
+			}
 		}
+
+	public static void follower(){
+		User user = getCurrentUser();
+		//List<User> follower = user.get_folower();
+		render(user);
 	}
 }
