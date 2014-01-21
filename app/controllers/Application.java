@@ -157,8 +157,7 @@ public class Application extends Controller {
 	public static void upload(String title, String tags, String caption, File image) {
 		if (image != null) {
 			User user = getCurrentUser();
-			String targetPath = "public/" + user.get_username().toString() + "/photos";
-			//String targetPath = "public";
+			String targetPath = "public/uploads/" + user.get_username().toString() + "/photos";
 			File dir = new File(targetPath);
 			if (!dir.exists()) {
 				dir.mkdirs();
