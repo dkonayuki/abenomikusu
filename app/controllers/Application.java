@@ -162,6 +162,21 @@ public class Application extends Controller {
 			user.addPhoto(photo);
 			user.save();
 			System.out.println("File saved in " + targetPath);
+			
+			//tags
+			//spaceでsplit
+			String[] tagNames = tags.replaceAll("　", " ").split(" ");
+			for(String tagName : tagNames){
+				//重複確認
+				Tag tag = Tag.find("name = ?", tagName).first();
+				if(tag == null){
+					tag = new Tag(tagName);
+					tag.save();
+				}
+				//タグと写真の関係を保存
+				TagPhotoRelation tpr = new TagPhotoRelation(tag, photo);
+				tpr.save();
+			}
 		} else {
 			System.out.println("File not found");
 		}  
@@ -169,11 +184,29 @@ public class Application extends Controller {
 	}
 	
 	public static void serchResult(){
+		User user = getCurrentUser();
+		
 		String serch = params.get("serch");
 		serch = "%" + serch +"%";
-		User user = getCurrentUser();
-		List<User> results = User.find("username like ? OR nickname like ?", serch, serch).fetch();
-		render(user, results);
+		
+		//List<User> results = User.find("username like ? OR nickname like ?", serch, serch).fetch();
+		//render(user, results);
+		
+
+		List<Photo> photos = new ArrayList();
+		List<Tag> tags = Tag.find("name like ?", serch).fetch();
+		for (Tag tag : tags){
+			List<TagPhotoRelation> relations = TagPhotoRelation.find("tagId = ?", tag.id).fetch();
+					for(TagPhotoRelation relation : relations){
+						Photo photo = Photo.find("id = ?", relation.get_photoId()).first();
+						System.out.println("写真" +photo.id);
+						if(photo != null)
+							photos.add(photo);
+					}
+		}
+		
+		System.out.println(photos);
+		render(user, photos);
 	}
 
 	public static void logout(){

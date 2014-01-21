@@ -46,3 +46,24 @@
     </div>    
 </div>
 #{/list}
+
+<div id="portfolio">
+<ul>
+#{list items: photos, as: 'photo'}
+	<li id="item">
+      <p><a class='iframe' href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
+         <img src=${photo.url} alt="...">
+      </a></p>
+      
+      <div class="caption">
+      	<div id="texter">
+        <h3>${photo.title}</h3>
+        <p>${photo.caption}</p>
+        </div>
+        <div id="deleter">
+      </div>
+      </div>
+ 	</li>
+#{/list}
+</ul>
+</div>
