@@ -19,7 +19,7 @@
                 </span>
             </h1>
              <h2>
-                Nickname
+                ${user.nickname}
             </h2>
 
         </div>
@@ -49,7 +49,7 @@
                 </li>
                 <li class="sn-navitem"><a href="#">Timeline</a>
                 </li>
-                <li class="sn-navitem"><a href="#">Follower</a>
+                <li class="sn-navitem"><a href="@{follower()}">Follower</a>
                 </li>
             #{if Long.parseLong(session.get("login_user")) == user.id} 
                 <li class="sn-navitem"><a href="@{profile()}">Profile</a>
@@ -60,9 +60,12 @@
                 </li>
             #{/else}
                 <li class="sn-navitem"><a href="@{logout()}">ログアウト</a>
-                </li>                
+                </li>
+                            
                 <li class="search">
-					<span><input type="text"  placeholder="Search..." ></span>
+                	<form name="serch" action = "@{serchResult()}" method="post">
+					<span><input type="text"  placeholder="Search..." name="serch" ></span>
+					</form>
                 </li>
             </ul>
         </div>

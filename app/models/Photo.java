@@ -14,7 +14,7 @@ public class Photo extends Model{
 	private String url;
 	private String title;
 	private String caption;
-//	private List<String> tag;
+	//private HashMap tag;
 	@ManyToOne
     private User user;
 	@OneToMany(mappedBy="photo", cascade=CascadeType.ALL)

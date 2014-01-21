@@ -18,14 +18,16 @@ public class User extends Model{
     //public static int id; //	auto make, auto increment
     private String pass;//digested
     private String username;
+    private String nickname;
     private String profile;
     private String avatar;//URL
     private String cover;//URL
     //nickname , username wo wakete
-//    private List<User> folower;
+//    private List<User> follower;
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Photo> photos;
-    private HashMap<Long,User> folower;//HashMap<user_id,user>
+    private HashMap<Long,User> follower;//HashMap<user_id,user>
+
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
     public boolean compare_pass(String pass) throws NoSuchAlgorithmException{
@@ -34,6 +36,9 @@ public class User extends Model{
     
     public void set_username(String username){this.username=username;}
     public String get_username(){return this.username;}
+    
+    public void set_nickname(String nickname){this.nickname=nickname;}
+    public String get_nickname(){return this.nickname;}
     
     public void set_profile(String profile){this.profile=profile;}
     public String get_profile(){return this.profile;}
@@ -44,18 +49,20 @@ public class User extends Model{
     public void set_cover(String cover){this.cover=cover;}
     public String get_cover(){return this.cover;}
     
-    public void add_folower(User user){
-    	this.folower.put(user.id,user);
+    public void add_follower(User user){
+    	this.follower.put(user.id,user);
     }
+
     public void delete_folower(User user){
-    	this.folower.remove(user.id);
+    	this.follower.remove(user.id);
     }
-    public HashMap get_folower(){
-    	return this.folower;
+    public HashMap get_follower(){
+    	return this.follower;
     }
     
     public User(String username, String pass) throws NoSuchAlgorithmException {
     	this.username=username;
+    	this.nickname=username;
     	this.pass=digest(pass);
     	this.profile="よろしくお願いします。";
     	this.avatar="/public/images/default.png";//default icon URL

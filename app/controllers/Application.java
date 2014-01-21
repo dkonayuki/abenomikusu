@@ -94,9 +94,9 @@ public class Application extends Controller {
 	public static void postEditProfile(File uploadAvatar){
 		Long id = Long.parseLong(session.get("login_user"));
 		User user = User.find("id = ?", id).first();
-		String username = params.get("username");
+		String nickname = params.get("nickname");
 		String profile  = params.get("profile");
-		user.set_username(username);
+		user.set_nickname(nickname);
 		user.set_profile(profile);
 		user.save();
 		if(uploadAvatar != null){
@@ -104,14 +104,6 @@ public class Application extends Controller {
 		}    	
 		profile();
 	}    	
-
-	/*
-	 * アバターの一覧表示(for debug)
-	 */
-	public static void avatars(){
-		List<Avatar> avatars = Avatar.findAll();
-		render(avatars);
-	}
 
 	/*
 	 * avatar content
@@ -157,8 +149,7 @@ public class Application extends Controller {
 	public static void upload(String title, String tags, String caption, File image) {
 		if (image != null) {
 			User user = getCurrentUser();
-			String targetPath = "public/" + user.get_username().toString() + "/photos";
-			//String targetPath = "public";
+			String targetPath = "public/uploads/" + user.get_username().toString() + "/photos";
 			File dir = new File(targetPath);
 			if (!dir.exists()) {
 				dir.mkdirs();
@@ -170,10 +161,51 @@ public class Application extends Controller {
 			user.addPhoto(photo);
 			user.save();
 			System.out.println("File saved in " + targetPath);
+			
+			//tags
+			//spaceでsplit
+			String[] tagNames = tags.replaceAll("　", " ").split(" ");
+			for(String tagName : tagNames){
+				//重複確認
+				Tag tag = Tag.find("name = ?", tagName).first();
+				if(tag == null){
+					tag = new Tag(tagName);
+					tag.save();
+				}
+				//タグと写真の関係を保存
+				TagPhotoRelation tpr = new TagPhotoRelation(tag, photo);
+				tpr.save();
+			}
 		} else {
 			System.out.println("File not found");
 		}  
 		home();
+	}
+	
+	public static void serchResult(){
+		User user = getCurrentUser();
+		
+		String serch = params.get("serch");
+		serch = "%" + serch +"%";
+		
+		//List<User> results = User.find("username like ? OR nickname like ?", serch, serch).fetch();
+		//render(user, results);
+		
+
+		List<Photo> photos = new ArrayList();
+		List<Tag> tags = Tag.find("name like ?", serch).fetch();
+		for (Tag tag : tags){
+			List<TagPhotoRelation> relations = TagPhotoRelation.find("tagId = ?", tag.id).fetch();
+					for(TagPhotoRelation relation : relations){
+						Photo photo = Photo.find("id = ?", relation.get_photoId()).first();
+						System.out.println("写真" +photo.id);
+						if(photo != null)
+							photos.add(photo);
+					}
+		}
+		
+		System.out.println(photos);
+		render(user, photos);
 	}
 
 	public static void logout(){
@@ -181,6 +213,7 @@ public class Application extends Controller {
 		login_signup();
 	}
 	
+
 	public static void photoviewer(String url) {
 		/* 
 		 * get photo from parent
@@ -202,6 +235,12 @@ public class Application extends Controller {
 		else{
 			List<Photo> photos = Photo.find("user = ?", user).fetch();
 			render(photos, user);
+			}
 		}
+
+	public static void follower(){
+		User user = getCurrentUser();
+		//List<User> follower = user.get_folower();
+		render(user);
 	}
 }

@@ -46,7 +46,7 @@ public class Avatar {
     	File to = Play.getFile(location2 + "/avatar.png");
         Files.copy(file, to);
         User user = User.find("id = ?", id).first();
-    	user.set_avatar(location2 + "/avatar.png");
+    	user.set_avatar(location2  + "/avatar.png");
 		user.save();
         return new Avatar(to);
     }
