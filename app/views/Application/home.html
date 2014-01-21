@@ -4,7 +4,7 @@
 <ul>
 #{list items: photos, as: 'photo'}
 	<li id="item">
-      <p><a class='iframe' href="http://wikipedia.com" onclick='imgClicked()'>
+      <p><a class='iframe' href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
          <img src=${photo.url} alt="...">
       </a></p>
       

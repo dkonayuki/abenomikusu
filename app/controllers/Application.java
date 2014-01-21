@@ -179,4 +179,14 @@ public class Application extends Controller {
 		session.clear();
 		login_signup();
 	}
+	
+	public static void photoviewer(String url) {
+		/* 
+		 * get photo from parent
+		 */
+		
+		Photo photo = Photo.find("url = ?", url).first();
+		// render
+		render(photo);
+	}
 }
