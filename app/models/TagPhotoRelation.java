@@ -10,8 +10,11 @@ import java.util.*;
 @Entity
 public class TagPhotoRelation extends Model{
 	//public static int id; //	auto make, auto increment
-	long tagId;
-	long photoId;
+	private long tagId;
+	private long photoId;
+	
+	public long get_photoId(){ return this.photoId;}
+	public long get_tagId(){ return this.tagId;}
 	
 	public TagPhotoRelation(Tag tag, Photo photo){
 		this.tagId = tag.id;
