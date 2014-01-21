@@ -18,6 +18,7 @@ public class User extends Model{
     //public static int id; //	auto make, auto increment
     private String pass;//digested
     private String username;
+    private String nickname;
     private String profile;
     private String avatar;//URL
     private String cover;//URL
@@ -34,6 +35,9 @@ public class User extends Model{
     
     public void set_username(String username){this.username=username;}
     public String get_username(){return this.username;}
+    
+    public void set_nickname(String nickname){this.nickname=nickname;}
+    public String get_nickname(){return this.nickname;}
     
     public void set_profile(String profile){this.profile=profile;}
     public String get_profile(){return this.profile;}
@@ -56,6 +60,7 @@ public class User extends Model{
     
     public User(String username, String pass) throws NoSuchAlgorithmException {
     	this.username=username;
+    	this.nickname=username;
     	this.pass=digest(pass);
     	this.profile="よろしくお願いします。";
     	this.avatar="/public/images/default.png";//default icon URL

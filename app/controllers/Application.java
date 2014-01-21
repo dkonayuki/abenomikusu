@@ -94,9 +94,9 @@ public class Application extends Controller {
 	public static void postEditProfile(File uploadAvatar){
 		Long id = Long.parseLong(session.get("login_user"));
 		User user = User.find("id = ?", id).first();
-		String username = params.get("username");
+		String nickname = params.get("nickname");
 		String profile  = params.get("profile");
-		user.set_username(username);
+		user.set_nickname(nickname);
 		user.set_profile(profile);
 		user.save();
 		if(uploadAvatar != null){
@@ -104,14 +104,6 @@ public class Application extends Controller {
 		}    	
 		profile();
 	}    	
-
-	/*
-	 * アバターの一覧表示(for debug)
-	 */
-	public static void avatars(){
-		List<Avatar> avatars = Avatar.findAll();
-		render(avatars);
-	}
 
 	/*
 	 * avatar content
@@ -173,6 +165,14 @@ public class Application extends Controller {
 			System.out.println("File not found");
 		}  
 		home();
+	}
+	
+	public static void serchResult(){
+		String serch = params.get("serch");
+		serch = "%" + serch +"%";
+		User user = getCurrentUser();
+		List<User> results = User.find("username like ? OR nickname like ?", serch, serch).fetch();
+		render(user, results);
 	}
 
 	public static void logout(){

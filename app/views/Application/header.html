@@ -15,7 +15,7 @@
         <div class="person">
              <h1>
              	<span class="character-name-holder">  
-             	${user.username}
+             	${user.nickname}
                 </span>
             </h1>
              <h2>
@@ -62,7 +62,9 @@
                 <li class="sn-navitem"><a href="@{logout()}">ログアウト</a>
                 </li>                
                 <li class="search">
-					<span><input type="text"  placeholder="Search..." ></span>
+                	<form name="serch" action = "@{serchResult()}" method="post">
+					<span><input type="text"  placeholder="Search..." name="serch" ></span>
+					</form>
                 </li>
             </ul>
         </div>
