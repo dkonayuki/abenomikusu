@@ -7,12 +7,14 @@ import javax.persistence.*;
 
 import java.util.*;
 
-
+@Entity
 public class Comment extends Model{
 	//public static int id; //	auto make, auto increment
+	@ManyToOne
 	private User user;
 	private String content;
 	private Date date;
+	@ManyToOne
 	private Photo photo;
 
     public void set_user(User user){this.user=user;}

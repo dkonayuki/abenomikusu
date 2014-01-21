@@ -23,9 +23,9 @@ public class User extends Model{
     private String cover;//URL
     //nickname , username wo wakete
 //    private List<User> folower;
-//    private List<Photo> photos;
-    private HashMap<Long,User> folower;//List<user_id>
-
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+    private List<Photo> photos;
+    private HashMap<Long,User> folower;//HashMap<user_id,user>
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
     public boolean compare_pass(String pass) throws NoSuchAlgorithmException{
@@ -61,7 +61,11 @@ public class User extends Model{
     	this.avatar="/public/images/default.png";//default icon URL
     	this.cover="";//default cover URL
 //    	this.folower=new TreeSet<Integer>();
-//    	this.photos=new ArrayList<Photo>();
+    	this.photos=new ArrayList<Photo>();
+    }
+    
+    public void addPhoto(Photo photo) {
+    	this.photos.add(photo);
     }
     
     private static  String digest (String password) throws NoSuchAlgorithmException{
