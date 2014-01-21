@@ -15,11 +15,11 @@
         <div class="person">
              <h1>
              	<span class="character-name-holder">  
-             	${user.nickname}
+             	${user.username}
                 </span>
             </h1>
              <h2>
-                Nickname
+                ${user.nickname}
             </h2>
 
         </div>
@@ -49,7 +49,7 @@
                 </li>
                 <li class="sn-navitem"><a href="#">Timeline</a>
                 </li>
-                <li class="sn-navitem"><a href="#">Follower</a>
+                <li class="sn-navitem"><a href="@{follower()}">Follower</a>
                 </li>
             #{if Long.parseLong(session.get("login_user")) == user.id} 
                 <li class="sn-navitem"><a href="@{profile()}">Profile</a>

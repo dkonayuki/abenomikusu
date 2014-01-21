@@ -149,8 +149,7 @@ public class Application extends Controller {
 	public static void upload(String title, String tags, String caption, File image) {
 		if (image != null) {
 			User user = getCurrentUser();
-			String targetPath = "public/" + user.get_username().toString() + "/photos";
-			//String targetPath = "public";
+			String targetPath = "public/uploads/" + user.get_username().toString() + "/photos";
 			File dir = new File(targetPath);
 			if (!dir.exists()) {
 				dir.mkdirs();
@@ -214,6 +213,7 @@ public class Application extends Controller {
 		login_signup();
 	}
 	
+
 	public static void photoviewer(String url) {
 		/* 
 		 * get photo from parent
@@ -231,6 +231,12 @@ public class Application extends Controller {
 		else{
 			List<Photo> photos = Photo.find("user = ?", user).fetch();
 			render(photos, user);
+			}
 		}
+
+	public static void follower(){
+		User user = getCurrentUser();
+		//List<User> follower = user.get_folower();
+		render(user);
 	}
 }
