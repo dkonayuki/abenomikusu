@@ -22,6 +22,7 @@ public class User extends Model{
     private String profile;
     private String avatar;//URL
     private String cover;//URL
+
     @ManyToOne
     private User self;
     @OneToMany(mappedBy="self", cascade=CascadeType.ALL)
@@ -51,7 +52,7 @@ public class User extends Model{
     
     public void set_cover(String cover){this.cover=cover;}
     public String get_cover(){return this.cover;}
-    
+
     public User(String username, String pass) throws NoSuchAlgorithmException {
     	this.username=username;
     	this.nickname=username;
