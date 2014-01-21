@@ -4,6 +4,9 @@ function submitStop(e){//Enterでの画面遷移防止
         return false;
 }
 
+function imgClicked() {
+	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+}
 
 function ChangeTab_login_signup(tabname) {
 	// 全部消す
@@ -22,6 +25,11 @@ function showThumbNail() {
 function hideThumbNail() {
 	document.getElementById('thumbnail').style.display = "none";
 }
+
+function onDeletePhoto() {
+	alert("will delete this photo later");
+}
+
 function login_check(){//TODO toppageに行くときにUser情報を何かしらの方法で保存しておく
 	var name=document.login.inputName_login.value;
 	var pass=document.login.inputPassword_login.value;

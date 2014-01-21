@@ -28,3 +28,9 @@ border-radius: 2px;
 #container {
 	position: relative;
 }
+
+.disable {
+	color: #555 !important;
+	pointer-events: none;
+    cursor: default;
+}

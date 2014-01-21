@@ -19,14 +19,14 @@
                 </span>
             </h1>
              <h2>
-                e n e i m ™
+                Nickname
             </h2>
 
         </div>
         <div class="stats">
             <div class="stat statcount">
                  <h1>
-                    512
+                    ${user.getPhotoNumber()}
                 </h1>
 
                  <h2>
@@ -37,16 +37,28 @@
         </div>
         <div class="subnav-holder">
             <ul class="nav-links" style="position:relative;">
+            #{if Long.parseLong(session.get("login_user")) == user.id}
                 <li class="sn-navitem" data-toggle="modal" data-target="#myModal"><a href="#">Upload</a>
                 </li>
+            #{/if}
+            #{else}
+            	<li class="sn-navitem disable" data-toggle="modal" data-target="#myModal"><a href="#">Upload</a>
+                </li>
+            #{/else}
                 <li class="sn-navitem"><a href="@{home()}">Home</a>
                 </li>
                 <li class="sn-navitem"><a href="#">Timeline</a>
                 </li>
                 <li class="sn-navitem"><a href="#">Follower</a>
                 </li>
+            #{if Long.parseLong(session.get("login_user")) == user.id} 
                 <li class="sn-navitem"><a href="@{profile()}">Profile</a>
                 </li>
+            #{/if}
+            #{else}
+            	<li class="sn-navitem disable"><a href="@{profile()}">Profile</a>
+                </li>
+            #{/else}
                 <li class="sn-navitem"><a href="@{logout()}">ログアウト</a>
                 </li>                
                 <li class="search">

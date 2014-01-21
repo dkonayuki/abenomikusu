@@ -73,6 +73,10 @@ public class User extends Model{
     	this.photos.add(photo);
     }
     
+    public int getPhotoNumber() {
+    	return this.photos.size();
+    }
+    
     private static  String digest (String password) throws NoSuchAlgorithmException{
     	//ダイジェスト化
 		String passDigest = null;

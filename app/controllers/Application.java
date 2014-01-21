@@ -72,6 +72,7 @@ public class Application extends Controller {
 			User user = new User(name, pass);
 			user.save();
 
+			
 			// 埋め込むべき変数をテンプレートに渡す．
 			// テンプレートからはキー名で参照できる．
 			// テンプレートからは，${entry.id} として該当データで自動生成された
@@ -141,7 +142,6 @@ public class Application extends Controller {
 			login_signup();
 		else{	
 			List<Photo> photos = Photo.find("user = ?", user).fetch();
-
 			render(photos, user);
 		}
 	}
@@ -150,14 +150,17 @@ public class Application extends Controller {
 		if (image != null) {
 			User user = getCurrentUser();
 			String targetPath = "public/" + user.get_username().toString() + "/photos";
+			//String targetPath = "public";
 			File dir = new File(targetPath);
 			if (!dir.exists()) {
-				dir.mkdir();
+				dir.mkdirs();
 			}
 			targetPath += "/" + image.getName();
 			image.renameTo(new File(targetPath));
 			Photo photo = new Photo(targetPath, title, caption, user);
 			photo.save();
+			user.addPhoto(photo);
+			user.save();
 			System.out.println("File saved in " + targetPath);
 		} else {
 			System.out.println("File not found");
@@ -176,5 +179,25 @@ public class Application extends Controller {
 	public static void logout(){
 		session.clear();
 		login_signup();
+	}
+	
+	public static void photoviewer(String url) {
+		/* 
+		 * get photo from parent
+		 */
+		
+		Photo photo = Photo.find("url = ?", url).first();
+		// render
+		render(photo);
+	}
+	
+	public static void user(long id) {
+		User user = User.find("id = ?", id).first();
+		if (user == null)
+			home();
+		else{
+			List<Photo> photos = Photo.find("user = ?", user).fetch();
+			render(photos, user);
+		}
 	}
 }
