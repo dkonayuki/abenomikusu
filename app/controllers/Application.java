@@ -203,7 +203,6 @@ public class Application extends Controller {
 
 	public static void follower(){
 		User user = getCurrentUser();
-		//List<User> follower = user.get_folower();
 		render(user);
 	}
 }
