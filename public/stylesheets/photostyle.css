@@ -9817,7 +9817,7 @@ S .smallBrick .brickActionCommentText{
 }
 
 .mediaDetail{
-	width:960px;
+	max-width:960px;
 	height:640px;
 	position:relative;
 	z-index:1020
