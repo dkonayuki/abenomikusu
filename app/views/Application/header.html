@@ -60,8 +60,17 @@
                 </li>
             #{/else}
                 <li class="sn-navitem"><a href="@{logout()}">ログアウト</a>
-                </li>
-                            
+                </li>   
+            #{if (Long.parseLong(session.get("login_user")) != user.id)}
+            	#{if (!user.isFollowed(Long.parseLong(session.get("login_user")))) }
+	                <li class="sn-navitem"><a href="@{follow(user.id)}">Follow</a>
+	                </li>
+                #{/if}
+                #{else}
+	            	<li class="sn-navitem"><a href="#">Unfollow</a>
+	                </li>
+            	#{/else}   
+            #{/if}
                 <li class="search">
                 	<form name="serch" action = "@{serchResult()}" method="post">
 					<span><input type="text"  placeholder="Search..." name="serch" ></span>

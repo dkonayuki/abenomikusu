@@ -240,13 +240,22 @@ public class Application extends Controller {
 
 	public static void follower(){
 		User user = getCurrentUser();
-		HashMap map = user.get_follower();
-		ArrayList followers=new ArrayList();
-		Iterator it = map.keySet().iterator();
-        while (it.hasNext()) {
-            Object o = it.next();
-            followers.add(map.get(o));
-        }
-		render(user,followers);
+		render(user);
+	}
+	
+	public static void follow(long id) {
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+		currentUser.addFollowing(user);
+		user.addFollower(currentUser);
+		user.save();
+		currentUser.save();
+		System.out.println("**********************");
+		if (user.isFollowed(currentUser.id)) {
+			System.out.println(user.get_username() + " is followed by " + currentUser.get_username());
+		} else {
+			System.out.println("wrooooooong");
+		}
+		home();
 	}
 }
