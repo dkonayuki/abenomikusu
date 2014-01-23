@@ -13,16 +13,129 @@ ul {
 }
 
 #portfolio li img {
-  display: block;
-  margin: 0;
--moz-border-radius: 2px;
--webkit-border-radius: 2px;
-border-radius: 2px;
-	width: 200px;
+  	display: block;
+  	margin: 0;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	width: 240px;
 }
 
 #portfolio ul {
-  position: absolute;
+  	position: absolute;
+}
+
+#portfolio ul li:hover {
+	border-color: #428bca;
+}
+
+#portfolio ul li .caption {
+	
+}
+
+#portfolio ul li .caption #texter {
+	width: 75%;
+	position: absolute;
+}
+
+#portfolio ul li .caption #deleter {
+	width: 25%;
+	height: 25px;
+	margin-top: 20px;
+	right: 5px;
+	position: absolute;
+	background-image: url('../images/delete.png');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	float: right;
+	opacity: 0;
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing: ease-out;
+    -o-transition-duration: 0.2s;
+    -o-transition-timing: ease-out;
+    -moz-transition-duration: 0.2s;
+    -moz-transition-timing: ease-out;
+    -ms-transition-duration: 0.2s;
+    -ms-transition-timing: ease-out;
+    transition-duration: 0.2s;
+    transition-timing: ease-out
+}
+
+#portfolio ul li:hover .caption #deleter {
+	opacity: 1;
+}
+
+
+#portfolio div.zcontainer {
+	width: 100%;
+	height: auto;
+	padding: 5px;
+}
+
+.zcontainer .item {
+	width: 250px;
+	background-color: #ffffff;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	padding: 5px;
+	border: 1px solid #dedede;
+	position: relative;
+}
+
+.zcontainer .item:hover {
+	border-color: #428bca;
+}
+
+.zcontainer .item .image {
+	display: block;
+  	width: 240px;
+}
+
+.zcontainer .item .image > img {
+	margin: 0;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	width: 240px;
+	height: auto;
+}
+
+.zcontainer .item .caption {
+	height: auto;
+	width: 100%;
+}
+
+.zcontainer .item .caption .texter {
+	width: 75%;
+	position: absolute;
+}
+
+.zcontainer .item .caption .deleter {
+	width: 25%;
+	height: 25px;
+	margin-top: 20px;
+	right: 5px;
+	position: absolute;
+	background-image: url('../images/delete.png');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	float: right;
+	opacity: 0;
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing: ease-out;
+    -o-transition-duration: 0.2s;
+    -o-transition-timing: ease-out;
+    -moz-transition-duration: 0.2s;
+    -moz-transition-timing: ease-out;
+    -ms-transition-duration: 0.2s;
+    -ms-transition-timing: ease-out;
+    transition-duration: 0.2s;
+    transition-timing: ease-out
+}
+
+.zcontainer .item .caption .deleter:hover {
+	opacity: 1;
 }
 
 #container {
