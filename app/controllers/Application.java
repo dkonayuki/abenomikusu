@@ -221,11 +221,21 @@ public class Application extends Controller {
 		
 		User user = getCurrentUser();
 		Photo photo = Photo.find("url = ?", url).first();
+		
+		List<Comment> comments = Comment.find("photo = ?", photo).fetch();
+		
+		/*
+		if (comments.size() < 1) {
+			photo.addComment(new Comment(user, "this is a default comment", photo));
+			comments = photo.getComment();
+		}
+		*/
+			
 		// render
 		if (user == null)
-			render(photo);
+			render(photo, comments);
 		else
-			render(photo, user);
+			render(photo, comments, user);
 	}
 	
 	public static void user(long id) {

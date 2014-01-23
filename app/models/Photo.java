@@ -55,6 +55,10 @@ public class Photo extends Model{
     	this.comments.add(comment);
     }
     
+    public List<Comment> getComment() {
+    	return this.comments;
+    }
+    
     public Photo(String url ,String title ,String caption ,User user){
     	this.url=url;
     	this.title=title;

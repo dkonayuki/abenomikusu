@@ -1181,12 +1181,12 @@ textarea{
 
 }
 
-body{
+body {
 	margin:0;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size:14px;
 	line-height:20px;
-	color:#333;
+	color:#fff;
 	background-color:#fff
 }
 
@@ -6423,9 +6423,6 @@ a.label:hover,a.label:focus,a.badge:hover,a.badge:focus{
 	position:fixed
 }
 
-body{
-}
-
 .multiViewTopBannerWrapper{
 	height:28px;
 	height:0
@@ -8412,7 +8409,6 @@ body{
 	text-align:center;
 	overflow-x:auto;
 	overflow-y:auto;
-	min-width:1000px
 }
 
 .tooltip{
@@ -9799,12 +9795,12 @@ S .smallBrick .brickActionCommentText{
 }
 
 .mediaDetail{
-	max-width:960px;
 	width:auto;
 	height:auto;
 	margin:0 auto;
 	padding: 14px;
 	position:relative;
+	background-color:#fff;
 }
 
 .modal-header .close{
@@ -9814,21 +9810,23 @@ S .smallBrick .brickActionCommentText{
 html {overflow-y: scroll;}
 
 body {
+	max-width:1008px;
 	width:auto;
-	max-width: 960x;
 	height:auto;
+	margin: 0px auto;
 }
 
 .bigPhoto{
 	position:relative;
-	width:612px;
+	max-width:612px;
 	height:auto;
 	padding:0px;
 }
 
 .bigPhoto img{	
-	width:612px;
+	max-width:612px;
 	height:auto;
+	position: relative;
 }
 
 .fp-embed{
@@ -9884,7 +9882,6 @@ body {
 }
 
 .detailSidebar{
-	padding-top:14px;
 	padding-right:14px;
 	position:absolute;
 	top:0;
@@ -9893,11 +9890,12 @@ body {
 	min-height:100px;
 	z-index:8007;
 	text-align:left;
-	
+	height:100%;
 }
 
 .userInfoBar{
 	width:302px;
+	padding-top: 14px;
 	padding-bottom:7px
 }
 
@@ -10150,10 +10148,7 @@ body {
 .commentProfileImage img{
 	width:40px;
 	height:40px;
-	display:block;
-	-moz-border-radius:20px;
-	-webkit-border-radius:20px;
-	border-radius:20px
+	display:block;	
 }
 
 .commentCreateTime{
@@ -10594,7 +10589,7 @@ html[xmlns] .clearfix{
 }
 
 .jspPane{
-	position:absolute
+	position:relative
 }
 
 .jspVerticalBar{
