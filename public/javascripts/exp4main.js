@@ -5,7 +5,7 @@ function submitStop(e){//Enterでの画面遷移防止
 }
 
 function imgClicked() {
-	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+	$(".image").colorbox({iframe:true, width:"80%", height:"80%"});
 }
 
 function ChangeTab_login_signup(tabname) {
