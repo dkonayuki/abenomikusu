@@ -70,22 +70,24 @@
             </a>
 
         </div>
-        <div style="overflow: hidden; padding: 0px; height: auto; width: 302px;" class="detailComments">
-            <div style="height:90%; width: 302px;" class="jspContainer">
+        <div style="overflow: hidden; padding: 0px; height: 260px; width: 302px;" class="detailComments">
+            <div style="height:100%; width: 302px;" class="jspContainer">
                 <div style="padding: 0px; width: 288px; top: 0px;" class="jspPane">
                 	#{list items: comments, as: 'comment'}
-                	<div class="comment clearfix" id="detailComment_618615715494863541" fromid="13471171" commentid="618615715494863541">
+                	<div class="comment clearfix" id=${comment.id} fromid=${comment.user.id} commentid=${comment.id}>
         				<div class="commentProfileImage">
             				<a href="@{user(comment.user.id)}" title="${comment.user.username}" target="_blank">
-                				<img src="http://images.ak.instagram.com/profiles/profile_13471171_75sq_1387942925.jpg">
+                				<img src=${user.avatar}>
                 			</a>
         				</div>
         				<div class="commentBody">
-            				<a class="commentUserName" href="/lethuy89" target="_blank">lethuy89</a>
+            				<a class="commentUserName" href="@{user(comment.user.id)}" target="_blank">${comment.user.username}</a>
+            				<!--
             				<a href="javascript:void(0);" class="commentTinyButton mentionUser btn btn-info btn-mini" rel="nofollow">@mention</a>
             				<a href="javascript:void(0);" class="commentTinyButton deleteComment btn btn-danger btn-mini" rel="nofollow">Delete</a><span class="commentCreateTime">3 weeks ago </span>
+            				-->
             				<br>
-            				<span class="detailCommentText emojstext">Ngon the o dau day. Dag doi kinh len dc :))</span>
+            				<span class="detailCommentText emojstext">${comment.content}</span>
         				</div>
     				</div>
                 	#{/list}
