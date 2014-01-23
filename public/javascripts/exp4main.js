@@ -10,7 +10,8 @@ function imgClicked() {
 
 function onOpenPhotoPage() {
 	if (top.location!= self.location) {
-		top.location = self.location.href
+		var win=window.open(self.location.href, '_blank');
+  		win.focus();
 	}
 }
 
