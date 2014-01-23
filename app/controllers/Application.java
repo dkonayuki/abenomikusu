@@ -232,9 +232,9 @@ public class Application extends Controller {
 		User user = User.find("id = ?", id).first();
 		if (user == null)
 			home();
-		else{
-			List<Photo> photos = Photo.find("user = ?", user).fetch();
-			render(photos, user);
+		else {
+				List<Photo> photos = Photo.find("user = ?", user).fetch();
+				render(photos, user);
 			}
 		}
 
@@ -247,16 +247,22 @@ public class Application extends Controller {
 	public static void follow(long id) {
 		User currentUser = getCurrentUser();
 		User user = User.find("id = ?", id).first();
-		currentUser.addFollowing(user);
 		user.addFollower(currentUser);
+		currentUser.addFollowing(user);
 		user.save();
-		currentUser.save();
 		System.out.println("**********************");
+		System.out.println("user:" + user.get_username());
+		System.out.println("currentuser:" + currentUser.get_username());
+		System.out.println( user.get_username() + "'s followers count:" + user.getFollowerCount());
+		System.out.println("Follower:" + user.followers.get(0).get_username());
+		System.out.println(currentUser.get_username() + "'s followings count:" + user.getFollowingCount());
+		System.out.println("Following:" + user.followings.get(0).get_username());
+
 		if (user.isFollowed(currentUser.id)) {
 			System.out.println(user.get_username() + " is followed by " + currentUser.get_username());
 		} else {
 			System.out.println("wrooooooong");
 		}
-		home();
+		user(id);
 	}
 }

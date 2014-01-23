@@ -26,12 +26,11 @@ public class User extends Model{
     @ManyToOne
     private User self;
     @OneToMany(mappedBy="self", cascade=CascadeType.ALL)
-    private List<User> followings; //自分がfollowている人のリスト
+    public List<User> followings; //自分がfollowている人のリスト
     @OneToMany(mappedBy="self", cascade=CascadeType.ALL)
-    private List<User> followers; //自分をfollowしている人のリスト
+    public List<User> followers; //自分をfollowしている人のリスト
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Photo> photos;
-    //private HashMap<Long,User> folower;//HashMap<user_id,user>
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
     public boolean compare_pass(String pass) throws NoSuchAlgorithmException{
@@ -63,6 +62,7 @@ public class User extends Model{
     	this.followers = new ArrayList<User>();
     	this.followings = new ArrayList<User>();
     	this.photos = new ArrayList<Photo>();
+    	this.self = this;
     }
     
     public void addPhoto(Photo photo) {
@@ -88,6 +88,9 @@ public class User extends Model{
     public void deleteFollower(User user) {
     	this.followers.remove(user);
     }
+    public int getFollowerCount() {
+    	return this.followers.size();
+    }
     public boolean isFollowing(User user) {
     	if (this.followings.contains(user)) 
     		return true;
@@ -99,6 +102,9 @@ public class User extends Model{
     }
     public void deleteFollowing(User user) {
     	this.followings.remove(user);
+    }
+    public int getFollowingCount() {
+    	return this.followings.size();
     }
     
     public int getPhotoNumber() {
