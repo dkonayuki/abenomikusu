@@ -3,7 +3,7 @@ body {
   font-family: sans-serif;
   font-size: 12px;
   font-weight: 400;
-  background-color: #CCCCCC;
+  background-color: #ffffff;
 }
 
 .wrapper {}
@@ -16,12 +16,13 @@ body {
 #items {}
 
 #items .item {
+	border: 1px solid #dedede;
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
     background: linear-gradient(to bottom, #F6F6F6 0%, #EAEAEA 100%) repeat scroll 0 0 transparent;
-    border-radius: 4px 4px 4px 4px;
+    border-radius: 5px 5px 5px 5px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 1px rgba(0, 0, 0, 0.1), 0 3px 1px rgba(0, 0, 0, 0.05);
     text-shadow: 0 1px 0 #DDDDDD;
     width: 270px;
@@ -29,8 +30,55 @@ body {
     float: left;
 }
 
+#items .item:hover {
+	border-color:#428bca;
+}
+
 #items .item .item-content {
   padding: 10px;
+  width:75%;
+  position:relative;
+  float:left;
+}
+
+#items .item .zdelete {
+  	padding: 10px;
+  	width: 25%;
+  	margin-left: auto;
+    margin-right: auto;
+  	margin-top: 20px;
+  	display:table-cell;
+  	vertical-align:middle; 
+  	text-align:center;
+	/*background-image: url('../images/delete.png');
+	background-repeat: no-repeat;*/
+	background-size: 25px;
+	float: right;
+	left:0;
+	opacity: 0;
+	position:relative;
+	/* transition animation when hovering over items */
+	-webkit-transition-duration: 0.2s;
+    -webkit-transition-timing: ease-out;
+    -o-transition-duration: 0.2s;
+    -o-transition-timing: ease-out;
+    -moz-transition-duration: 0.2s;
+    -moz-transition-timing: ease-out;
+    -ms-transition-duration: 0.2s;
+    -ms-transition-timing: ease-out;
+    transition-duration: 0.2s;
+    transition-timing: ease-out
+}
+
+#items .item:hover .zdelete {
+	opacity:1;
+}
+
+#items .item:hover .zdelete > img:active {
+	background-size: 25px;
+	width: 25px;
+	height: 25px;
+	z-index:10;
 }
 
 #items .item .picture .description {
@@ -47,7 +95,6 @@ body {
     display: block;
     position: relative;
     z-index: 5;
-    border-top: 1px solid #999999;
     border-radius: 4px 4px 4px 4px;
 }
 
@@ -58,7 +105,7 @@ body {
 }
 
 #items .item .picture img {
-    border-radius: 2px 2px 0px 0px;
+    border-radius: 4px 4px 0px 0px;
     height: auto;
     position: relative;
     width: 100%;
