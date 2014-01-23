@@ -10,9 +10,15 @@ function imgClicked() {
 
 function onOpenPhotoPage() {
 	if (top.location!= self.location) {
-		var win=window.open(self.location.href, '_blank');
+		var win = window.open(self.location.href, '_blank');
   		win.focus();
 	}
+}
+
+function onOpenUserPage(userid) {
+	var href = "/user?id=" + userid;
+	var win = window.open(href, '_blank');
+  	win.focus();
 }
 
 function ChangeTab_login_signup(tabname) {

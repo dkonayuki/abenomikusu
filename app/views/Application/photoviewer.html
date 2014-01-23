@@ -25,11 +25,11 @@
     </div>
     <div class="detailSidebar">
         <div class="userInfoBar clearfix"> 
-        	<a class="userAvatarLink" href="javascript:hideMediaDetail();" title="Nguyễn Hoài Nam" rel="nofollow">
+        	<a class="userAvatarLink" href="javascript:onOpenUserPage(${user.id})" title=${user.username} rel="nofollow">
             	<img src=${user.avatar}>
             </a>
 
-            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:hideMediaDetail();" rel="nofollow">${user.username}</a>
+            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:onOpenUserPage(${user.id})" rel="nofollow">${user.username}</a>
 
             </div>
         </div>
@@ -62,10 +62,7 @@
             </a>
         </div>
         <div class="addCommentContainer">
-            <textarea class="addComment" cols="20" id="addComment" name="addComment" placeholder="Comment" rows="2"></textarea>
-            <div class="loadingComments">
-                <img src="/Content/Images/ajax-loader-arrow.gif" alt="">
-            </div> 
+            <textarea class="addComment" cols="20" id="addComment" name="addComment" placeholder="Comment" rows="2"></textarea> 
             <a style="display: none;" href="javascript:void(0);" class="showAllComments" rel="nofollow">
             	<i class="icon-chevron-down">
             	</i>
@@ -84,7 +81,7 @@
                 			</a>
         				</div>
         				<div class="commentBody">
-            				<a class="commentUserName" href="@{user(comment.user.id)}" target="_blank">${comment.user.username}</a>
+            				<a class="commentUserName" href="javascript:onOpenUserPage(${comment.user.id})" target="_blank">${comment.user.username}</a>
             				<!--
             				<a href="javascript:void(0);" class="commentTinyButton mentionUser btn btn-info btn-mini" rel="nofollow">@mention</a>
             				<a href="javascript:void(0);" class="commentTinyButton deleteComment btn btn-danger btn-mini" rel="nofollow">Delete</a><span class="commentCreateTime">3 weeks ago </span>
