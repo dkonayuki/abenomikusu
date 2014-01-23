@@ -9800,7 +9800,8 @@ S .smallBrick .brickActionCommentText{
 
 .mediaDetail{
 	max-width:960px;
-	height: auto;
+	width:auto;
+	height:auto;
 	padding: 14px;
 	position:relative;
 }
@@ -9822,13 +9823,11 @@ body {
 	width:612px;
 	height:auto;
 	padding:0px;
-	cursor:pointer;
-	overflow:hidden;
 }
 
 .bigPhoto img{	
 	width:612px;
-	height:100%;
+	height:auto;
 }
 
 .fp-embed{
