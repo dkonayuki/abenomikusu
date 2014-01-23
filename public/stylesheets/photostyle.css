@@ -9802,6 +9802,7 @@ S .smallBrick .brickActionCommentText{
 	max-width:960px;
 	width:auto;
 	height:auto;
+	margin:0 auto;
 	padding: 14px;
 	position:relative;
 }

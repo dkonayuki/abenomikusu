@@ -8,6 +8,12 @@ function imgClicked() {
 	$(".image").colorbox({iframe:true, width:"80%", height:"80%"});
 }
 
+function onOpenPhotoPage() {
+	if (top.location!= self.location) {
+		top.location = self.location.href
+	}
+}
+
 function ChangeTab_login_signup(tabname) {
 	// 全部消す
 	document.getElementById('login').style.display = 'none';

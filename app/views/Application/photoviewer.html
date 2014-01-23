@@ -16,11 +16,12 @@
   	<script type="text/javascript" src="@{'/public/javascripts/exp4main.js'}"></script>
   
 	<title>${photo.title}</title>
+
 </head>
 <body>
 <div class="mediaDetail">
     <div class="bigPhoto" style="z-index: 8008;">
-        <img src=${photo.url}>
+        <img src=${photo.url} onclick="onOpenPhotoPage()">
     </div>
     <div class="detailSidebar">
         <div class="userInfoBar clearfix"> 
@@ -85,6 +86,7 @@ $(function(){
         innerHeight:$('body').height()
     });
 });
+
 </script>
 </body>
 </html>
