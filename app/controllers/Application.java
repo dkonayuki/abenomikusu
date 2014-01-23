@@ -240,6 +240,13 @@ public class Application extends Controller {
 
 	public static void follower(){
 		User user = getCurrentUser();
-		render(user);
+		HashMap map = user.get_follower();
+		ArrayList followers=new ArrayList();
+		Iterator it = map.keySet().iterator();
+        while (it.hasNext()) {
+            Object o = it.next();
+            followers.add(map.get(o));
+        }
+		render(user,followers);
 	}
 }

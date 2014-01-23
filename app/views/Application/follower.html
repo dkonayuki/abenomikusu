@@ -1,25 +1,25 @@
 *{<meta charset="utf-8">}*
 #{extends 'Application/header.html' /}
 <div id="follower">
-#{list items: user.follower, as: 'follower'}
+#{list items: followers, as: 'follower'}
 	<div class="row" style="margin:10px;">
 		<div class="col-md-10 col-md-offset-1" style="min-height:200px; background-image: url(http://farm6.staticflickr.com/5477/coverphoto/12521320@N08_h.jpg?1376067409#12521320@N08); border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;">
 			<div class="row">
 				<div class="col-md-2">
 					<div style="position:absolute; top:25px">
-							<img height="auto" width="100%" src="${user.avatar}">
+							<img height="auto" width="100%" src="${follower.avatar}">
 					</div>
 				</div>
 				<div class="col-md-9" style="color:#ffffff; top:25px;">
 					<div>
 						<h1 style="display:inline">hoge </h1>
-						<h4 style="display:inline">${user.profile}</h4>
+						<h4 style="display:inline">${follower.profile}</h4>
 					</div>
 					<div style="margin:10px">
-						<img height="100px" width="auto" src="${user.avatar}">
-						<img height="100px" width="auto" src="${user.avatar}">
-						<img height="100px" width="auto" src="${user.avatar}">
-						<img height="100px" width="auto" src="${user.avatar}">
+						<img height="100px" width="auto" src="${follower.avatar}">
+						<img height="100px" width="auto" src="${follower.avatar}">
+						<img height="100px" width="auto" src="${follower.avatar}">
+						<img height="100px" width="auto" src="${follower.avatar}">
 					</div>
 				</div>
 				<div class="col-md-1" style="position:absolute; top:90px; right:20px">
