@@ -43,7 +43,8 @@ body {
 
 #items .item .zdelete {
   	padding: 10px;
-  	width: 25%;
+  	width: 45px;
+	height: 25px;
   	margin-left: auto;
     margin-right: auto;
   	margin-top: 20px;
@@ -51,11 +52,10 @@ body {
   	vertical-align:middle; 
   	text-align:center;
 	/*background-image: url('../images/delete.png');
-	background-repeat: no-repeat;*/
-	background-size: 25px;
+	background-repeat: no-repeat;
+	background-size: 25px;*/
 	float: right;
-	left:0;
-	opacity: 0;
+	opacity: 0.5;
 	position:relative;
 	/* transition animation when hovering over items */
 	-webkit-transition-duration: 0.2s;
@@ -72,6 +72,10 @@ body {
 
 #items .item:hover .zdelete {
 	opacity:1;
+}
+
+#items .item .zdelete > img {
+	background-size: 25px;
 }
 
 #items .item:hover .zdelete > img {
