@@ -10157,7 +10157,7 @@ body {
 
 .commentBody{
 	float:left;
-	width:241px;
+	width:232px;
 	margin-left:7px
 }
 
@@ -10584,7 +10584,7 @@ html[xmlns] .clearfix{
 }
 
 .jspContainer{
-	overflow:hidden;
+	overflow:auto;
 	position:relative
 }
 
