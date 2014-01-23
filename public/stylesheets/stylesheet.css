@@ -74,11 +74,10 @@ body {
 	opacity:1;
 }
 
-#items .item:hover .zdelete > img:active {
+#items .item:hover .zdelete > img {
 	background-size: 25px;
 	width: 25px;
 	height: 25px;
-	z-index:10;
 }
 
 #items .item .picture .description {

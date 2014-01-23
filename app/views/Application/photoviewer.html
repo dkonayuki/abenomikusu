@@ -10,35 +10,32 @@
   	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/photostyle.css'}">
 	
 	<script type="text/javascript" src="@{'/public/javascripts/jquery-1.10.2.js'}"></script>
-  <script type="text/javascript" src="@{'/public/javascripts/bootstrap.js'}"></script>
-  <script type="text/javascript" src="@{'/public/javascripts/jquery.colorbox.js'}"></script>
-  <script type="text/javascript" src="@{'/public/javascripts/jquery.wookmark.js'}"></script>
-  <script type="text/javascript" src="@{'/public/javascripts/jqueryplugin.js'}"></script>
-  <script type="text/javascript" src="@{'/public/javascripts/exp4main.js'}"></script>
+  	<script type="text/javascript" src="@{'/public/javascripts/bootstrap.js'}"></script>
+  	<script type="text/javascript" src="@{'/public/javascripts/jquery.colorbox.js'}"></script>
+  	<script type="text/javascript" src="@{'/public/javascripts/jquery.wookmark.js'}"></script>
+  	<script type="text/javascript" src="@{'/public/javascripts/jqueryplugin.js'}"></script>
+  	<script type="text/javascript" src="@{'/public/javascripts/exp4main.js'}"></script>
   
 	<title>${photo.title}</title>
 </head>
 <body>
 <div class="mediaDetail">
-    <div class="bigPhoto" style="z-index: 8008; background: none;">
+    <div class="bigPhoto" style="z-index: 8008;">
         <img src=${photo.url}>
-        
-        <div class="photoExtraInfo selectable" style="z-index: 8009; display: none;">
-            <div>Filter: <span class="selectable">Mayfair</span> | <span class="selectable">2014-1-20 12:10:05</span> | <a href="http://pinsta.me/p/637260604709249094_330743" target="_blank"><span class="selectable detailPermalink">Permalink</span></a>
-
-            </div>
-        </div>
     </div>
     <div class="detailSidebar">
-        <div class="userInfoBar clearfix"> <a class="userAvatarLink" href="javascript:hideMediaDetail();" title="Nguyễn Hoài Nam" rel="nofollow">
-                        <img src=${user.avatar}></a>
+        <div class="userInfoBar clearfix"> 
+        	<a class="userAvatarLink" href="javascript:hideMediaDetail();" title="Nguyễn Hoài Nam" rel="nofollow">
+            	<img src=${user.avatar}>
+            </a>
 
-            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:hideMediaDetail();" rel="nofollow">eneim </a>
+            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:hideMediaDetail();" rel="nofollow">${user.username}</a>
 
             </div>
         </div>
         
-        <div class="detailCaption emojstext">self-design a player is a touch work ..</div>
+        <div class="detailCaption emojstext">${photo.title}</div>
+        
         <div class="detailStats">
             
             <div class="btn-group tasksButton"> 
@@ -65,11 +62,16 @@
             <textarea class="addComment" cols="20" id="addComment" name="addComment" placeholder="Comment" rows="2"></textarea>
             <div class="loadingComments">
                 <img src="/Content/Images/ajax-loader-arrow.gif" alt="">
-            </div> <a style="display: none;" href="javascript:void(0);" class="showAllComments" rel="nofollow"><i class="icon-chevron-down"></i>View all 0 comments</a>
+            </div> 
+            <a style="display: none;" href="javascript:void(0);" class="showAllComments" rel="nofollow">
+            	<i class="icon-chevron-down">
+            	</i>
+            	View all 0 comments
+            </a>
 
         </div>
-        <div style="height: 281px; overflow: hidden; padding: 0px; width: 302px;" class="detailComments">
-            <div style="width: 302px; height: 281px;" class="jspContainer">
+        <div style="overflow: hidden; padding: 0px; width: 302px;" class="detailComments">
+            <div style="width: 302px;" class="jspContainer">
                 <div style="padding: 0px; top: 0px; width: 302px;" class="jspPane"></div>
             </div>
         </div>
