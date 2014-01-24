@@ -1,12 +1,16 @@
 *{<meta charset="utf-8">}*
 #{extends 'Application/header.html' /}
 <div id="timeline">
-	<div class="wrapper">
-		<div id="main">
-			<div id="items" class="row-fluid">
 				#{list items: photos, as: 'photo'}
-				<div class=" item masonry-brick">
-					<div class="picture">
+				<div class="row">
+					<div class="timeline-avatar">
+						<a href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username} rel="nofollow">
+	            	<img src=${photo.user.avatar}>
+	       		</a>
+	       	</div>
+	       		<a href="javascript:onOpenUserPage(${photo.user.id})" rel="nofollow"><h2 class="timeline-username">${photo.user.username}</h2></a>
+				</div>		
+						<div class="timeline-photo">
 						<a class="image" href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
          					<img src=${photo.url} alt="...">
       					</a>
@@ -23,9 +27,5 @@
 							</div>
 						</div>
 					</div>
-				</div>
 				#{/list}
-			</div>
-		</div>
-	</div>
 </div>
