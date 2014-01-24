@@ -401,7 +401,12 @@ public class Application extends Controller {
 
 		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
 		data.delete();
-
 		user(id);
+	}
+	
+	public static void timeline() {
+		User user = getCurrentUser();
+		List<Photo> photos = Photo.find("order by date desc").fetch();
+		render(photos, user);
 	}
 }
