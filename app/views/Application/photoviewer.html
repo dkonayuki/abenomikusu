@@ -21,7 +21,7 @@
 <body>
 <div class="mediaDetail">
     <div class="bigPhoto" style="z-index: 8008;">
-        <img src=${photo.url} onclick="onOpenPhotoPage()">
+        <img id=${photo.id} src=${photo.url} onclick="onOpenPhotoPage()">
     </div>
     <div class="detailSidebar">
         <div class="userInfoBar clearfix"> 
@@ -70,7 +70,7 @@
             </a>
 
         </div>
-        <div style="overflow: auto; padding: 0px; height: 210px; width: 302px;" class="detailComments">
+        <div style="overflow: auto; padding: 0px; height: auto; width: 302px;" class="detailComments" id='commentsofphotoid${photo.id}'>
             <div style="width: 280px;" class="jspContainer">
                 <div style="padding: 0px; width: 280px; top: 0px;" class="jspPane">
                 	#{list items: comments, as: 'comment'}
@@ -100,10 +100,21 @@
 
 <script>
 $(function(){
-    parent.$.colorbox.resize({
-        innerWidth:$('body').width(),
-        innerHeight:$('body').height()
-    });
+	var img = document.getElementById('${photo.id}');
+	
+	img.onload = function() {
+		
+		var height = img.height + 28;
+		parent.$.colorbox.resize({
+        	innerWidth:$('body').width(),
+        	innerHeight:height
+    	});
+    	
+    	height = height - 277;
+    	alert(height);
+    	document.getElementById('commentsofphotoid${photo.id}').style.height = height.toString() + "px";
+	};
+	
 });
 
 </script>
