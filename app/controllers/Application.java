@@ -185,30 +185,95 @@ public class Application extends Controller {
 	}
 	
 	public static void serchResult(){
-		User user = getCurrentUser();
-		
-		String serch = params.get("serch");
-		serch = "%" + serch +"%";
-		
 		//List<User> results = User.find("username like ? OR nickname like ?", serch, serch).fetch();
 		//render(user, results);
+		User user = getCurrentUser();
+		int count = 0;
 		
-
-		List<Photo> photos = new ArrayList();
-		List<Tag> tags = Tag.find("name like ?", serch).fetch();
-		for (Tag tag : tags){
-			List<TagPhotoRelation> relations = TagPhotoRelation.find("tagId = ?", tag.id).fetch();
-					for(TagPhotoRelation relation : relations){
-						Photo photo = Photo.find("id = ?", relation.get_photoId()).first();
-						System.out.println("写真" +photo.id);
-						if(photo != null)
-							photos.add(photo);
-					}
+		String search = params.get("serch");
+		String[] searchs = search.replaceAll("　", " ").split(" ");
+		
+		for (int i=0; i<searchs.length; i++){
+			searchs[i] = "%" + searchs[i] + "%";
 		}
 		
-		System.out.println(photos);
-		render(user, photos);
+		System.out.println("ああああああ");
+		for (int i=0; i<searchs.length; i++){
+			System.out.println(searchs[i]);
+		}
+		
+		
+		//タイトルで検索
+		HashSet<Photo> photoTitleSet = new HashSet();
+		HashSet<Photo> photoTitleSet2 = new HashSet();
+		for (String s: searchs){
+			List<Photo> photoTitleList = Photo.find("title like ?", s).fetch();	
+			System.out.println("カウント" + count);
+			if (count == 0){
+				photoTitleSet = ListToHashSet(photoTitleList);
+				System.out.println(photoTitleSet);
+			} else {
+				photoTitleSet2 = ListToHashSet(photoTitleList);
+				System.out.println(photoTitleSet2);
+				photoTitleSet.retainAll(photoTitleSet2);
+				System.out.println(photoTitleSet);
+			}
+			count++;
+		}
+		
+		HashSet<Photo> photoSet = photoTitleSet;		
+		
+		//タグ検索
+		HashSet<Photo> photoTagSet = new HashSet();
+		HashSet<Photo> photoTagSet2 = new HashSet();
+		count = 0;
+		
+		for (String s: searchs){
+			photoTagSet2.clear();
+			List<Tag> tags = Tag.find("name like ?", s).fetch();
+			
+			for (Tag tag : tags){
+				List<TagPhotoRelation> relations = TagPhotoRelation.find("tagId = ?", tag.id).fetch();
+				for(TagPhotoRelation relation : relations){
+					Photo photo = Photo.find("id = ?", relation.get_photoId()).first();
+					if(photo != null){
+						if (count == 0){
+							photoTagSet.add(photo);
+						} else {
+							photoTagSet2.add(photo);
+						}
+					}
+				}
+				
+			}
+			if(count != 0){
+				photoTagSet.retainAll(photoTagSet2);
+			}
+			count++;
+		}
+		
+		photoSet.addAll(photoTagSet);
+		List<Photo> photoList = SetToList(photoSet);
+		
+		render(user, photoList);
 	}
+	
+	private static HashSet<Photo> ListToHashSet(List<Photo> list){
+		HashSet<Photo> set = new HashSet();
+		for (Photo photo: list){
+			set.add(photo);
+		}
+		return set;
+	}
+	
+	private static List<Photo> SetToList(Set<Photo> set){
+		ArrayList<Photo> list = new ArrayList();
+		for (Photo photo: set){
+			list.add(photo);
+		}
+		return list;
+	}
+	
 
 	public static void logout(){
 		session.clear();
