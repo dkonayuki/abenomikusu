@@ -49,7 +49,7 @@
 
 <div id="portfolio">
 <ul>
-#{list items: photos, as: 'photo'}
+#{list items: photoList, as: 'photo'}
 	<li id="item">
       <p><a class='iframe' href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
          <img src=${photo.url} alt="...">

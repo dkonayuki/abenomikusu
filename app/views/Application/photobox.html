@@ -1,24 +1,5 @@
 *{<meta charset="utf-8">}*
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	
-  	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/photostyle.css'}">
-	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/colorbox.css'}">
-  	
-	<script type="text/javascript" src="@{'/public/javascripts/jquery-1.10.2.js'}"></script>
-  	<script type="text/javascript" src="@{'/public/javascripts/bootstrap.js'}"></script>
-  	<script type="text/javascript" src="@{'/public/javascripts/jquery.colorbox.js'}"></script>
-  	<script type="text/javascript" src="@{'/public/javascripts/jquery.wookmark.js'}"></script>
-  	<script type="text/javascript" src="@{'/public/javascripts/jqueryplugin.js'}"></script>
-  	<script type="text/javascript" src="@{'/public/javascripts/exp4main.js'}"></script>
-  
-	<title>${photo.title}</title>
-
-</head>
-<body>
+#{extends 'Application/header.html' /}
 <div class="mediaDetail">
     <div class="bigPhoto" style="z-index: 8008;">
         <img id=${photo.id} src=${photo.url} onclick="onOpenPhotoPage()">
@@ -62,9 +43,15 @@
             </a>
         </div>
         <div class="addCommentContainer">
-            <textarea class="addComment" cols="20" id="addComment" name="addComment" placeholder="Comment" rows="2"></textarea>            
+            <textarea class="addComment" cols="20" id="addComment" name="addComment" placeholder="Comment" rows="2"></textarea> 
+            <a style="display: none;" href="javascript:void(0);" class="showAllComments" rel="nofollow">
+            	<i class="icon-chevron-down">
+            	</i>
+            	View all 0 comments
+            </a>
+
         </div>
-        <div style="overflow: auto; padding: 0px; height: auto; width: 302px;" class="detailComments" id='commentsofphotoid${photo.id}'>
+        <div style="overflow: auto; padding: 0px; height: 210px; width: 302px;" class="detailComments">
             <div style="width: 280px;" class="jspContainer">
                 <div style="padding: 0px; width: 280px; top: 0px;" class="jspPane">
                 	#{list items: comments, as: 'comment'}
@@ -91,25 +78,3 @@
         
     </div>
 </div>
-
-<script>
-$(function(){
-	var img = document.getElementById('${photo.id}');
-	
-	img.onload = function() {
-		
-		var height = img.height + 28;
-		parent.$.colorbox.resize({
-        	innerWidth:$('body').width(),
-        	innerHeight:height
-    	});
-    	
-    	height = height - 277;
-    	document.getElementById('commentsofphotoid${photo.id}').style.height = height.toString() + "px";
-	};
-	
-});
-
-</script>
-</body>
-</html>

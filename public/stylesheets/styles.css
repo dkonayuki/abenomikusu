@@ -13,16 +13,20 @@ ul {
 }
 
 #portfolio li img {
-  display: block;
-  margin: 0;
--moz-border-radius: 2px;
--webkit-border-radius: 2px;
-border-radius: 2px;
-	width: 200px;
+  	display: block;
+  	margin: 0;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	width: 240px;
 }
 
 #portfolio ul {
-  position: absolute;
+  	position: absolute;
+}
+
+#portfolio ul li:hover {
+	border-color: #428bca;
 }
 
 #container {

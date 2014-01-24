@@ -25,8 +25,12 @@ import play.mvc.Http;
 public class Application extends Controller {
 
 	public static void index() {
-		session.clear();
-		render();
+		User user = getCurrentUser();
+		
+		if (user != null)
+			home();
+		else
+			login_signup();
 	}    
 
 	public static void login_signup(){render();}
@@ -158,8 +162,6 @@ public class Application extends Controller {
 			image.renameTo(new File(targetPath));
 			Photo photo = new Photo(targetPath, title, caption, user);
 			photo.save();
-			user.addPhoto(photo);
-			user.save();
 			System.out.println("File saved in " + targetPath);
 			
 			//tags
@@ -183,30 +185,95 @@ public class Application extends Controller {
 	}
 	
 	public static void serchResult(){
-		User user = getCurrentUser();
-		
-		String serch = params.get("serch");
-		serch = "%" + serch +"%";
-		
 		//List<User> results = User.find("username like ? OR nickname like ?", serch, serch).fetch();
 		//render(user, results);
+		User user = getCurrentUser();
+		int count = 0;
 		
-
-		List<Photo> photos = new ArrayList();
-		List<Tag> tags = Tag.find("name like ?", serch).fetch();
-		for (Tag tag : tags){
-			List<TagPhotoRelation> relations = TagPhotoRelation.find("tagId = ?", tag.id).fetch();
-					for(TagPhotoRelation relation : relations){
-						Photo photo = Photo.find("id = ?", relation.get_photoId()).first();
-						System.out.println("写真" +photo.id);
-						if(photo != null)
-							photos.add(photo);
-					}
+		String search = params.get("serch");
+		String[] searchs = search.replaceAll("　", " ").split(" ");
+		
+		for (int i=0; i<searchs.length; i++){
+			searchs[i] = "%" + searchs[i] + "%";
 		}
 		
-		System.out.println(photos);
-		render(user, photos);
+		System.out.println("ああああああ");
+		for (int i=0; i<searchs.length; i++){
+			System.out.println(searchs[i]);
+		}
+		
+		
+		//タイトルで検索
+		HashSet<Photo> photoTitleSet = new HashSet();
+		HashSet<Photo> photoTitleSet2 = new HashSet();
+		for (String s: searchs){
+			List<Photo> photoTitleList = Photo.find("title like ?", s).fetch();	
+			System.out.println("カウント" + count);
+			if (count == 0){
+				photoTitleSet = ListToHashSet(photoTitleList);
+				System.out.println(photoTitleSet);
+			} else {
+				photoTitleSet2 = ListToHashSet(photoTitleList);
+				System.out.println(photoTitleSet2);
+				photoTitleSet.retainAll(photoTitleSet2);
+				System.out.println(photoTitleSet);
+			}
+			count++;
+		}
+		
+		HashSet<Photo> photoSet = photoTitleSet;		
+		
+		//タグ検索
+		HashSet<Photo> photoTagSet = new HashSet();
+		HashSet<Photo> photoTagSet2 = new HashSet();
+		count = 0;
+		
+		for (String s: searchs){
+			photoTagSet2.clear();
+			List<Tag> tags = Tag.find("name like ?", s).fetch();
+			
+			for (Tag tag : tags){
+				List<TagPhotoRelation> relations = TagPhotoRelation.find("tagId = ?", tag.id).fetch();
+				for(TagPhotoRelation relation : relations){
+					Photo photo = Photo.find("id = ?", relation.get_photoId()).first();
+					if(photo != null){
+						if (count == 0){
+							photoTagSet.add(photo);
+						} else {
+							photoTagSet2.add(photo);
+						}
+					}
+				}
+				
+			}
+			if(count != 0){
+				photoTagSet.retainAll(photoTagSet2);
+			}
+			count++;
+		}
+		
+		photoSet.addAll(photoTagSet);
+		List<Photo> photoList = SetToList(photoSet);
+		
+		render(user, photoList);
 	}
+	
+	private static HashSet<Photo> ListToHashSet(List<Photo> list){
+		HashSet<Photo> set = new HashSet();
+		for (Photo photo: list){
+			set.add(photo);
+		}
+		return set;
+	}
+	
+	private static List<Photo> SetToList(Set<Photo> set){
+		ArrayList<Photo> list = new ArrayList();
+		for (Photo photo: set){
+			list.add(photo);
+		}
+		return list;
+	}
+	
 
 	public static void logout(){
 		session.clear();
@@ -221,11 +288,21 @@ public class Application extends Controller {
 		
 		User user = getCurrentUser();
 		Photo photo = Photo.find("url = ?", url).first();
+		
+		List<Comment> comments = Comment.find("photo = ?", photo).fetch();
+		
+		/*
+		if (comments.size() < 1) {
+			photo.addComment(new Comment(user, "this is a default comment", photo));
+			comments = photo.getComment();
+		}
+		*/
+			
 		// render
 		if (user == null)
-			render(photo);
+			render(photo, comments);
 		else
-			render(photo, user);
+			render(photo, comments, user);
 	}
 	
 	public static void user(long id) {
@@ -258,45 +335,19 @@ public class Application extends Controller {
 	public static void follow(long id) {
 		User currentUser = getCurrentUser();
 		User user = User.find("id = ?", id).first();
-		FollowerData data = new FollowerData(currentUser);
-		data.save();
-		user.addFollower(data);
-		//currentUser.addFollowing(user);
-		user.save();
-		System.out.println("**********************");
-		System.out.println("user:" + user.get_username());
-		System.out.println("currentuser:" + currentUser.get_username());
-		System.out.println( user.get_username() + "'s followers count:" + user.getFollowerCount());
-		System.out.println("Follower:" + user.followers.get(0).getUser().get_username());
-		//System.out.println(currentUser.get_username() + "'s followings count:" + user.getFollowingCount());
-		//System.out.println("Following:" + user.followings.get(0).get_username());
 
-		if (user.isFollowed(currentUser.id)) {
-			System.out.println(user.get_username() + " is followed by " + currentUser.get_username());
-		} else {
-			System.out.println("wrooooooong");
-		}
+		FollowingData data = new FollowingData(currentUser, user);
+		data.save();
 		user(id);
 	}
 	
 	public static void unFollow(long id) {
 		User currentUser = getCurrentUser();
 		User user = User.find("id = ?", id).first();
-		FollowerData data = FollowerData.find("user = ?", currentUser).first();
-		user.deleteFollower(data);
-		user.save();
+
+		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
 		data.delete();
-		currentUser.save();
-		System.out.println("**********************");
-		System.out.println("user:" + user.get_username());
-		System.out.println("currentuser:" + currentUser.get_username());
-		System.out.println( user.get_username() + "'s followers count:" + user.getFollowerCount());
-		//System.out.println("Follower:" + user.followers.get(0).getUser().get_username());
-		if (user.isFollowed(currentUser.id)) {
-			System.out.println("wrooooooong");
-		} else {
-			System.out.println(user.get_username() + " is not followed by " + currentUser.get_username());
-		}
+
 		user(id);
 	}
 }

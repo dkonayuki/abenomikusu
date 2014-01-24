@@ -23,10 +23,10 @@ public class User extends Model{
     private String avatar;//URL
     private String cover;//URL
 
-    @OneToMany
-    public List<FollowerData> followers; //自分がfollowている人のリスト
-    //@OneToMany(mappedBy="FollowingData", cascade=CascadeType.ALL)
-    //public List<FollowingData> followings; //自分をfollowしている人のリスト
+    @OneToMany(mappedBy="followee", cascade=CascadeType.ALL)
+    public List<FollowingData> followers; //自分をfollowしている人のリスト
+    @OneToMany(mappedBy="follower", cascade=CascadeType.ALL)
+    public List<FollowingData> followings; //自分がfollowている人のリスト
     
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Photo> photos;
@@ -58,54 +58,28 @@ public class User extends Model{
     	this.profile="よろしくお願いします。";
     	this.avatar="/public/images/default.png";//default icon URL
     	this.cover="";//default cover URL
-    	this.followers = new ArrayList<FollowerData>();
-    	//this.followings = new ArrayList<FollowerData>();
-    	this.photos = new ArrayList<Photo>();
     }
     
     public void addPhoto(Photo photo) {
     	this.photos.add(photo);
     }
     
-    public boolean isFollowed(FollowerData data) {
-    	if (this.followers.contains(data)) 
-    		return true;
-    	else 
-    		return false;
-    }
     public boolean isFollowed(long id) {
     	User user = User.find("id = ?", id).first();
-    	FollowerData data = FollowerData.find("user = ?", user).first();
-    	if (this.followers.contains(data))
-    		return true;
-    	else 
-    		return false;
+    	for (FollowingData f : this.followers) {
+    		if (f.getFollower() == user) 
+    			return true;
+    	}
+    	return false;
     }
-    public void addFollower(FollowerData data) {
-    	this.followers.add(data);
-    }
-    public void deleteFollower(FollowerData data) {
-    	this.followers.remove(data);
-    }
+    
     public int getFollowerCount() {
     	return this.followers.size();
     }
-    /*
-    public boolean isFollowing(User user) {
-    	if (this.followings.contains(user)) 
-    		return true;
-    	else 
-    		return false;
-    }
-    public void addFollowing(User user) {
-    	this.followings.add(user);
-    }
-    public void deleteFollowing(User user) {
-    	this.followings.remove(user);
-    }
+
     public int getFollowingCount() {
     	return this.followings.size();
-    }*/
+    }
     
     public List<Photo> getPhoto(){
     	return this.photos;

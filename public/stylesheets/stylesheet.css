@@ -1,0 +1,134 @@
+body {
+  color: #000000;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: #ffffff;
+}
+
+.wrapper {}
+
+#main {
+    margin-bottom: 30px;
+    margin-top: 55px;
+}
+
+#items {}
+
+#items .item {
+	border: 1px solid #dedede;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #EAEAEA 100%) repeat scroll 0 0 transparent;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 1px rgba(0, 0, 0, 0.1), 0 3px 1px rgba(0, 0, 0, 0.05);
+    text-shadow: 0 1px 0 #DDDDDD;
+    width: 270px;
+    margin: 10px;
+    float: left;
+}
+
+#items .item:hover {
+	border-color:#428bca;
+}
+
+#items .item .item-content {
+  padding: 10px;
+  width:75%;
+  position:relative;
+  float:left;
+}
+
+#items .item .zdelete {
+  	padding: 10px;
+  	width: 45px;
+	height: 45px;
+  	margin-left: auto;
+    margin-right: auto;
+  	margin-top: 20px;
+  	display:table-cell;
+  	vertical-align:middle; 
+  	text-align:center;
+	/*background-image: url('../images/delete.png');
+	background-repeat: no-repeat;
+	background-size: 25px;*/
+	float: right;
+	opacity: 0.5;
+	position:relative;
+	/* transition animation when hovering over items */
+	-webkit-transition-duration: 0.2s;
+    -webkit-transition-timing: ease-out;
+    -o-transition-duration: 0.2s;
+    -o-transition-timing: ease-out;
+    -moz-transition-duration: 0.2s;
+    -moz-transition-timing: ease-out;
+    -ms-transition-duration: 0.2s;
+    -ms-transition-timing: ease-out;
+    transition-duration: 0.2s;
+    transition-timing: ease-out
+}
+
+#items .item:hover .zdelete {
+	opacity:1;
+}
+
+#items .item .zdelete > img {
+	background-size: 25px;
+}
+
+#items .item:hover .zdelete > img {
+	background-size: 25px;
+	width: 25px;
+	height: 25px;
+}
+
+#items .item .picture .description {
+    margin-top: 10px;
+}
+
+#items .item .meta span {
+    font-size: 12px !important;
+    line-height: 16px !important;
+    margin-right: 5px;
+}
+
+#items .item .picture {
+    display: block;
+    position: relative;
+    z-index: 5;
+    border-radius: 4px 4px 4px 4px;
+}
+
+#items .item .picture a.image {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+#items .item .picture img {
+    border-radius: 4px 4px 0px 0px;
+    height: auto;
+    position: relative;
+    width: 100%;
+}
+
+.picture img {
+    height: auto;
+    width: 100%;
+}
+
+
+.navbar-inner {
+  box-shadow: 0px 5px 10px #999 !important;
+}
+
+
+/* RESPONSIVE CSS HACKS
+ -------------------------------------------------- */
+ @media (max-width: 768px) {
+  #main {
+    margin-top: 5px;
+  }
+}
