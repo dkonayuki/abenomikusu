@@ -247,18 +247,17 @@ public class Application extends Controller {
 	public static void follow(long id) {
 		User currentUser = getCurrentUser();
 		User user = User.find("id = ?", id).first();
-		FollowerData data = new FollowerData(currentUser);
+		//add follower
+		FollowingData data = new FollowingData(currentUser, user);
 		data.save();
-		user.addFollower(data);
-		//currentUser.addFollowing(user);
-		user.save();
+
 		System.out.println("**********************");
 		System.out.println("user:" + user.get_username());
 		System.out.println("currentuser:" + currentUser.get_username());
-		System.out.println( user.get_username() + "'s followers count:" + user.getFollowerCount());
-		System.out.println("Follower:" + user.followers.get(0).getUser().get_username());
-		//System.out.println(currentUser.get_username() + "'s followings count:" + user.getFollowingCount());
-		//System.out.println("Following:" + user.followings.get(0).get_username());
+		System.out.println(user.get_username() + "'s followers count:" + user.getFollowerCount());
+		System.out.println("Follower:" + data.getFollower().get_username());
+		System.out.println(currentUser.get_username() + "'s followings count:" + currentUser.getFollowingCount());
+		System.out.println("Following:" + data.getFollowee().get_username());
 
 		if (user.isFollowed(currentUser.id)) {
 			System.out.println(user.get_username() + " is followed by " + currentUser.get_username());
@@ -271,16 +270,16 @@ public class Application extends Controller {
 	public static void unFollow(long id) {
 		User currentUser = getCurrentUser();
 		User user = User.find("id = ?", id).first();
-		FollowerData data = FollowerData.find("user = ?", currentUser).first();
-		user.deleteFollower(data);
-		user.save();
+
+		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
 		data.delete();
-		currentUser.save();
+
 		System.out.println("**********************");
 		System.out.println("user:" + user.get_username());
 		System.out.println("currentuser:" + currentUser.get_username());
 		System.out.println( user.get_username() + "'s followers count:" + user.getFollowerCount());
-		//System.out.println("Follower:" + user.followers.get(0).getUser().get_username());
+		System.out.println(currentUser.get_username() + "'s followings count:" + user.getFollowingCount());
+
 		if (user.isFollowed(currentUser.id)) {
 			System.out.println("wrooooooong");
 		} else {
