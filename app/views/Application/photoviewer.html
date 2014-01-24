@@ -25,11 +25,11 @@
     </div>
     <div class="detailSidebar">
         <div class="userInfoBar clearfix"> 
-        	<a class="userAvatarLink" href="javascript:onOpenUserPage(${user.id})" title=${user.username} rel="nofollow">
-            	<img src=${user.avatar}>
+        	<a class="userAvatarLink" href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username} rel="nofollow">
+            	<img src=${photo.user.avatar}>
             </a>
 
-            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:onOpenUserPage(${user.id})" rel="nofollow">${user.username}</a>
+            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:onOpenUserPage(${photo.user.id})" rel="nofollow">${photo.user.username}</a>
 
             </div>
         </div>
@@ -71,7 +71,7 @@
                 	<div class="comment clearfix" id=${comment.id} fromid=${comment.user.id} commentid=${comment.id}>
         				<div class="commentProfileImage">
             				<a href="@{user(comment.user.id)}" title="${comment.user.username}" target="_blank">
-                				<img src=${user.avatar}>
+                				<img src=${comment.user.avatar}>
                 			</a>
         				</div>
         				<div class="commentBody">
