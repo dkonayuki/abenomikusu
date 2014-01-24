@@ -242,9 +242,9 @@ public class Application extends Controller {
 		User user = User.find("id = ?", id).first();
 		if (user == null)
 			home();
-		else{
-			List<Photo> photos = Photo.find("user = ?", user).fetch();
-			render(photos, user);
+		else {
+				List<Photo> photos = Photo.find("user = ?", user).fetch();
+				render(photos, user);
 			}
 		}
 
@@ -252,5 +252,49 @@ public class Application extends Controller {
 		User user = getCurrentUser();
 		//List<User> follower = user.get_folower();
 		render(user);
+	}
+	
+	public static void follow(long id) {
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+		//add follower
+		FollowingData data = new FollowingData(currentUser, user);
+		data.save();
+
+		System.out.println("**********************");
+		System.out.println("user:" + user.get_username());
+		System.out.println("currentuser:" + currentUser.get_username());
+		System.out.println(user.get_username() + "'s followers count:" + user.getFollowerCount());
+		System.out.println("Follower:" + data.getFollower().get_username());
+		System.out.println(currentUser.get_username() + "'s followings count:" + currentUser.getFollowingCount());
+		System.out.println("Following:" + data.getFollowee().get_username());
+
+		if (user.isFollowed(currentUser.id)) {
+			System.out.println(user.get_username() + " is followed by " + currentUser.get_username());
+		} else {
+			System.out.println("wrooooooong");
+		}
+		user(id);
+	}
+	
+	public static void unFollow(long id) {
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
+		data.delete();
+
+		System.out.println("**********************");
+		System.out.println("user:" + user.get_username());
+		System.out.println("currentuser:" + currentUser.get_username());
+		System.out.println( user.get_username() + "'s followers count:" + user.getFollowerCount());
+		System.out.println(currentUser.get_username() + "'s followings count:" + user.getFollowingCount());
+
+		if (user.isFollowed(currentUser.id)) {
+			System.out.println("wrooooooong");
+		} else {
+			System.out.println(user.get_username() + " is not followed by " + currentUser.get_username());
+		}
+		user(id);
 	}
 }
