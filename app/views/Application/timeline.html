@@ -2,7 +2,7 @@
 #{extends 'Application/header.html' /}
 <div id="timeline">
 				#{list items: photos, as: 'photo'}
-				<div class="row">
+				<div class="row" style="max-width:500px; margin:auto">
 					<div class="timeline-avatar">
 						<a href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username} rel="nofollow">
 	            	<img src=${photo.user.avatar}>
@@ -10,11 +10,11 @@
 	       	</div>
 	       		<a href="javascript:onOpenUserPage(${photo.user.id})" rel="nofollow"><h2 class="timeline-username">${photo.user.username}</h2></a>
 				</div>		
-						<div class="timeline-photo">
+					<div class="timeline-photo" style="margin-bottom:10px">
 						<a class="image" href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
          					<img src=${photo.url} alt="...">
       					</a>
-						<div class="item-content">
+						<div class="item-content" style="padding: 10px;">
 							<div class="description">
 								<h3>${photo.title}</h3>
         						<p>${photo.caption}</p>

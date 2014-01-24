@@ -415,8 +415,11 @@ public class Application extends Controller {
 
 	public static void follower(){
 		User user = getCurrentUser();
-		//List<User> followings=user.getFollowing();
-		List<Photo> photos = Photo.find("user = ?", user).fetch();
+		List<FollowingData> followings=user.followings;
+		
+		User _user = followings.get(0).getFollowee();
+		List<Photo> photos = Photo.find("user = ?", _user).fetch();
+		
 		render(user, photos);
 	}
 	
