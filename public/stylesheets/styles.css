@@ -63,3 +63,9 @@ ul {
 .timeline-photo:hover {
 	border-color:#428bca;
 }
+
+.timeline-avatar {
+	width: 100px;
+	float: left;
+	margin: 10px;
+}
