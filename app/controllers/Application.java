@@ -204,6 +204,39 @@ public class Application extends Controller {
 		renderJSON(map);
 	}
 	
+	public static void addcomment() {
+		long photoid = Long.parseLong(params.get("photoid"));
+		String content = params.get("content");
+		long userid = Long.parseLong(params.get("userid"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Photo photo = Photo.find("id = ?", photoid).first();
+		User user = User.find("id = ?", userid).first();
+		
+		Comment comment = new Comment(user, content, photo);
+		
+		photo.addComment(comment);
+		comment.save();
+		map.put("result", "OK");
+		map.put("uri", photoid + "&" + userid + "&" + content);
+		
+		/*
+		if (photo != null) {
+			File dir = new File(photo.get_url());
+			if (dir.delete()) {
+				Photo.delete("id = ?", photoid);
+				map.put("result", "OK");
+			} else {
+				map.put("result", "Error : unable to delete file from server");
+			}
+		} else {
+			map.put("result", "error");
+		}
+		*/
+		renderJSON(map);
+	}
+	
 	public static void serchResult(){
 		User user = getCurrentUser();
 		int count = 0;
