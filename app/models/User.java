@@ -107,10 +107,6 @@ public class User extends Model{
     	return this.followings.size();
     }*/
     
-    public List<User> getFollowing(){
-    	return this.followings;
-    }
-    
     public List<Photo> getPhoto(){
     	return this.photos;
     }
