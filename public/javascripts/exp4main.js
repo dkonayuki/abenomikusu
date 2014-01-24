@@ -21,6 +21,53 @@ function onOpenUserPage(userid) {
   	win.focus();
 }
 
+function onAddComment() {
+	
+}
+
+function onConfirmDelete(photoid) {
+	bootbox.confirm("Are you sure?", function(result) {
+		if (result == true) {
+			onDeletePhoto(photoid);
+		}	
+	});	
+}
+
+function onDeletePhoto(photoid) {
+	//alert("name: "+name+"\npass: "+pass);
+	if (photoid==""){
+		alert("error, photo id not matched");
+	} else {
+		var req = new XMLHttpRequest();
+	    // 送信先のURLを指定
+	    req.open("POST", "/deletephoto");
+	    // 結果が帰ってきた際に実行されるハンドラを指定
+	    req.onreadystatechange = function () {
+	        // readyState == 4: 修了
+	        if (req.readyState != 4) {
+	        	return;
+	        }
+	        // status == 200: 成功
+	        if (req.status != 200) {
+	            // 成功しなかった．失敗であることを表示して抜ける．
+	            alert("失敗．");
+	        	return;
+	        }	
+	        
+	        if(data.result=="OK"){
+	        	alert("登録が完了しました。");
+	        	document.location = "/home";
+	        }else{
+	        	alert("その名前は既に使われています");
+	        }
+	    }
+	    // Content-Type の指定
+	    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    // <input id="f"> に入力された文字列をエンコードして送信
+	    req.send("photoid="+enc(photoid));
+	}
+}
+
 function ChangeTab_login_signup(tabname) {
 	// 全部消す
 	document.getElementById('login').style.display = 'none';
@@ -37,10 +84,6 @@ function showThumbNail() {
 
 function hideThumbNail() {
 	document.getElementById('thumbnail').style.display = "none";
-}
-
-function onDeletePhoto() {
-	alert("will delete this photo later");
 }
 
 function login_check(){//TODO toppageに行くときにUser情報を何かしらの方法で保存しておく

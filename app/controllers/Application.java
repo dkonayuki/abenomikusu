@@ -75,7 +75,6 @@ public class Application extends Controller {
 			// アンケートデータをデータベースに書き込む
 			User user = new User(name, pass);
 			user.save();
-
 			
 			// 埋め込むべき変数をテンプレートに渡す．
 			// テンプレートからはキー名で参照できる．
@@ -182,6 +181,16 @@ public class Application extends Controller {
 			System.out.println("File not found");
 		}  
 		home();
+	}
+	
+	public static void deletePhoto() {
+		User user = getCurrentUser();
+		
+		String photoid =params.get("photoid");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int entries = Photo.delete("photoid = ?", photoid);
+		
 	}
 	
 	public static void serchResult(){

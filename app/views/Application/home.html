@@ -1,5 +1,6 @@
 *{<meta charset="utf-8">}*
 #{extends 'Application/header.html' /}
+
 <div id="portfolio">
 	<div class="wrapper">
 		<div id="main">
@@ -24,7 +25,16 @@
 						</div>
 						
 						<div class="zdelete">
-							<img onclick="alert('something')" src="@{'/public/images/delete.png'}"/>
+							<img onclick="onDeletePhoto(${photo.id})" src="@{'/public/images/delete.png'}"/>							
+							
+							<div class=row>
+            				<div class=col-md-12>
+                				<p class=lead>
+                    				Confirm
+                    			<a href="javascript:onConfirmDelete(${photo.id})" data-bb="confirm" class="btn btn-default"><i class="glyphicon glyphicon-play"></i></a>
+                			</p>
+            				</div>
+        					</div>
 						</div>
 					</div>
 				</div>
