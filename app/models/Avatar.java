@@ -45,7 +45,7 @@ public class Avatar {
         //File to = Play.getFile("uploads/avatar/" + file.getName());
     	String location2 = location + id;
     	File dir = new File(location2);
-    	if (!dir.exists()) {
+    	if(!dir.exists()){
     		dir.mkdirs();
     	}
     	

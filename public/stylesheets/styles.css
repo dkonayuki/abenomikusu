@@ -66,6 +66,11 @@ ul {
 
 .timeline-avatar {
 	width: 100px;
+	height: 100px;
 	float: left;
 	margin: 10px;
+	overflow: hidden;
+}
+.timeline-username {
+	display: inline-block;
 }
