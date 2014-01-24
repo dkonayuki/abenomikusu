@@ -1,29 +1,28 @@
 *{<meta charset="utf-8">}*
 #{extends 'Application/header.html' /}
 <div id="follower">
-#{list items: followers, as: 'follower'}
+#{list items: followings, as: 'following'}
 	<div class="row" style="margin:10px;">
 		<div class="col-md-10 col-md-offset-1" style="min-height:200px; background-image: url(http://farm6.staticflickr.com/5477/coverphoto/12521320@N08_h.jpg?1376067409#12521320@N08); border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;">
 			<div class="row">
 				<div class="col-md-2">
 					<div style="position:absolute; top:25px">
-							<img height="auto" width="100%" src="${follower.avatar}">
+							<img height="auto" width="100%" src="${following.avatar}">
 					</div>
 				</div>
 				<div class="col-md-9" style="color:#ffffff; top:25px;">
 					<div>
-						<h1 style="display:inline">hoge </h1>
-						<h4 style="display:inline">${follower.profile}</h4>
+						<h1 style="display:inline">${following.nickname} </h1>
+						<h4 style="display:inline">${following.profile}</h4>
 					</div>
 					<div style="margin:10px">
-						<img height="100px" width="auto" src="${follower.avatar}">
-						<img height="100px" width="auto" src="${follower.avatar}">
-						<img height="100px" width="auto" src="${follower.avatar}">
-						<img height="100px" width="auto" src="${follower.avatar}">
+					#{list items: photos, as: 'photo'}
+						<img height="100px" width="auto" src="${photo.url}">
+					#{/list}
 					</div>
 				</div>
-				<div class="col-md-1" style="position:absolute; top:90px; right:20px">
-					<button class="btn btn-primary">Unfollow</button>
+				<div class="col-md-1" style="position:absolute; top:90px; right:40px">
+					<button class="btn btn-primary" onclick="unfollow(${following.id})">Unfollow</button>
 				</div>
 			</div>
 		</div>

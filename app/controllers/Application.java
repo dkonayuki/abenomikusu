@@ -240,7 +240,19 @@ public class Application extends Controller {
 
 	public static void follower(){
 		User user = getCurrentUser();
-		render(user);
+		List<User> followings=user.getFollowing();
+		List<Photo> photos = Photo.find("user = ?", user).fetch();
+		render(user, followings, photos);
+	}
+	
+	public static void unfollow (long id){
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+		currentUser.deleteFollowing(user);
+		user.deleteFollower(currentUser);
+		user.save();
+		currentUser.save();
+		home();
 	}
 	
 	public static void follow(long id) {

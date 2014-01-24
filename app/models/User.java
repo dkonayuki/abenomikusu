@@ -101,6 +101,14 @@ public class User extends Model{
     	this.followings.remove(user);
     }
     
+    public List<User> getFollowing(){
+    	return this.followings;
+    }
+    
+    public List<Photo> getPhoto(){
+    	return this.photos;
+    }
+    
     public int getPhotoNumber() {
     	return this.photos.size();
     }
