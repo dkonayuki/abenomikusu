@@ -22,8 +22,6 @@ import models.TagPhotoRelation;
 import models.User;
 import play.mvc.Controller;
 
-
-
 public class Application extends Controller {
 
 	public static void index() {
@@ -366,7 +364,7 @@ public class Application extends Controller {
 		User user = getCurrentUser();
 		Photo photo = Photo.find("url = ?", url).first();
 		
-		List<Comment> comments = Comment.find("photo = ?", photo).fetch();
+		List<Comment> comments = Comment.find("photo = ? order by date desc", photo).fetch();
 		
 		/*
 		if (comments.size() < 1) {

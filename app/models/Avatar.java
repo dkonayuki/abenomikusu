@@ -60,13 +60,13 @@ public class Avatar {
 		MessageDigest md5 = MessageDigest.getInstance("MD5");
 		String hex = (new HexBinaryAdapter()).marshal(md5.digest(fileName.getBytes()));
 		
-    	File to = Play.getFile(location2 + "/" + file.getName());
-        Files.copy(file, to);
+    	//File to = Play.getFile(location2 + "/" + file.getName());
+        //Files.copy(file, to);
         
         file.renameTo(new File(location2 + "/" + hex + "." + extension));
         
         User user = User.find("id = ?", id).first();
-    	user.set_avatar(location2 + "/" + file.getName());
+    	user.set_avatar(location2 + "/" + hex + "." + extension);
 		user.save();
         return new Avatar(file);
     }

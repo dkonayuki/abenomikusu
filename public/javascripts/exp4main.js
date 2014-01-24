@@ -24,9 +24,9 @@ function onOpenUserPage(userid) {
 function onAddComment(photoid, userid) {
 	var content = document.getElementById('addComment').value;
 	//alert(content);
-	var date = new Date();
-	var time = date.getUTCDate();
-	alert(time);
+	if (content == "") {
+		
+	} else {
 	var req = new XMLHttpRequest();
     // 送信先のURLを指定
     req.open("POST", "/addcomment");
@@ -55,10 +55,12 @@ function onAddComment(photoid, userid) {
         	alert("Error: process failed.");
         }
     }
+    
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send("content=" + enc(content) + "&" +
             "photoid=" + enc(photoid) + "&" +
             "userid=" + enc(userid));
+	}
 }
 
 function onConfirmDelete(photoid) {
