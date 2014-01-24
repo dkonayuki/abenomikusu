@@ -1,0 +1,32 @@
+*{<meta charset="utf-8">}*
+#{extends 'Application/header.html' /}
+
+<div id="portfolio">
+	<div class="wrapper">
+		<div id="main">
+			<div id="items" class="row-fluid">
+				#{list items: photos, as: 'photo'}
+				<div class=" item masonry-brick">
+					<div class="picture">
+						<a class="image" href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
+         					<img src=${photo.url} alt="...">
+      					</a>
+						<div class="item-content">
+							<div class="description">
+								<h3>${photo.title}</h3>
+        						<p>${photo.caption}</p>
+							</div>
+							<div class="meta">
+								<span>
+									<i class="icon-calendar"></i>
+									${photo.date}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				#{/list}
+			</div>
+		</div>
+	</div>
+</div>
