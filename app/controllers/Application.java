@@ -1,24 +1,26 @@
 package controllers;
 
 
-import play.*;
-import play.mvc.*;
-import sun.misc.BASE64Encoder;
-
 import java.io.File;
-
-
-import models.*;
-
-import javax.persistence.*;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+
+import models.Avatar;
+import models.Comment;
+import models.FollowingData;
+import models.Photo;
+import models.Tag;
+import models.TagPhotoRelation;
 import models.User;
 import play.mvc.Controller;
-import play.mvc.Http;
 
 
 
@@ -94,7 +96,7 @@ public class Application extends Controller {
 		render(user);
 	}
 
-	public static void postEditProfile(File uploadAvatar){
+	public static void postEditProfile(File uploadAvatar) throws NoSuchAlgorithmException{
 		Long id = Long.parseLong(session.get("login_user"));
 		User user = User.find("id = ?", id).first();
 		String nickname = params.get("nickname");
@@ -149,7 +151,7 @@ public class Application extends Controller {
 		}
 	}
 
-	public static void upload(String title, String tags, String caption, File image) {
+	public static void upload(String title, String tags, String caption, File image) throws NoSuchAlgorithmException {
 		if (image != null) {
 			User user = getCurrentUser();
 			String targetPath = "public/uploads/" + user.get_username().toString() + "/photos";
@@ -158,7 +160,18 @@ public class Application extends Controller {
 				dir.mkdirs();
 			}
 			
-			targetPath += "/" + image.getName();
+			String fileName = image.getName();
+			String extension = "";
+
+			int i = fileName.lastIndexOf('.');
+			if (i > 0) {
+			    extension = fileName.substring(i+1);
+			}
+
+			MessageDigest md5 = MessageDigest.getInstance("MD5");
+			String hex = (new HexBinaryAdapter()).marshal(md5.digest(fileName.getBytes()));
+			
+			targetPath += "/" + hex + "." + extension;
 			image.renameTo(new File(targetPath));
 			Photo photo = new Photo(targetPath, title, caption, user);
 			photo.save();

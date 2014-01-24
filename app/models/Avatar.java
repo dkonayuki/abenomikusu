@@ -1,8 +1,13 @@
 package models;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+
 import play.Play;
 import play.libs.Files;
 
@@ -36,18 +41,33 @@ public class Avatar {
         //return new Avatar(Play.getFile("uploads/avatar/" + name));
     }
     
-    public static Avatar create(File file, Long id) {
+    public static Avatar create(File file, Long id) throws NoSuchAlgorithmException {
         //File to = Play.getFile("uploads/avatar/" + file.getName());
     	String location2 = location + id;
     	File dir = new File(location2);
-    	if(!dir.exists()){
-    		dir.mkdir();
+    	if (!dir.exists()) {
+    		dir.mkdirs();
     	}
-    	File to = Play.getFile(location2 + "/avatar.png");
+    	
+    	String fileName = file.getName();
+		String extension = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+		    extension = fileName.substring(i+1);
+		}
+
+		MessageDigest md5 = MessageDigest.getInstance("MD5");
+		String hex = (new HexBinaryAdapter()).marshal(md5.digest(fileName.getBytes()));
+		
+    	File to = Play.getFile(location2 + "/" + file.getName());
         Files.copy(file, to);
+        
+        file.renameTo(new File(location2 + "/" + hex + "." + extension));
+        
         User user = User.find("id = ?", id).first();
-    	user.set_avatar(location2  + "/avatar.png");
+    	user.set_avatar(location2 + "/" + file.getName());
 		user.save();
-        return new Avatar(to);
+        return new Avatar(file);
     }
 }
