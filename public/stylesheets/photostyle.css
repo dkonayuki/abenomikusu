@@ -8406,7 +8406,7 @@ body{
 	line-height:18px;
 	color:#333;
 	background-color:#eee;
-	text-align:center;
+	/*text-align:center;*/
 	overflow-x:auto;
 	overflow-y:auto;
 }
