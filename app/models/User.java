@@ -27,7 +27,6 @@ public class User extends Model{
     public List<FollowingData> followers; //自分をfollowしている人のリスト
     @OneToMany(mappedBy="follower", cascade=CascadeType.ALL)
     public List<FollowingData> followings; //自分がfollowている人のリスト
-    //(mappedBy="FollowingData", cascade=CascadeType.ALL)
     
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Photo> photos;
@@ -81,36 +80,6 @@ public class User extends Model{
     public int getFollowingCount() {
     	return this.followings.size();
     }
-    
-    /*
-    public boolean isFollowed(FollowerData data) {
-		if (this.followers.contains(data)) 
-			return true;
-		else 
-			return false;
-    }
-    public void addFollower(FollowerData data) {
-    	this.followers.add(data);
-    }
-    public void deleteFollower(FollowerData data) {
-    	this.followers.remove(data);
-    }
-
-    
-    public boolean isFollowing(User user) {
-    	if (this.followings.contains(user)) 
-    		return true;
-    	else 
-    		return false;
-    }
-    public void addFollowing(FollowingData data) {
-    	this.followings.add(data);
-    }
-    public void deleteFollowing(FollowingData data) {
-    	this.followings.remove(data);
-    }
-
-    */
     
     public int getPhotoNumber() {
     	return this.photos.size();
