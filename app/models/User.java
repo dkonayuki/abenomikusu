@@ -81,6 +81,10 @@ public class User extends Model{
     	return this.followings.size();
     }
     
+    public List<Photo> getPhoto(){
+    	return this.photos;
+    }
+    
     public int getPhotoNumber() {
     	return this.photos.size();
     }

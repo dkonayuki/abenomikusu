@@ -146,3 +146,35 @@ function signup_check(){//TODO toppageに行くときにUser情報を何かし�
 function enc(s) {
     return encodeURIComponent(s).replace(/%20/g, '+');
 }
+
+function unfollow (user_id){
+	var req = new XMLHttpRequest();
+    // 送信先のURLを指定
+    req.open("POST", "/unfollow");
+    // 結果が帰ってきた際に実行されるハンドラを指定
+    req.onreadystatechange = function () {
+        // readyState == 4: 修了
+        if (req.readyState != 4) {
+        	return;
+        }
+        // status == 200: 成功
+        if (req.status != 200) {
+            // 成功しなかった．失敗であることを表示して抜ける．
+            alert("失敗．");
+        	return;
+        }
+        
+        // body にはサーバから返却された文字列が格納される．
+        var body = req.responseText;
+        // デバッグ表示 
+        //alert('body: ' + body);
+
+        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
+        var data = eval("(" + body + ")");
+        
+    }
+    // Content-Type の指定
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    //送信
+    req.send(["id="+user_id].join("&"));
+}
