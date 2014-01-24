@@ -105,11 +105,26 @@ public class Application extends Controller {
 		if(uploadAvatar != null){
 			//Avatar.create(uploadAvatar, id);
 			home();
-		} else
-		
-		profile();
+		} else {
+			profile();
+		}
 	}
 
+	public static void changeavatar(File ava) throws NoSuchAlgorithmException {
+		Long id = Long.parseLong(session.get("login_user"));
+		User user = User.find("id = ?", id).first();
+		String nickname = params.get("nickname");
+		String profile  = params.get("profile");
+		user.set_nickname(nickname);
+		user.set_profile(profile);
+		user.save();
+		if(ava != null){
+			Avatar.create(ava, id);
+			home();
+		} else {
+			profile();
+		}
+	}
 	/*
 	 * avatar content
 	 */

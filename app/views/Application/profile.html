@@ -1,7 +1,7 @@
 *{<meta charset="utf-8">}*
 #{extends 'Application/header.html' /}
-<div id="profileEditPage">
-	<form class="form-horizontal" action="@{postEditProfile()}" method="post" enctype="multipart/form-data">
+<div id="profileEditPage" style="padding:10px">
+	<form class="form-horizontal" action="@{changeavatar()}" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="username" class="col-sm-2 control-label">ユーザー名</label>
 			<div class="col-sm-10">
@@ -22,7 +22,7 @@
     					<span class="btn btn-default btn-file">
     						<span class="fileinput-new">Select image</span>
     						<span class="fileinput-exists">Change</span>
-    						<input type="file" name="image" accept="image/*">
+    						<input type="file" name="ava" accept="image/*">
     					</span>
     					<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
   					</div>
