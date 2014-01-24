@@ -36,8 +36,9 @@ function onConfirmDelete(photoid) {
 function onDeletePhoto(photoid) {
 	//alert("name: "+name+"\npass: "+pass);
 	if (photoid==""){
-		alert("error, photo id not matched");
+		alert("Error: photo id does not match");
 	} else {
+		//alert(photoid);
 		var req = new XMLHttpRequest();
 	    // 送信先のURLを指定
 	    req.open("POST", "/deletephoto");
@@ -50,21 +51,25 @@ function onDeletePhoto(photoid) {
 	        // status == 200: 成功
 	        if (req.status != 200) {
 	            // 成功しなかった．失敗であることを表示して抜ける．
-	            alert("失敗．");
+	            alert("Error: unable to process, please try again later.");
 	        	return;
-	        }	
+	        }
 	        
-	        if(data.result=="OK"){
-	        	alert("登録が完了しました。");
-	        	document.location = "/home";
+	        var body = req.responseText;
+	        // デバッグ表示 
+	        //alert('body: ' + body);
+	
+	        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
+	        var data = eval("(" + body + ")");
+	        if (data.result == "OK"){
+	        	document.location = self.location;
 	        }else{
-	        	alert("その名前は既に使われています");
+	        	alert("Error: process failed.");
 	        }
 	    }
 	    // Content-Type の指定
 	    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	    // <input id="f"> に入力された文字列をエンコードして送信
-	    req.send("photoid="+enc(photoid));
+	    req.send("photoid=" + enc(photoid));
 	}
 }
 

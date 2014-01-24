@@ -25,16 +25,10 @@
 						</div>
 						
 						<div class="zdelete">
-							<img onclick="onDeletePhoto(${photo.id})" src="@{'/public/images/delete.png'}"/>							
-							
-							<div class=row>
-            				<div class=col-md-12>
-                				<p class=lead>
-                    				Confirm
-                    			<a href="javascript:onConfirmDelete(${photo.id})" data-bb="confirm" class="btn btn-default"><i class="glyphicon glyphicon-play"></i></a>
-                			</p>
-            				</div>
-        					</div>
+														
+								<a href="javascript:onConfirmDelete(${photo.id})" data-bb="confirm">
+                    				<img src="@{'/public/images/delete.png'}"/>
+                    			</a>
 						</div>
 					</div>
 				</div>

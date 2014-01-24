@@ -157,6 +157,7 @@ public class Application extends Controller {
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
+			
 			targetPath += "/" + image.getName();
 			image.renameTo(new File(targetPath));
 			Photo photo = new Photo(targetPath, title, caption, user);
@@ -183,14 +184,24 @@ public class Application extends Controller {
 		home();
 	}
 	
-	public static void deletePhoto() {
-		User user = getCurrentUser();
-		
-		String photoid =params.get("photoid");
+	public static void deletephoto() {
+		long photoid = Long.parseLong(params.get("photoid"));
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int entries = Photo.delete("photoid = ?", photoid);
+		Photo photo = Photo.find("id = ?", photoid).first();
 		
+		if (photo != null) {
+			File dir = new File(photo.get_url());
+			if (dir.delete()) {
+				Photo.delete("id = ?", photoid);
+				map.put("result", "OK");
+			} else {
+				map.put("result", "Error : unable to delete file from server");
+			}
+		} else {
+			map.put("result", "error");
+		}
+		renderJSON(map);
 	}
 	
 	public static void serchResult(){
