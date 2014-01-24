@@ -205,38 +205,49 @@ public class Application extends Controller {
 	}
 	
 	public static void serchResult(){
-		//List<User> results = User.find("username like ? OR nickname like ?", serch, serch).fetch();
-		//render(user, results);
 		User user = getCurrentUser();
 		int count = 0;
 		
+		
 		String search = params.get("serch");
 		String[] searchs = search.replaceAll("　", " ").split(" ");
-		
 		for (int i=0; i<searchs.length; i++){
 			searchs[i] = "%" + searchs[i] + "%";
 		}
 		
-		System.out.println("ああああああ");
-		for (int i=0; i<searchs.length; i++){
-			System.out.println(searchs[i]);
+		
+		String type = params.get("searchType");
+		//ユーザー検索の場合
+		if (type.equals("user")){
+			HashSet<User> userSet = new HashSet();
+			HashSet<User> userSet2 = new HashSet();
+			for (String s: searchs){
+				List<User> userList = User.find("username like ? OR nickname like ?", s, s).fetch();
+				if (count == 0){
+					userSet = ListToHashSet(userList);
+				} else {
+					userSet2 = ListToHashSet(userList);
+					userSet.retainAll(userSet2);
+				}
+				count++;
+			}
+			
+			List<User> userList = SetToList(userSet);
+			render(user, userList);
+			return;
 		}
 		
-		
+		//photo検索の場合
 		//タイトルで検索
 		HashSet<Photo> photoTitleSet = new HashSet();
 		HashSet<Photo> photoTitleSet2 = new HashSet();
 		for (String s: searchs){
 			List<Photo> photoTitleList = Photo.find("title like ?", s).fetch();	
-			System.out.println("カウント" + count);
 			if (count == 0){
 				photoTitleSet = ListToHashSet(photoTitleList);
-				System.out.println(photoTitleSet);
 			} else {
 				photoTitleSet2 = ListToHashSet(photoTitleList);
-				System.out.println(photoTitleSet2);
 				photoTitleSet.retainAll(photoTitleSet2);
-				System.out.println(photoTitleSet);
 			}
 			count++;
 		}
@@ -278,17 +289,17 @@ public class Application extends Controller {
 		render(user, photoList);
 	}
 	
-	private static HashSet<Photo> ListToHashSet(List<Photo> list){
-		HashSet<Photo> set = new HashSet();
-		for (Photo photo: list){
+	private static <T> HashSet ListToHashSet(List<T> list){
+		HashSet<T> set = new HashSet();
+		for (T photo: list){
 			set.add(photo);
 		}
 		return set;
 	}
 	
-	private static List<Photo> SetToList(Set<Photo> set){
-		ArrayList<Photo> list = new ArrayList();
-		for (Photo photo: set){
+	private static <T> List SetToList(Set<T> set){
+		ArrayList<T> list = new ArrayList();
+		for (T photo: set){
 			list.add(photo);
 		}
 		return list;
@@ -337,8 +348,9 @@ public class Application extends Controller {
 
 	public static void follower(){
 		User user = getCurrentUser();
-		//List<User> follower = user.get_folower();
-		render(user);
+		//List<User> followings=user.getFollowing();
+		List<Photo> photos = Photo.find("user = ?", user).fetch();
+		render(user, photos);
 	}
 	
 	public static void follow(long id) {
