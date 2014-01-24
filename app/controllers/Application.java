@@ -25,8 +25,12 @@ import play.mvc.Http;
 public class Application extends Controller {
 
 	public static void index() {
-		session.clear();
-		render();
+		User user = getCurrentUser();
+		
+		if (user != null)
+			home();
+		else
+			login_signup();
 	}    
 
 	public static void login_signup(){render();}
