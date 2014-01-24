@@ -103,10 +103,12 @@ public class Application extends Controller {
 		user.set_profile(profile);
 		user.save();
 		if(uploadAvatar != null){
-			Avatar.create(uploadAvatar, id);
-		}    	
+			//Avatar.create(uploadAvatar, id);
+			home();
+		} else
+		
 		profile();
-	}    	
+	}
 
 	/*
 	 * avatar content
