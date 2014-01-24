@@ -5,7 +5,20 @@ function submitStop(e){//Enterでの画面遷移防止
 }
 
 function imgClicked() {
-	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+	$(".image").colorbox({iframe:true, width:"80%", height:"80%"});
+}
+
+function onOpenPhotoPage() {
+	if (top.location!= self.location) {
+		var win = window.open(self.location.href, '_blank');
+  		win.focus();
+	}
+}
+
+function onOpenUserPage(userid) {
+	var href = "/user?id=" + userid;
+	var win = window.open(href, '_blank');
+  	win.focus();
 }
 
 function ChangeTab_login_signup(tabname) {

@@ -22,12 +22,14 @@ public class User extends Model{
     private String profile;
     private String avatar;//URL
     private String cover;//URL
-    //nickname , username wo wakete
-//    private List<User> follower;
+
+    @OneToMany(mappedBy="followee", cascade=CascadeType.ALL)
+    public List<FollowingData> followers; //自分をfollowしている人のリスト
+    @OneToMany(mappedBy="follower", cascade=CascadeType.ALL)
+    public List<FollowingData> followings; //自分がfollowている人のリスト
+    
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Photo> photos;
-    private HashMap<Long,User> follower;//HashMap<user_id,user>
-
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
     public boolean compare_pass(String pass) throws NoSuchAlgorithmException{
@@ -48,18 +50,7 @@ public class User extends Model{
     
     public void set_cover(String cover){this.cover=cover;}
     public String get_cover(){return this.cover;}
-    
-    public void add_follower(User user){
-    	this.follower.put(user.id,user);
-    }
 
-    public void delete_folower(User user){
-    	this.follower.remove(user.id);
-    }
-    public HashMap get_follower(){
-    	return this.follower;
-    }
-    
     public User(String username, String pass) throws NoSuchAlgorithmException {
     	this.username=username;
     	this.nickname=username;
@@ -67,12 +58,27 @@ public class User extends Model{
     	this.profile="よろしくお願いします。";
     	this.avatar="/public/images/default.png";//default icon URL
     	this.cover="";//default cover URL
-//    	this.folower=new TreeSet<Integer>();
-    	this.photos=new ArrayList<Photo>();
     }
     
     public void addPhoto(Photo photo) {
     	this.photos.add(photo);
+    }
+    
+    public boolean isFollowed(long id) {
+    	User user = User.find("id = ?", id).first();
+    	for (FollowingData f : this.followers) {
+    		if (f.getFollower() == user) 
+    			return true;
+    	}
+    	return false;
+    }
+    
+    public int getFollowerCount() {
+    	return this.followers.size();
+    }
+
+    public int getFollowingCount() {
+    	return this.followings.size();
     }
     
     public int getPhotoNumber() {

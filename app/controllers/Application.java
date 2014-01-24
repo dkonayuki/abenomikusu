@@ -25,8 +25,12 @@ import play.mvc.Http;
 public class Application extends Controller {
 
 	public static void index() {
-		session.clear();
-		render();
+		User user = getCurrentUser();
+		
+		if (user != null)
+			home();
+		else
+			login_signup();
 	}    
 
 	public static void login_signup(){render();}
@@ -158,8 +162,6 @@ public class Application extends Controller {
 			image.renameTo(new File(targetPath));
 			Photo photo = new Photo(targetPath, title, caption, user);
 			photo.save();
-			user.addPhoto(photo);
-			user.save();
 			System.out.println("File saved in " + targetPath);
 			
 			//tags
@@ -286,20 +288,30 @@ public class Application extends Controller {
 		
 		User user = getCurrentUser();
 		Photo photo = Photo.find("url = ?", url).first();
+		
+		List<Comment> comments = Comment.find("photo = ?", photo).fetch();
+		
+		/*
+		if (comments.size() < 1) {
+			photo.addComment(new Comment(user, "this is a default comment", photo));
+			comments = photo.getComment();
+		}
+		*/
+			
 		// render
 		if (user == null)
-			render(photo);
+			render(photo, comments);
 		else
-			render(photo, user);
+			render(photo, comments, user);
 	}
 	
 	public static void user(long id) {
 		User user = User.find("id = ?", id).first();
 		if (user == null)
 			home();
-		else{
-			List<Photo> photos = Photo.find("user = ?", user).fetch();
-			render(photos, user);
+		else {
+				List<Photo> photos = Photo.find("user = ?", user).fetch();
+				render(photos, user);
 			}
 		}
 
@@ -307,5 +319,24 @@ public class Application extends Controller {
 		User user = getCurrentUser();
 		//List<User> follower = user.get_folower();
 		render(user);
+	}
+	
+	public static void follow(long id) {
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = new FollowingData(currentUser, user);
+		data.save();
+		user(id);
+	}
+	
+	public static void unFollow(long id) {
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
+		data.delete();
+
+		user(id);
 	}
 }
