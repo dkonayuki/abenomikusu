@@ -1,0 +1,80 @@
+*{<meta charset="utf-8">}*
+#{extends 'Application/header.html' /}
+<div class="mediaDetail">
+    <div class="bigPhoto" style="z-index: 8008;">
+        <img id=${photo.id} src=${photo.url} onclick="onOpenPhotoPage()">
+    </div>
+    <div class="detailSidebar">
+        <div class="userInfoBar clearfix"> 
+        	<a class="userAvatarLink" href="javascript:onOpenUserPage(${user.id})" title=${user.username} rel="nofollow">
+            	<img src=${user.avatar}>
+            </a>
+
+            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:onOpenUserPage(${user.id})" rel="nofollow">${user.username}</a>
+
+            </div>
+        </div>
+        
+        <div class="detailCaption emojstext">
+        	<h5>${photo.title}</h5>
+        	<p>${photo.caption}</p>
+        </div>
+        
+        <div class="detailStats">
+            
+            <div class="btn-group tasksButton"> 
+            	<a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+            		<i class="icon-tasks icon-white">
+            		</i>
+        			<>span class="caret"></span>
+    			</a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:deleteMedia()"><i class="icon-remove"></i>Delete</a>
+                    </li>
+                </ul>
+                
+                
+            </div>
+            
+            <a href="javascript:void(0)" class="sendButton btn btn-success" rel="nofollow">
+                	<i class="icon-comment icon-white"></i>
+                	Comment
+            </a>
+        </div>
+        <div class="addCommentContainer">
+            <textarea class="addComment" cols="20" id="addComment" name="addComment" placeholder="Comment" rows="2"></textarea> 
+            <a style="display: none;" href="javascript:void(0);" class="showAllComments" rel="nofollow">
+            	<i class="icon-chevron-down">
+            	</i>
+            	View all 0 comments
+            </a>
+
+        </div>
+        <div style="overflow: auto; padding: 0px; height: 210px; width: 302px;" class="detailComments">
+            <div style="width: 280px;" class="jspContainer">
+                <div style="padding: 0px; width: 280px; top: 0px;" class="jspPane">
+                	#{list items: comments, as: 'comment'}
+                	<div class="comment clearfix" id=${comment.id} fromid=${comment.user.id} commentid=${comment.id}>
+        				<div class="commentProfileImage">
+            				<a href="@{user(comment.user.id)}" title="${comment.user.username}" target="_blank">
+                				<img src=${user.avatar}>
+                			</a>
+        				</div>
+        				<div class="commentBody">
+            				<a class="commentUserName" href="javascript:onOpenUserPage(${comment.user.id})" target="_blank">${comment.user.username}</a>
+            				<!--
+            				<a href="javascript:void(0);" class="commentTinyButton mentionUser btn btn-info btn-mini" rel="nofollow">@mention</a>
+            				<a href="javascript:void(0);" class="commentTinyButton deleteComment btn btn-danger btn-mini" rel="nofollow">Delete</a><span class="commentCreateTime">3 weeks ago </span>
+            				-->
+            				<br>
+            				<span class="detailCommentText emojstext">${comment.content}</span>
+        				</div>
+    				</div>
+                	#{/list}
+                </div>                
+            </div>
+        </div>
+        
+    </div>
+</div>
