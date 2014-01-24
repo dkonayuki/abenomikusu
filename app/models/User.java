@@ -23,15 +23,13 @@ public class User extends Model{
     private String avatar;//URL
     private String cover;//URL
 
-    @ManyToOne
-    private User self;
-    @OneToMany(mappedBy="self", cascade=CascadeType.ALL)
-    private List<User> followings; //自分がfollowている人のリスト
-    @OneToMany(mappedBy="self", cascade=CascadeType.ALL)
-    private List<User> followers; //自分をfollowしている人のリスト
+    @OneToMany
+    public List<FollowerData> followers; //自分がfollowている人のリスト
+    //@OneToMany(mappedBy="FollowingData", cascade=CascadeType.ALL)
+    //public List<FollowingData> followings; //自分をfollowしている人のリスト
+    
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
     private List<Photo> photos;
-    //private HashMap<Long,User> folower;//HashMap<user_id,user>
     
     public void set_pass(String pass) throws NoSuchAlgorithmException{this.pass=digest(pass);}
     public boolean compare_pass(String pass) throws NoSuchAlgorithmException{
@@ -60,8 +58,8 @@ public class User extends Model{
     	this.profile="よろしくお願いします。";
     	this.avatar="/public/images/default.png";//default icon URL
     	this.cover="";//default cover URL
-    	this.followers = new ArrayList<User>();
-    	this.followings = new ArrayList<User>();
+    	this.followers = new ArrayList<FollowerData>();
+    	//this.followings = new ArrayList<FollowerData>();
     	this.photos = new ArrayList<Photo>();
     }
     
@@ -69,25 +67,30 @@ public class User extends Model{
     	this.photos.add(photo);
     }
     
-    public boolean isFollowed(User user) {
-    	if (this.followers.contains(user)) 
+    public boolean isFollowed(FollowerData data) {
+    	if (this.followers.contains(data)) 
     		return true;
     	else 
     		return false;
     }
     public boolean isFollowed(long id) {
     	User user = User.find("id = ?", id).first();
-    	if (this.followers.contains(user)) 
+    	FollowerData data = FollowerData.find("user = ?", user).first();
+    	if (this.followers.contains(data))
     		return true;
     	else 
     		return false;
     }
-    public void addFollower(User user) {
-    	this.followers.add(user);
+    public void addFollower(FollowerData data) {
+    	this.followers.add(data);
     }
-    public void deleteFollower(User user) {
-    	this.followers.remove(user);
+    public void deleteFollower(FollowerData data) {
+    	this.followers.remove(data);
     }
+    public int getFollowerCount() {
+    	return this.followers.size();
+    }
+    /*
     public boolean isFollowing(User user) {
     	if (this.followings.contains(user)) 
     		return true;
@@ -100,6 +103,9 @@ public class User extends Model{
     public void deleteFollowing(User user) {
     	this.followings.remove(user);
     }
+    public int getFollowingCount() {
+    	return this.followings.size();
+    }*/
     
     public List<User> getFollowing(){
     	return this.followings;
