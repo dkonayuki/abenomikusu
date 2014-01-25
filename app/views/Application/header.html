@@ -10,7 +10,7 @@
             <img class="sn-avatar-mask" height="110" width="110" src="${user.avatar}">
         </div>
         <div class="person">
-             <h1>
+            <h1>
              	<span class="character-name-holder">  
              	${user.username}
                 </span>
@@ -69,14 +69,14 @@
             	#{/else}   
             #{/if}
             	<form name="serch" action = "@{serchResult()}" method="post">	
-	            	<li style="position:absolute; right:200px; color:white">
+	            	<li style="position:absolute; right:200px; height:40px; line-height:38px; color:white; vertical-align:middle">
 	            		<label for="photoSearch">photo</label>
 						<input id = "photoSearch" type="radio"  value="photo" name="searchType" checked>
 						<label for="userSearch">user</label>
 						<input id = "userSearch" type="radio"  value="user" name="searchType">
 	                </li>
 	    	        <li class="search">
-						<span><input type="text"  placeholder="Search..." name="serch" ></span>
+						<span><input type="text" style="padding-left:4px"  placeholder="Search..." name="serch" ></span>
                 	</li>
                 </form>
             </ul>
