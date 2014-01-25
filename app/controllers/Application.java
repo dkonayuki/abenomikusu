@@ -167,7 +167,7 @@ public class Application extends Controller {
 		if (user == null)
 			login_signup();
 		else{	
-			List<Photo> photos = Photo.find("user = ?", user).fetch();
+			List<Photo> photos = Photo.find("user = ? order by date desc", user).fetch();
 			render(photos, user);
 		}
 	}
