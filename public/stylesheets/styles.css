@@ -51,6 +51,8 @@ ul {
 .timeline-photo {
 	width:100%;
 	margin-bottom:10px;
+	border-top:1px solid #ddddbb;
+	border-bottom:1px solid #ddddbb;
 	-moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
