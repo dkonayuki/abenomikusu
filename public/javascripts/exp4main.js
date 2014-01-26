@@ -51,7 +51,7 @@ function onOpenPhotoPage() {
 
 function onOpenUserPage(userid) {
 	var href = "/user?id=" + userid;
-	var win = window.open(href, '_blank');
+	var win = window.open(href, '_top');
   	win.focus();
 }
 
