@@ -39,6 +39,7 @@ ul {
   cursor: default;
 }
 #timeline {
+<<<<<<< HEAD
 	max-width: 500px;
 	margin: 0 auto;
 }
@@ -99,4 +100,71 @@ ul {
 #timeline .row {
 	background-color:#DDDDDD;
 	border-radius: 4px 4px 0px 0px;
+=======
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+#timeline img {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.timeline-photo {
+	width:100%;
+	margin-bottom:10px;
+	border-top:1px solid #ddddbb;
+	border-bottom:1px solid #ddddbb;
+	-moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #EAEAEA 100%) repeat scroll 0 0 transparent;
+}
+
+.timeline-photo a.image > img {
+	width: 100%;
+}
+.timeline-photo:hover {
+	/*border-color:#428bca;*/
+}
+
+.timeline-avatar {
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin:15px;
+	overflow: hidden;
+}
+
+.timeline-avatar a > img {
+	width:100%;
+	height:100%
+}
+
+.timeline-user {
+	position:relative;
+    bottom:-40px;
+    max-width:80%;
+    margin-left:130px;
+    text-align:left;
+    font-size:inherit;
+    color:#000;
+    text-decoration:none    
+}
+
+.timeline-username {
+	position:relative;
+	margin-bottom:0;
+}
+
+#timeline .row {
+	background-color:#DDDDDD;
+	border-radius: 4px 4px 0px 0px;
+}
+
+#timeline .row:hover {
+	border-color: #428bca;
+>>>>>>> branch 'master' of http://www.se.cs.titech.ac.jp/lecture/exp4/git/abeno.git
 }

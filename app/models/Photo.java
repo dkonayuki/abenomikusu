@@ -21,7 +21,6 @@ public class Photo extends Model{
 	private List<Comment> comments;
     private Date date;
     private HashMap<Long,Integer> rank;//<userid,point>
-
     
     public void put_rank(long user_id,int point){
     	this.rank.put(user_id, point);

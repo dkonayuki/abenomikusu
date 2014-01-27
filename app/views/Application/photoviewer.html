@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="mediaDetail">
-    <div class="bigPhoto" style="z-index: 8008;">
+    <div class="bigPhoto" style="z-index: 8006;">
         <img id=${photo.id} src=${photo.url} onclick="onOpenPhotoPage()">
     </div>
     <div class="detailSidebar">
@@ -94,15 +94,22 @@ $(function(){
 	var img = document.getElementById('${photo.id}');
 	
 	img.onload = function() {
+		var height = $('body').height();
+		if (height < 333) { height = 333 };
 		
-		var height = img.height + 28;
+		var imgWidth = $('body').width() - 28 - 330;
+		
+		if (img.width > imgWidth) img.style.width = imgWidth.toString() + 'px';
+		
 		var width = img.width + 380;
+		
 		parent.$.colorbox.resize({
         	innerWidth:width,
         	innerHeight:height
     	});
     	
     	height = height - 277;
+    	
     	document.getElementById('commentsofphotoid${photo.id}').style.height = height.toString() + "px";
 	};
 	

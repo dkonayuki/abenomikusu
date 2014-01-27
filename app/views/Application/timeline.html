@@ -1,7 +1,13 @@
 *{<meta charset="utf-8">}*
 #{extends 'Application/header.html' /}
+
+
 <div id="timeline">
+	<div class="wrapper" style="margin-top:-10px; float: left; width: 60%">
+		<div id="main">
+			<div id="items" class="row-fluid">
 				#{list items: photos, as: 'photo'}
+				<div class=" item masonry-brick" style="width: 100%">
 					<div class="row" style="margin:auto">
 						<div class="timeline-avatar">
 							<a href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username} rel="nofollow">
@@ -12,7 +18,7 @@
 	  						<a href="javascript:onOpenUserPage(${photo.user.id})" rel="nofollow">
 	  							<h3 class="timeline-username">${photo.user.username}</h3>
 	  						</a>
-	  						<h5 style="margin-top:0">${photo.user.profile}</h5>
+	  						<h5 style="margin-top:0">${photo.user.nickname}</h5>
 	  					</div>
 					</div>
 	
@@ -27,10 +33,42 @@
 							</div>
 							<div class="meta">
 								<span>	
+									<i class="icon-calendar"></i>
 									${photo.date}
 								</span>
 							</div>
 						</div>
 					</div>
+				</div>
 				#{/list}
+			</div>
+		</div>
+	</div>
+	
+	<div class="wrapper" style="margin-top:-10px; float: right; width: 40%; padding:25px;">
+		#{list items: users, as: 'anuser'}
+		<div class="row" id=${anuser.id} onload="setUserColor(${anuser.id})" style="margin:0px 0px 15px 0px; border-radius: 4px 4px 4px 4px;">
+						<div class="timeline-avatar">
+							<a href="javascript:onOpenUserPage(${anuser.id})" title=${anuser.username} rel="nofollow">
+	            				<img src=${anuser.avatar}>
+	       					</a>
+	  					</div>
+	  					<div class="timeline-user">
+	  						<a href="javascript:onOpenUserPage(${anuser.id})" rel="nofollow">
+	  							<h3 class="timeline-username">${anuser.username}</h3>
+	  						</a>
+	  						<h5 style="margin-top:0">${anuser.nickname}</h5>
+	  					</div>
+	  					<div class="" style="width: 15%; position:relative; float:right; bottom:20px; padding-right:20px; text-align:right;">
+	  						<h4>
+                    			${anuser.getPhotoNumber()}
+                			</h4>
+
+                 			<h6>
+                    			Photos
+                			</h6>
+	  					</div>
+					</div>
+		#{/list}
+	</div>
 </div>
