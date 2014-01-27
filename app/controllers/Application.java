@@ -447,13 +447,9 @@ public class Application extends Controller {
 
 	public static void follower(){
 		User user = getCurrentUser();
-		List<FollowingData> followings=user.followings;
-		List<Photo> photos;
-		
-		/* ??? */
-		photos = Photo.find("user = ?", user).fetch();
-				
-		render(user, photos);
+		List<FollowingData> following_data=FollowingData.find("follower = ?", user).fetch();
+	
+		render(user, following_data);
 	}
 	
 	public static void follow(long id) {
@@ -474,9 +470,19 @@ public class Application extends Controller {
 		user(id);
 	}
 	
+	public static void unFollowInFollowerTab(long id) {
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
+		data.delete();
+		follower();
+	}
+	
 	public static void timeline() {
 		User user = getCurrentUser();
 		List<Photo> photos = Photo.find("order by date desc").fetch();
+
 		
 		//List<User> users = user.getFollowings();
 		

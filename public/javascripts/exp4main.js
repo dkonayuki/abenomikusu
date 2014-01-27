@@ -38,6 +38,40 @@ function onFollow(id) {
     req.send("id=" + enc(id));
 }
 
+function onFollow(id) {
+		var req = new XMLHttpRequest();
+    // 送信先のURLを指定
+    req.open("POST", "/follow");
+    // 結果が帰ってきた際に実行されるハンドラを指定
+    req.onreadystatechange = function () {
+        // readyState == 4: 修了
+        if (req.readyState != 4) {
+        	return;
+        }
+        // status == 200: 成功
+        if (req.status != 200) {
+            // 成功しなかった．失敗であることを表示して抜ける．
+            alert("Error: unable to process, please try again later.");
+        	return;
+        }
+        
+        var body = req.responseText;
+        // デバッグ表示 
+        //alert('body: ' + body);
+
+        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
+        var data = eval("(" + body + ")");
+        if (data.result == "OK"){
+        	document.location = self.location;
+        }else{
+        	alert("Error: process failed.");
+        }
+    }
+    // Content-Type の指定
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send("id=" + enc(id));
+}
+
 function imgClicked() {
 	$(".image").colorbox({iframe:true, width:"80%"});
 }
@@ -53,6 +87,96 @@ function onOpenUserPage(userid) {
 	var href = "/user?id=" + userid;
 	var win = window.open(href, '_top');
   	win.focus();
+}
+
+function onAddComment(photoid, userid) {
+	var content = document.getElementById('addComment').value;
+	//alert(content);
+	if (content == "") {
+		
+	} else {
+	var req = new XMLHttpRequest();
+    // 送信先のURLを指定
+    req.open("POST", "/addcomment");
+    // 結果が帰ってきた際に実行されるハンドラを指定
+    req.onreadystatechange = function () {
+        // readyState == 4: 修了
+        if (req.readyState != 4) {
+        	return;
+        }
+        // status == 200: 成功
+        if (req.status != 200) {
+            // 成功しなかった．失敗であることを表示して抜ける．
+            alert("Error: unable to process, please try again later.");
+        	return;
+        }
+        
+        var body = req.responseText;
+        // デバッグ表示 
+
+        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
+        var data = eval("(" + body + ")");
+        if (data.result == "OK"){
+        	//alert(data.result);
+        	document.location = self.location;
+        }else{
+        	alert("Error: process failed.");
+        }
+    }
+    
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send("content=" + enc(content) + "&" +
+            "photoid=" + enc(photoid) + "&" +
+            "userid=" + enc(userid));
+	}
+}
+
+function onConfirmDelete(photoid) {
+	bootbox.confirm("Are you sure?", function(result) {
+		if (result == true) {
+			onDeletePhoto(photoid);
+		}	
+	});	
+}
+
+function onDeletePhoto(photoid) {
+	//alert("name: "+name+"\npass: "+pass);
+	if (photoid==""){
+		alert("Error: photo id does not match");
+	} else {
+		//alert(photoid);
+		var req = new XMLHttpRequest();
+	    // 送信先のURLを指定
+	    req.open("POST", "/deletephoto");
+	    // 結果が帰ってきた際に実行されるハンドラを指定
+	    req.onreadystatechange = function () {
+	        // readyState == 4: 修了
+	        if (req.readyState != 4) {
+	        	return;
+	        }
+	        // status == 200: 成功
+	        if (req.status != 200) {
+	            // 成功しなかった．失敗であることを表示して抜ける．
+	            alert("Error: unable to process, please try again later.");
+	        	return;
+	        }
+	        
+	        var body = req.responseText;
+	        // デバッグ表示 
+	        //alert('body: ' + body);
+	
+	        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
+	        var data = eval("(" + body + ")");
+	        if (data.result == "OK"){
+	        	document.location = self.location;
+	        }else{
+	        	alert("Error: process failed.");
+	        }
+	    }
+	    // Content-Type の指定
+	    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    req.send("photoid=" + enc(photoid));
+	}
 }
 
 function onAddComment(photoid, userid) {
