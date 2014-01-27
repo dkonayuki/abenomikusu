@@ -401,6 +401,7 @@ public class Application extends Controller {
 		Photo photo = Photo.find("url = ?", url).first();
 		
 		List<Comment> comments = Comment.find("photo = ? order by date desc", photo).fetch();
+		List<Tag> tags = photo.getTags();
 		
 		/*
 		if (comments.size() < 1) {
@@ -408,12 +409,12 @@ public class Application extends Controller {
 			comments = photo.getComment();
 		}
 		*/
-			
+		
 		// render
 		if (user == null)
-			render(photo, comments);
+			render(photo, comments, tags);
 		else
-			render(photo, comments, user);
+			render(photo, comments, tags, user);
 	}
 	
 	public static void user(long id) {

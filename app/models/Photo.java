@@ -58,6 +58,18 @@ public class Photo extends Model{
     	return this.comments;
     }
     
+    public List<Tag> getTags() {
+    	List<Tag> tags = new ArrayList<Tag>();
+    	
+    	List<TagPhotoRelation> tagrel = TagPhotoRelation.find("photoId = ?", this.id).fetch();
+    	if (tagrel != null) {
+    		for (int i = 0; i < tagrel.size(); i++) {
+    			tags.add((Tag) Tag.find("id = ?", tagrel.get(i).get_tagId()).first());
+    		}
+    		return tags;
+    	} else return tags; 
+    }
+    
     public Photo(String url ,String title ,String caption ,User user){
     	this.url=url;
     	this.title=title;

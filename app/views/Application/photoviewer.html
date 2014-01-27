@@ -23,12 +23,12 @@
     </div>
     <div class="detailSidebar">
         <div class="userInfoBar clearfix"> 
-        	<a class="userAvatarLink" href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username} rel="nofollow">
+        	<a class="userAvatarLink" href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username}>
             	<img src=${photo.user.avatar}>
             </a>
 
-            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:onOpenUserPage(${photo.user.id})" rel="nofollow">${photo.user.username}</a>
-
+            <div class="userRightInfo" style="bottom:5px"> <a class="userAvatarLink" href="javascript:onOpenUserPage(${photo.user.id})">${photo.user.username}</a>
+			
             </div>
         </div>
         
@@ -38,20 +38,12 @@
         </div>
         
         <div class="detailStats">
-            
-            <div class="btn-group tasksButton"> 
-            	<a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
-            		<i class="icon-tasks icon-white">
-            		</i>
-        			<span> class="caret"></span>
-    			</a>
-
-                <ul class="dropdown-menu">
-                    <li><a href="javascript:deleteMedia()"><i class="icon-remove"></i>Delete</a>
-                    </li>
-                </ul>
-                
-                
+            <div class="btn-group" style="width:160px; display:inline; overflow-x:auto; overflow-y: hidden; white-space: nowrap;">
+            	#{list items:tags, as: 'tag'} 
+            	<span class="btn btn-info btn-mini" style="border-radius: 5px;">
+            		${tag.name}
+    			</span>
+				#{/list}
             </div>
             
             <a href="javascript:onAddComment(${photo.id}, ${user.id})" class="sendButton btn btn-success" rel="nofollow">
