@@ -119,10 +119,12 @@
     opacity:1;
     -ms-filter:alpha(opacity=100);
     filter:alpha(opacity=100);
+    /*repeat:onÇ…Ç∑ÇÈÇ…ÇÕÇ±Ç±Ç©ÇÁ-------------------------------------------*/
     background-size:100%;
     background-position:center top;
     background-attachment:fixed;
     background-repeat:no-repeat;
+    /*Ç±Ç±Ç‹Ç≈è¡Ç∑------------------------------------------------------------*/
     z-index:2
 }
 
