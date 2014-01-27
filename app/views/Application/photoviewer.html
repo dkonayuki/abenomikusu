@@ -94,16 +94,14 @@ $(function(){
 	var img = document.getElementById('${photo.id}');
 	
 	img.onload = function() {
+		var height = $('body').height();
+		if (height < 333) { height = 333 };
 		
 		var imgWidth = $('body').width() - 28 - 330;
 		
 		if (img.width > imgWidth) img.style.width = imgWidth.toString() + 'px';
 		
 		var width = img.width + 380;
-		
-		var height = img.height + 24;
-		
-		if (height < 305 + 28) height = 305 + 28;
 		
 		parent.$.colorbox.resize({
         	innerWidth:width,

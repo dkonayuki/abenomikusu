@@ -39,7 +39,7 @@ function onFollow(id) {
 }
 
 function imgClicked() {
-	$(".image").colorbox({iframe:true, width:"80%", height:"80%"});
+	$(".image").colorbox({iframe:true, width:"80%"});
 }
 
 function onOpenPhotoPage() {

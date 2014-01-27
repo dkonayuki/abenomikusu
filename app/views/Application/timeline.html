@@ -46,7 +46,7 @@
 	
 	<div class="wrapper" style="float: right; width: 40%; padding:25px;">
 		#{list items: users, as: 'anuser'}
-		<div class="row" style="margin:0px 0px 15px 0px; border-radius: 4px 4px 4px 4px;">
+		<div class="row" id=${anuser.id} onload="setUserColor(${anuser.id})" style="margin:0px 0px 15px 0px; border-radius: 4px 4px 4px 4px;">
 						<div class="timeline-avatar">
 							<a href="javascript:onOpenUserPage(${anuser.id})" title=${anuser.username} rel="nofollow">
 	            				<img src=${anuser.avatar}>

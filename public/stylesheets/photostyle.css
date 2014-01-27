@@ -9814,8 +9814,8 @@ body {
 	max-width:90%px;
 	min-height:305px;
 	width:auto;
-	height:100%;
-	margin: 0 auto;
+	height:auto;
+	margin: 0;
 	background-color:#fff;
 }
 

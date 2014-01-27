@@ -446,9 +446,11 @@ public class Application extends Controller {
 		User user = getCurrentUser();
 		List<Photo> photos = Photo.find("order by date desc").fetch();
 		
-		List<User> users = user.getFollowings();
+		//List<User> users = user.getFollowings();
 		
-		//List<User> users = User.findAll();
+		List<User> users = User.findAll();
+		users.remove(user);
+		
 		render(photos, user, users);
 	}
 }
