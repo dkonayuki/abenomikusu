@@ -96,6 +96,9 @@ $(function(){
 	img.onload = function() {
 		
 		var height = img.height + 28;
+		
+		if (height < 305 + 28) height = 305 + 28;
+		
 		var width = img.width + 380;
 		parent.$.colorbox.resize({
         	innerWidth:width,
@@ -103,6 +106,7 @@ $(function(){
     	});
     	
     	height = height - 277;
+    	
     	document.getElementById('commentsofphotoid${photo.id}').style.height = height.toString() + "px";
 	};
 	

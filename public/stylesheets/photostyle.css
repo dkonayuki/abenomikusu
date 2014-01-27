@@ -9796,6 +9796,7 @@ S .smallBrick .brickActionCommentText{
 
 .mediaDetail{
 	width:auto;
+	min-height:305px;
 	height:auto;
 	margin:0 auto;
 	padding: 14px;
@@ -9818,13 +9819,18 @@ body {
 
 .bigPhoto{
 	position:relative;
-	max-width:612px;
+	/*max-width:612px;*/
+	max-width:80%;
+	width:auto;
+	min-height:305px;
 	height:auto;
 	padding:0px;
 }
 
 .bigPhoto img{	
-	max-width:612px;
+	/*max-width:612px;*/
+	max-width: 80%;
+	width:auto;
 	height:auto;
 	position: relative;
 }
