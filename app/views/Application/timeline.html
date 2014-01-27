@@ -3,11 +3,11 @@
 
 
 <div id="timeline">
-	<div class="wrapper" style="margin-top:-10px; float: left; width: 60%">
+	<div class="wrapper" style="margin-top:-10px; float: left; width: 65%">
 		<div id="main">
 			<div id="items" class="row-fluid">
 				#{list items: photos, as: 'photo'}
-				<div class=" item masonry-brick" style="width: 100%">
+				<div class=" item masonry-brick" style="width: 46%">
 					<div class="row" style="margin:auto">
 						<div class="timeline-avatar">
 							<a href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username} rel="nofollow">
@@ -45,7 +45,7 @@
 		</div>
 	</div>
 	
-	<div class="wrapper" style="margin-top:-10px; float: right; width: 40%; padding:25px;">
+	<div class="wrapper" style="margin-top:-10px; float: right; width: 35%; padding:25px;">
 		#{list items: users, as: 'anuser'}
 		<div class="row" id=${anuser.id} onload="setUserColor(${anuser.id})" style="margin:0px 0px 15px 0px; border-radius: 4px 4px 4px 4px;">
 						<div class="timeline-avatar">
