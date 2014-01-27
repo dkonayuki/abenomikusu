@@ -320,6 +320,7 @@ public class Application extends Controller {
 		//List<User> followings=user.getFollowing();
 		List<Photo> photos = Photo.find("user = ?", user).fetch();
 		render(user, photos);
+		//TODO クリックしたら他のユーザーのページに飛ぶ➡user(id)でおk
 	}
 	
 	public static void unfollow (long id){
