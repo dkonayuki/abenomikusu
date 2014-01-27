@@ -300,7 +300,13 @@ public class Application extends Controller {
 			}
 			
 			List<User> userList = SetToList(userSet);
-			render(user, userList);
+			HashMap<User,List<Photo>> photoMap = new HashMap<>();
+			for (User user2:userList){
+				List<Photo> photos = Photo.find("user = ?", user2).fetch(5);
+				photoMap.put(user2, photos);
+			}
+			
+			render(user, userList, photoMap);
 			return;
 		}
 		
