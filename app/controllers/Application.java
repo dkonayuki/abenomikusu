@@ -445,6 +445,10 @@ public class Application extends Controller {
 	public static void timeline() {
 		User user = getCurrentUser();
 		List<Photo> photos = Photo.find("order by date desc").fetch();
-		render(photos, user);
+		
+		List<User> users = user.getFollowings();
+		
+		//List<User> users = User.findAll();
+		render(photos, user, users);
 	}
 }

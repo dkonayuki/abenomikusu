@@ -39,7 +39,7 @@ ul {
   cursor: default;
 }
 #timeline {
-	max-width: 500px;
+	max-width: 100%;
 	margin: 0 auto;
 }
 
@@ -65,7 +65,7 @@ ul {
 	width: 100%;
 }
 .timeline-photo:hover {
-	border-color:#428bca;
+	/*border-color:#428bca;*/
 }
 
 .timeline-avatar {
@@ -84,6 +84,7 @@ ul {
 .timeline-user {
 	position:relative;
     bottom:-40px;
+    max-width:80%;
     text-align:left;
     font-size:inherit;
     color:#000;
