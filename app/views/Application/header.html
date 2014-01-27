@@ -73,7 +73,7 @@
 	                </li>
             	#{/else}   
             #{/if}
-            	<form name="serch" action = "@{serchResult()}" method="post">	
+            	<form name="serch" action = "@{searchResult()}" method="post">	
 	            	<li style="position:absolute; right:220px; height:40px; line-height:38px; color:white; vertical-align:middle">
 	            		<label for="photoSearch">photo</label>
 						<input id = "photoSearch" type="radio"  value="photo" name="searchType" checked>
@@ -81,7 +81,7 @@
 						<input id = "userSearch" type="radio"  value="user" name="searchType">
 	                </li>
 	    	        <li class="search">
-						<span><input type="text" style="padding-left:4px"  placeholder="Search..." name="serch" ></span>
+						<span><input type="text" style="padding-left:4px"  placeholder="Search..." name="search" ></span>
                 	</li>
                 </form>
             </ul>
