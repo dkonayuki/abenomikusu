@@ -136,38 +136,7 @@ public class Application extends Controller {
 		home();
 	}
 	
-	/*
-	public static void createCover(File cover, Long id) throws NoSuchAlgorithmException {
-		System.out.println(cover);
-		File file = cover;
-		System.out.println("あいうえおおおおお"); 
-		System.out.println(file);
-		
-    	String location = "public/uploads/covers/" + id;
-    	File dir = new File(location);
-    	if(!dir.exists()){
-    		dir.mkdirs();
-    	}
-    	
-    	String fileName = file.getName();
-		String extension = "";
 
-		int i = fileName.lastIndexOf('.');
-		if (i > 0) {
-		    extension = fileName.substring(i+1);
-		}
-
-		MessageDigest md5 = MessageDigest.getInstance("MD5");
-		String hex = (new HexBinaryAdapter()).marshal(md5.digest(fileName.getBytes()));
-		
-        file.renameTo(new File(location + "/" + hex + "." + extension));
-        
-        User user = User.find("id = ?", id).first();
-    	user.set_avatar(location + "/" + hex + "." + extension);
-		user.save();
-        return;
-	}
-	*/
 	
 	/*
 	 * avatar content
@@ -315,19 +284,19 @@ public class Application extends Controller {
 		renderJSON(map);
 	}
 	
-	public static void serchResult(){
+	public static void searchResult(String search, String searchType){
 		User user = getCurrentUser();
 		int count = 0;
 		
-		
-		String search = params.get("serch");
+		//String search = params.get("serch");
 		String[] searchs = search.replaceAll("　", " ").split(" ");
 		for (int i=0; i<searchs.length; i++){
 			searchs[i] = "%" + searchs[i] + "%";
 		}
 		
 		
-		String type = params.get("searchType");
+		//String type = params.get("searchType");
+		String type = searchType;
 		//ユーザー検索の場合
 		if (type.equals("user")){
 			HashSet<User> userSet = new HashSet();
@@ -344,7 +313,7 @@ public class Application extends Controller {
 			}
 			
 			List<User> userList = SetToList(userSet);			
-			render(user, userList);
+			render(user, userList, search, searchType);
 			return;
 		}
 		
@@ -480,6 +449,26 @@ public class Application extends Controller {
 		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
 		data.delete();
 		user(id);
+	}
+	
+	public static void followInSearchResultTab(long id, String search, String searchType) {
+		//フォロワーページ専用
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = new FollowingData(currentUser, user);
+		data.save();
+		searchResult(search, searchType);
+	}
+	
+	public static void unFollowInSearchResultTab(long id, String search, String searchType) {
+		//フォロワーページ専用
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
+		data.delete();
+		searchResult(search, searchType);
 	}
 	
 	public static void unFollowInFollowerTab(long id) {

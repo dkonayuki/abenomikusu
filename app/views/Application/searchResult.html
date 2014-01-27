@@ -11,24 +11,34 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div style="position:absolute; top:25px">
-							<img height="150px" width="150px" src="${user2.avatar}">
+							<a href="@{user(user2.id)}"><img height="150px" width="150px" src="${user2.avatar}"></a>
 					</div>
 				</div>
 				<div class="col-md-9" style="color:#ffffff; top:25px;">
 					<div>
-						<h1 style="display:inline">${user2.nickname} </h1>
+						<a href="@{user(user2.id)}"><h1 style="display:inline">${user2.nickname} </h1></a>
 						<h4 style="display:inline">${user2.profile}</h4>
 					</div>
 					<div style="margin:10px">
 						#{list items: user2.photos, as: 'photo'}
 							#{if photo_index <= 5}
-								<img height="100px" width="auto" src="${photo.url}">
+								<a class="image" href="@{photoViewer(photo.url)}" onclick='imgClicked()'>	
+									<img height="100px" width="auto" src="${photo.url}">
+								</a>
 							#{/if}	
 						#{/list}
 					</div>
 				</div>
 				<div class="col-md-1" style="position:absolute; top:90px; right:20px">
-					<button class="btn btn-success">Unfollow</button>
+					  #{if (Long.parseLong(session.get("login_user")) != user2.id)}
+            			#{if (!user2.isFollowed(Long.parseLong(session.get("login_user")))) }
+            				<a href="@{followInSearchResultTab(user2.id, search, searchType)}"><button class="btn btn-success">follow</button></a>
+                		#{/if}
+                		#{else}
+	                		<a href="@{unFollowInSearchResultTab(user2.id, search, searchType)}"><button class="btn btn-warning">Unfollow</button></a>
+            			#{/else}   
+            			#{/if}
+							
 				</div>
 			</div>
 		</div>
