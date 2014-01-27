@@ -93,8 +93,9 @@ public class Application extends Controller {
 		//File
 		render(user);
 	}
-
+/*
 	public static void postEditProfile(File uploadAvatar) throws NoSuchAlgorithmException{
+		
 		Long id = Long.parseLong(session.get("login_user"));
 		User user = User.find("id = ?", id).first();
 		String nickname = params.get("nickname");
@@ -109,8 +110,9 @@ public class Application extends Controller {
 			profile();
 		}
 	}
+	*/
 
-	public static void changeavatar(File ava) throws NoSuchAlgorithmException {
+	public static void changeavatar(File ava, File cover) throws NoSuchAlgorithmException {
 		Long id = Long.parseLong(session.get("login_user"));
 		User user = User.find("id = ?", id).first();
 		String nickname = params.get("nickname");
@@ -120,11 +122,41 @@ public class Application extends Controller {
 		user.save();
 		if(ava != null){
 			Avatar.create(ava, id);
-			home();
-		} else {
-			profile();
 		}
+		if(cover != null){
+			createCover(cover, id);
+		}
+		home();
 	}
+	
+	public static void createCover(File cover, Long id) throws NoSuchAlgorithmException {
+		File file = cover;
+    	String location = "public/uploads/covers/" + id;
+    	File dir = new File(location);
+    	if(!dir.exists()){
+    		dir.mkdirs();
+    	}
+    	
+    	String fileName = file.getName();
+		String extension = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+		    extension = fileName.substring(i+1);
+		}
+
+		MessageDigest md5 = MessageDigest.getInstance("MD5");
+		String hex = (new HexBinaryAdapter()).marshal(md5.digest(fileName.getBytes()));
+		
+        file.renameTo(new File(location + "/" + hex + "." + extension));
+        
+        User user = User.find("id = ?", id).first();
+    	user.set_avatar(location + "/" + hex + "." + extension);
+		user.save();
+        return;
+	}
+	
+	
 	/*
 	 * avatar content
 	 */
@@ -299,14 +331,8 @@ public class Application extends Controller {
 				count++;
 			}
 			
-			List<User> userList = SetToList(userSet);
-			HashMap<User,List<Photo>> photoMap = new HashMap<>();
-			for (User user2:userList){
-				List<Photo> photos = Photo.find("user = ?", user2).fetch(5);
-				photoMap.put(user2, photos);
-			}
-			
-			render(user, userList, photoMap);
+			List<User> userList = SetToList(userSet);			
+			render(user, userList);
 			return;
 		}
 		

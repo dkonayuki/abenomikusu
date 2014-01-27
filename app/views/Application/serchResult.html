@@ -7,7 +7,7 @@
 <div id="follower">
 #{list items: userList, as: 'user2'}
 	<div class="row" style="margin:10px;">
-		<div class="col-md-10 col-md-offset-1" style="min-height:200px; background-image: url(http://farm6.staticflickr.com/5477/coverphoto/12521320@N08_h.jpg?1376067409#12521320@N08); border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;">
+		<div class="col-md-10 col-md-offset-1" style="min-height:200px; background-image: url(${user2.cover}); border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;">
 			<div class="row">
 				<div class="col-md-2">
 					<div style="position:absolute; top:25px">
@@ -20,18 +20,15 @@
 						<h4 style="display:inline">${user2.profile}</h4>
 					</div>
 					<div style="margin:10px">
-						
-						%{List photos = photoMap.get(user2);}%
-						#{list items: photos, as: 'photo'}
-							<img height="100px" width="auto" src="${photo.url}">	
+						#{list items: user2.photos, as: 'photo'}
+							#{if photo_index <= 5}
+								<img height="100px" width="auto" src="${photo.url}">
+							#{/if}	
 						#{/list}
-						
-						
-						
 					</div>
 				</div>
 				<div class="col-md-1" style="position:absolute; top:90px; right:20px">
-					<button class="btn btn-primary">Unfollow</button>
+					<button class="btn btn-success">Unfollow</button>
 				</div>
 			</div>
 		</div>
