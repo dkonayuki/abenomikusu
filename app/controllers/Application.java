@@ -483,6 +483,7 @@ public class Application extends Controller {
 	}
 	
 	public static void unFollowInFollowerTab(long id) {
+		//フォロワーページ専用
 		User currentUser = getCurrentUser();
 		User user = User.find("id = ?", id).first();
 
