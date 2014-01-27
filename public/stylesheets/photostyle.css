@@ -9811,7 +9811,7 @@ S .smallBrick .brickActionCommentText{
 html {overflow-y: scroll;}
 
 body {
-	max-width:1008px;
+	max-width:90%px;
 	width:auto;
 	height:auto;
 	margin: 0px auto;
@@ -9820,16 +9820,15 @@ body {
 .bigPhoto{
 	position:relative;
 	/*max-width:612px;*/
-	max-width:80%;
 	width:auto;
 	min-height:305px;
 	height:auto;
 	padding:0px;
+	z-index:-1;
 }
 
 .bigPhoto img{	
 	/*max-width:612px;*/
-	max-width: 80%;
 	width:auto;
 	height:auto;
 	position: relative;
