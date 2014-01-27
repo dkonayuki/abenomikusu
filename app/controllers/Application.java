@@ -123,9 +123,12 @@ public class Application extends Controller {
 		if(ava != null){
 			Avatar.create(ava, id);
 		}
+		/*
 		if(cover != null){
 			createCover(cover, id);
 		}
+		
+		*/
 		home();
 	}
 	
