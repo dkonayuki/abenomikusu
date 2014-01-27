@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 import models.Avatar;
 import models.Comment;
+import models.Cover;
 import models.FollowingData;
 import models.Photo;
 import models.Tag;
@@ -123,17 +124,25 @@ public class Application extends Controller {
 		if(ava != null){
 			Avatar.create(ava, id);
 		}
-		/*
+		
 		if(cover != null){
-			createCover(cover, id);
+			System.out.println("あいうえおおおおお"); 
+			System.out.println(cover);
+			
+			Cover.create(cover, id);
 		}
 		
-		*/
+		
 		home();
 	}
 	
+	/*
 	public static void createCover(File cover, Long id) throws NoSuchAlgorithmException {
+		System.out.println(cover);
 		File file = cover;
+		System.out.println("あいうえおおおおお"); 
+		System.out.println(file);
+		
     	String location = "public/uploads/covers/" + id;
     	File dir = new File(location);
     	if(!dir.exists()){
@@ -158,7 +167,7 @@ public class Application extends Controller {
 		user.save();
         return;
 	}
-	
+	*/
 	
 	/*
 	 * avatar content
