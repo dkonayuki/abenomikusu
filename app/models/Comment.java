@@ -17,7 +17,7 @@ public class Comment extends Model{
 	@ManyToOne
 	private Photo photo;
 
-    public void set_user(User user){this.user=user;}
+	public void set_user(User user){this.user=user;}
     public User get_user(){return this.user;}
     
     public void set_content(String content){this.content=content;}
@@ -29,7 +29,7 @@ public class Comment extends Model{
     public void set_photo(Photo photo){this.photo=photo;}
     public Photo get_photo(){return this.photo;}
 	
-	public Comment(User user, String content,Photo photo){
+	public Comment(User user, String content, Photo photo){
 		this.user=user;
 		this.content=content;
 		this.date=new Date();

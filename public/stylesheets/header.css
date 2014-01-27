@@ -111,6 +111,7 @@
     top:0;
     overflow:hidden
 }
+
 .subnav-refresh .cover-photo-holder .cover-photo {
     width:100%;
     height:100%;
@@ -246,7 +247,6 @@
     position:absolute;
     left:0;
     right:0;
-    position:absolute;
     bottom:50px;
     left:140px;
     text-align:left;
@@ -415,44 +415,6 @@
     box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.1)
 }
 
-/*
-.subnav-refresh .subnav-middle ul.nav-links .sn-dropdowntarget ul.arrange {
-    margin-left:-21px;
-    right:auto
-}
-.subnav-refresh ul.nav-links .sn-dropdowntarget ul.arrange li {
-    width:auto
-}
-
-.subnav-refresh ul.nav-links li.set .sn-ico-comment-set {
-    background-image:url('http://l.yimg.com/g/images/sprites/icons-sfdd8bf43a3.png');
-    background-position:14px -850px;
-    background-repeat:no-repeat;
-    float:left;
-    height:41px;
-    padding:0;
-    width:32px
-}
-
-.subnav-refresh ul.nav-links li.set .count {
-    float:left;
-    padding:13px 15px 0 3px;
-    line-height:10px
-}
-
-.subnav-refresh ul.nav-links li.set.active .sn-ico-comment-set {
-    background-image:url('http://l.yimg.com/g/images/sprites/icons-sfdd8bf43a3.png');
-    background-position:14px -400px;
-    background-repeat:no-repeat;
-    background-size:inherit
-}
-
-.subnav-refresh ul.nav-links li.set.active .count {
-    color:#fc389c
-}
-
-*/
-
 .subnav-refresh .subnav-middle ul.nav-links li.sn-navitem {
     white-space:nowrap;
     border-right:1px solid black;
@@ -527,7 +489,7 @@
 
 /* search */
 
-.subnav-refresh .subnav-middle ul.nav-links li.search { 
+.subnav-refresh .subnav-middle ul.nav-links li.search {
 	float:right;
 	padding:6px 30px 6px 30px;
 	margin:auto;

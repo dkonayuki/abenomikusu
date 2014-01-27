@@ -3,17 +3,14 @@
 <div class="subnav-refresh subnav-view subnav-state-ready" id="subnav-refresh" style="left: 0px; width: auto; ">
     <div class="cover-photo-holder">
         <div id="cover-photo" class="cover-photo wviewvert" 
-        			style="background-image: url(http://farm6.staticflickr.com/5477/coverphoto/12521320@N08_h.jpg?1376067409#12521320@N08); top: -35px; "></div>
+        			style="background-image: url(http://upload.wikimedia.org/wikipedia/ja/7/7e/Titech_new_lib.jpg); top: -35px; "></div>
     </div>
     <div class="subnav-middle">
         <div class="sn-avatar sn-avatar-size-300">
-        	<!--
-           	<img class="sn-avatar-mask" height="110" width="110" src="http://farm4.staticflickr.com/3717/buddyicons/12521320@N08_r.jpg?1386337584#12521320@N08">
-            -->
             <img class="sn-avatar-mask" height="110" width="110" src="${user.avatar}">
         </div>
         <div class="person">
-             <h1>
+            <h1>
              	<span class="character-name-holder">  
              	${user.username}
                 </span>
@@ -47,7 +44,7 @@
             #{/else}
                 <li class="sn-navitem"><a href="@{home()}">Home</a>
                 </li>
-                <li class="sn-navitem"><a href="#">Timeline</a>
+                <li class="sn-navitem"><a href="@{timeline()}">Timeline</a>
                 </li>
                 <li class="sn-navitem"><a href="@{follower()}">Follower</a>
                 </li>
@@ -71,42 +68,47 @@
 	                </li>
             	#{/else}   
             #{/if}
-                <li class="search">
-                	<form name="serch" action = "@{serchResult()}" method="post">
-					<span><input type="text"  placeholder="Search..." name="serch" ></span>
-					</form>
-                </li>
+            	<form name="serch" action = "@{serchResult()}" method="post">	
+	            	<li style="position:absolute; right:200px; height:40px; line-height:38px; color:white; vertical-align:middle">
+	            		<label for="photoSearch">photo</label>
+						<input id = "photoSearch" type="radio"  value="photo" name="searchType" checked>
+						<label for="userSearch">user</label>
+						<input id = "userSearch" type="radio"  value="user" name="searchType">
+	                </li>
+	    	        <li class="search">
+						<span><input type="text" style="padding-left:4px"  placeholder="Search..." name="serch" ></span>
+                	</li>
+                </form>
             </ul>
         </div>
     </div>
 </div>
+        
 <!-- Button trigger modal -->
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-						<form action="@{upload()}" method="post" enctype="multipart/form-data">
-            		<div class="modal-body">
+			<form action="@{upload()}" method="post" enctype="multipart/form-data">
+            	<div class="modal-body">
                     <div class="fileinput fileinput-new" data-provides="fileinput" style="width: 100%; height:100%;">
-                    	<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="display:none;" id="thumbnail">
+                    	<div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="margin-bottom:15px" id="thumbnail">
                     	</div>
                         
                         <div> 
-                        	<span class="btn btn-default btn-file" onclick="showThumbNail()">
+                        	<span class="btn btn-default btn-file">
                         		<span class="fileinput-new">Select image</span>
                         		<span class="fileinput-exists">Change</span>
                         		<input type="file" name="image" accept="image/*">
-                            </span> 
-                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput" onclick="hideThumbNail()">Remove</a>
+                            </span>
+                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group" style="margin-top: 10px"> <span class="input-group-addon">Tittle</span>
-
                             <input type="text" class="form-control" name="title" placeholder="Title">
                         </div>
                         <div class="input-group" style="margin-top: 10px"> <span class="input-group-addon">Tags</span>
-
                             <input type="text" class="form-control" name="tags" placeholder="Tags">
                         </div>
                         <div class="form-group" style="margin-top: 10px">

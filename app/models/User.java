@@ -73,6 +73,14 @@ public class User extends Model{
     	return false;
     }
     
+    public List<User> getFollowings() {
+    	List<User> users = new ArrayList<User>();
+    	for (FollowingData f : this.followings) {
+    		users.add(f.getFollowee());
+    	}
+    	return users;
+    }
+    
     public int getFollowerCount() {
     	return this.followers.size();
     }

@@ -1,7 +1,41 @@
-function submitStop(e){//Enterでの画面遷移防止
+function submitStop(e){ //Enterでの画面遷移防止
     if (!e) var e = window.event;
     if(e.keyCode == 13)
         return false;
+}
+
+function onFollow(id) {
+		var req = new XMLHttpRequest();
+    // 送信先のURLを指定
+    req.open("POST", "/follow");
+    // 結果が帰ってきた際に実行されるハンドラを指定
+    req.onreadystatechange = function () {
+        // readyState == 4: 修了
+        if (req.readyState != 4) {
+        	return;
+        }
+        // status == 200: 成功
+        if (req.status != 200) {
+            // 成功しなかった．失敗であることを表示して抜ける．
+            alert("Error: unable to process, please try again later.");
+        	return;
+        }
+        
+        var body = req.responseText;
+        // デバッグ表示 
+        //alert('body: ' + body);
+
+        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
+        var data = eval("(" + body + ")");
+        if (data.result == "OK"){
+        	document.location = self.location;
+        }else{
+        	alert("Error: process failed.");
+        }
+    }
+    // Content-Type の指定
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send("id=" + enc(id));
 }
 
 function imgClicked() {
@@ -21,6 +55,96 @@ function onOpenUserPage(userid) {
   	win.focus();
 }
 
+function onAddComment(photoid, userid) {
+	var content = document.getElementById('addComment').value;
+	//alert(content);
+	if (content == "") {
+		
+	} else {
+	var req = new XMLHttpRequest();
+    // 送信先のURLを指定
+    req.open("POST", "/addcomment");
+    // 結果が帰ってきた際に実行されるハンドラを指定
+    req.onreadystatechange = function () {
+        // readyState == 4: 修了
+        if (req.readyState != 4) {
+        	return;
+        }
+        // status == 200: 成功
+        if (req.status != 200) {
+            // 成功しなかった．失敗であることを表示して抜ける．
+            alert("Error: unable to process, please try again later.");
+        	return;
+        }
+        
+        var body = req.responseText;
+        // デバッグ表示 
+
+        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
+        var data = eval("(" + body + ")");
+        if (data.result == "OK"){
+        	//alert(data.result);
+        	document.location = self.location;
+        }else{
+        	alert("Error: process failed.");
+        }
+    }
+    
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send("content=" + enc(content) + "&" +
+            "photoid=" + enc(photoid) + "&" +
+            "userid=" + enc(userid));
+	}
+}
+
+function onConfirmDelete(photoid) {
+	bootbox.confirm("Are you sure?", function(result) {
+		if (result == true) {
+			onDeletePhoto(photoid);
+		}	
+	});	
+}
+
+function onDeletePhoto(photoid) {
+	//alert("name: "+name+"\npass: "+pass);
+	if (photoid==""){
+		alert("Error: photo id does not match");
+	} else {
+		//alert(photoid);
+		var req = new XMLHttpRequest();
+	    // 送信先のURLを指定
+	    req.open("POST", "/deletephoto");
+	    // 結果が帰ってきた際に実行されるハンドラを指定
+	    req.onreadystatechange = function () {
+	        // readyState == 4: 修了
+	        if (req.readyState != 4) {
+	        	return;
+	        }
+	        // status == 200: 成功
+	        if (req.status != 200) {
+	            // 成功しなかった．失敗であることを表示して抜ける．
+	            alert("Error: unable to process, please try again later.");
+	        	return;
+	        }
+	        
+	        var body = req.responseText;
+	        // デバッグ表示 
+	        //alert('body: ' + body);
+	
+	        // 戻ってきた JSON 文字列を JavaScript オブジェクトに変換
+	        var data = eval("(" + body + ")");
+	        if (data.result == "OK"){
+	        	document.location = self.location;
+	        }else{
+	        	alert("Error: process failed.");
+	        }
+	    }
+	    // Content-Type の指定
+	    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    req.send("photoid=" + enc(photoid));
+	}
+}
+
 function ChangeTab_login_signup(tabname) {
 	// 全部消す
 	document.getElementById('login').style.display = 'none';
@@ -37,10 +161,6 @@ function showThumbNail() {
 
 function hideThumbNail() {
 	document.getElementById('thumbnail').style.display = "none";
-}
-
-function onDeletePhoto() {
-	alert("will delete this photo later");
 }
 
 function login_check(){//TODO toppageに行くときにUser情報を何かしらの方法で保存しておく

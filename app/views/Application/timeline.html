@@ -1,0 +1,36 @@
+*{<meta charset="utf-8">}*
+#{extends 'Application/header.html' /}
+<div id="timeline">
+				#{list items: photos, as: 'photo'}
+					<div class="row" style="margin:auto">
+						<div class="timeline-avatar">
+							<a href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username} rel="nofollow">
+	            				<img src=${photo.user.avatar}>
+	       					</a>
+	  					</div>
+	  					<div class="timeline-user">
+	  						<a href="javascript:onOpenUserPage(${photo.user.id})" rel="nofollow">
+	  							<h3 class="timeline-username">${photo.user.username}</h3>
+	  						</a>
+	  						<h5 style="margin-top:0">${photo.user.profile}</h5>
+	  					</div>
+					</div>
+	
+					<div class="timeline-photo" style="margin-bottom:10px">
+						<a class="image" href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
+         					<img src=${photo.url} alt="...">
+      					</a>
+						<div class="item-content" style="padding: 10px;">
+							<div class="description">
+								<h3>${photo.title}</h3>
+        						<p>${photo.caption}</p>
+							</div>
+							<div class="meta">
+								<span>	
+									${photo.date}
+								</span>
+							</div>
+						</div>
+					</div>
+				#{/list}
+</div>
