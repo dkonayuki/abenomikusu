@@ -18,12 +18,9 @@
 					</div>
 					<div style="margin-top:12px; height: 100px; overflow-x:auto; overflow-y: hidden; white-space: nowrap;">
 					#{list items: following.followee.photos, as: 'photo'}
-						
 						<a class="image" href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
          					<img height="100px" width="auto" src="${photo.url}" alt="...">
       					</a>
-							
-						
 					#{/list}
 					</div>
 				</div>
