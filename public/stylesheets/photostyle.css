@@ -9797,8 +9797,8 @@ S .smallBrick .brickActionCommentText{
 .mediaDetail{
 	width:auto;
 	min-height:305px;
-	height:auto;
-	margin:0 auto;
+	height: 100%;
+	margin: auto;
 	padding: 14px;
 	position:relative;
 	background-color:#fff;
@@ -9812,19 +9812,23 @@ html {overflow-y: scroll;}
 
 body {
 	max-width:90%px;
+	min-height:305px;
 	width:auto;
-	height:auto;
-	margin: 0px auto;
+	height:100%;
+	margin: 0 auto;
+	background-color:#fff;
 }
 
 .bigPhoto{
 	position:relative;
 	/*max-width:612px;*/
 	width:auto;
+	margin:auto;
+	margin-right:358px;
 	min-height:305px;
 	height:auto;
 	padding:0px;
-	z-index:-1;
+	text-align: center;
 }
 
 .bigPhoto img{	
