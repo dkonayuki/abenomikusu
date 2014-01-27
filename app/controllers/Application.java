@@ -300,7 +300,7 @@ public class Application extends Controller {
 			}
 			
 			List<User> userList = SetToList(userSet);
-			HashMap<User,List<Photo>> photoMap = new HashMap<>();
+			HashMap<User,List<Photo>> photoMap = new HashMap<User,List<Photo>>();
 			for (User user2:userList){
 				List<Photo> photos = Photo.find("user = ?", user2).fetch(5);
 				photoMap.put(user2, photos);
@@ -422,10 +422,8 @@ public class Application extends Controller {
 	public static void follower(){
 		User user = getCurrentUser();
 		List<FollowingData> following_data=FollowingData.find("follower = ?", user).fetch();
-				
+	
 		render(user, following_data);
-		//TODO クリックしたら他のユーザーのページに飛ぶ➡user(id)でおk
-
 	}
 	
 	public static void follow(long id) {
