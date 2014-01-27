@@ -504,4 +504,24 @@ public class Application extends Controller {
 		
 		render(photos, user, users);
 	}
+	
+	public static void user_delete(){
+		User user = getCurrentUser();
+		List<FollowingData> following_data=FollowingData.find("follower = ?", user).fetch();
+		for(FollowingData following_data_i : following_data){//お互いのフォロー削除
+			following_data_i.delete();
+		}
+		List<FollowingData> following_data_2=FollowingData.find("followee = ?", user).fetch();
+		for(FollowingData following_data_i : following_data_2){//お互いのフォロー削除
+			following_data_i.delete();
+		}
+		List<Photo> photos = Photo.find("user = ?",user).fetch();
+		for(Photo photo:photos){//写真削除
+			photo.delete();
+		}
+		
+		
+		user.delete();
+		renderJSON(new ArrayList());
+	}
 }
