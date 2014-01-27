@@ -126,17 +126,11 @@ public class Application extends Controller {
 		}
 		
 		if(cover != null){
-			System.out.println("あいうえおおおおお"); 
-			System.out.println(cover);
-			
 			Cover.create(cover, id);
 		}
 		
-		
 		home();
 	}
-	
-
 	
 	/*
 	 * avatar content
@@ -144,14 +138,6 @@ public class Application extends Controller {
 	public static void avatarContent(String name) {
 		Avatar avatar = Avatar.findByName(name);
 		renderBinary(avatar.file);
-	}
-
-	public static void toppage() {
-		User user = getCurrentUser();
-		if (user == null)
-			login_signup();
-		else
-			render(user);
 	}
 
 	public static User getCurrentUser() {
