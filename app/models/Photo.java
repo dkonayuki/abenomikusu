@@ -21,7 +21,6 @@ public class Photo extends Model{
 	private List<Comment> comments;
     private Date date;
     private HashMap<Long,Integer> rank;//<userid,point>
-
     
     public void put_rank(long user_id,int point){
     	this.rank.put(user_id, point);
@@ -57,6 +56,18 @@ public class Photo extends Model{
     
     public List<Comment> getComment() {
     	return this.comments;
+    }
+    
+    public List<Tag> getTags() {
+    	List<Tag> tags = new ArrayList<Tag>();
+    	
+    	List<TagPhotoRelation> tagrel = TagPhotoRelation.find("photoId = ?", this.id).fetch();
+    	if (tagrel != null) {
+    		for (int i = 0; i < tagrel.size(); i++) {
+    			tags.add((Tag) Tag.find("id = ?", tagrel.get(i).get_tagId()).first());
+    		}
+    		return tags;
+    	} else return tags; 
     }
     
     public Photo(String url ,String title ,String caption ,User user){

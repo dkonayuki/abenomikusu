@@ -11,12 +11,12 @@ import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import play.Play;
 import play.libs.Files;
 
-public class Avatar {
+public class Cover {
     
     public File file;
-    private final static String location = "public/uploads/avatars/";
+    private final static String location = "public/uploads/covers/";
     
-    public Avatar(File file) {
+    public Cover(File file) {
         this.file = file;
     }
 
@@ -24,25 +24,9 @@ public class Avatar {
         return file.getName();
     }
     
-    public Long getSize() {
-        return file.length();
-    }
     
-    public static List<Avatar> findAll() {
-        List<Avatar> all = new ArrayList<Avatar>();
-        for (File file : Play.getFile(location).listFiles()) {
-            all.add(new Avatar(file));
-        }
-        return all;
-    }
     
-    public static Avatar findByName(String name) {
-    	return new Avatar(Play.getFile(name));
-        //return new Avatar(Play.getFile("uploads/avatar/" + name));
-    }
-    
-    public static Avatar create(File file, Long id) throws NoSuchAlgorithmException {
-        //File to = Play.getFile("uploads/avatar/" + file.getName());
+    public static Cover create(File file, Long id) throws NoSuchAlgorithmException {
     	String location2 = location + id;
     	File dir = new File(location2);
     	if(!dir.exists()){
@@ -60,14 +44,12 @@ public class Avatar {
 		MessageDigest md5 = MessageDigest.getInstance("MD5");
 		String hex = (new HexBinaryAdapter()).marshal(md5.digest(fileName.getBytes()));
 		
-    	//File to = Play.getFile(location2 + "/" + file.getName());
-        //Files.copy(file, to);
         
         file.renameTo(new File(location2 + "/" + hex + "." + extension));
         
         User user = User.find("id = ?", id).first();
-    	user.set_avatar(location2 + "/" + hex + "." + extension);
+    	user.set_cover(location2 + "/" + hex + "." + extension);
 		user.save();
-        return new Avatar(file);
+        return new Cover(file);
     }
 }

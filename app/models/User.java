@@ -57,7 +57,7 @@ public class User extends Model{
     	this.pass=digest(pass);
     	this.profile="よろしくお願いします。";
     	this.avatar="/public/images/default.png";//default icon URL
-    	this.cover="";//default cover URL
+    	this.cover="/public/images/titech.png";//default cover URL
     }
     
     public void addPhoto(Photo photo) {
@@ -71,6 +71,14 @@ public class User extends Model{
     			return true;
     	}
     	return false;
+    }
+    
+    public List<User> getFollowings() {
+    	List<User> users = new ArrayList<User>();
+    	for (FollowingData f : this.followings) {
+    		users.add(f.getFollowee());
+    	}
+    	return users;
     }
     
     public int getFollowerCount() {

@@ -1,26 +1,27 @@
 package controllers;
 
 
-import play.*;
-import play.mvc.*;
-import sun.misc.BASE64Encoder;
-
 import java.io.File;
-
-
-import models.*;
-
-import javax.persistence.*;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+
+import models.Avatar;
+import models.Comment;
+import models.Cover;
+import models.FollowingData;
+import models.Photo;
+import models.Tag;
+import models.TagPhotoRelation;
 import models.User;
 import play.mvc.Controller;
-import play.mvc.Http;
-
-
 
 public class Application extends Controller {
 
@@ -75,7 +76,6 @@ public class Application extends Controller {
 			// アンケートデータをデータベースに書き込む
 			User user = new User(name, pass);
 			user.save();
-
 			
 			// 埋め込むべき変数をテンプレートに渡す．
 			// テンプレートからはキー名で参照できる．
@@ -94,8 +94,9 @@ public class Application extends Controller {
 		//File
 		render(user);
 	}
-
-	public static void postEditProfile(File uploadAvatar){
+/*
+	public static void postEditProfile(File uploadAvatar) throws NoSuchAlgorithmException{
+		
 		Long id = Long.parseLong(session.get("login_user"));
 		User user = User.find("id = ?", id).first();
 		String nickname = params.get("nickname");
@@ -104,25 +105,39 @@ public class Application extends Controller {
 		user.set_profile(profile);
 		user.save();
 		if(uploadAvatar != null){
-			Avatar.create(uploadAvatar, id);
-		}    	
-		profile();
-	}    	
+			//Avatar.create(uploadAvatar, id);
+			home();
+		} else {
+			profile();
+		}
+	}
+	*/
 
+	public static void changeavatar(File ava, File cover) throws NoSuchAlgorithmException {
+		Long id = Long.parseLong(session.get("login_user"));
+		User user = User.find("id = ?", id).first();
+		String nickname = params.get("nickname");
+		String profile  = params.get("profile");
+		user.set_nickname(nickname);
+		user.set_profile(profile);
+		user.save();
+		if(ava != null){
+			Avatar.create(ava, id);
+		}
+		
+		if(cover != null){
+			Cover.create(cover, id);
+		}
+		
+		home();
+	}
+	
 	/*
 	 * avatar content
 	 */
 	public static void avatarContent(String name) {
 		Avatar avatar = Avatar.findByName(name);
 		renderBinary(avatar.file);
-	}
-
-	public static void toppage() {
-		User user = getCurrentUser();
-		if (user == null)
-			login_signup();
-		else
-			render(user);
 	}
 
 	public static User getCurrentUser() {
@@ -133,6 +148,12 @@ public class Application extends Controller {
 		}
 		Long id = Long.parseLong(session.get("login_user"));
 		User user = User.find("id = ?", id).first();
+		
+		if (user == null) {
+			login_signup();
+			return null;
+		}
+		
 		if(user.get_avatar() == null || user.get_avatar().equals("")){
 			user.set_avatar("/public/images/default.png");
 			user.save();
@@ -145,12 +166,12 @@ public class Application extends Controller {
 		if (user == null)
 			login_signup();
 		else{	
-			List<Photo> photos = Photo.find("user = ?", user).fetch();
+			List<Photo> photos = Photo.find("user = ? order by date desc", user).fetch();
 			render(photos, user);
 		}
 	}
 
-	public static void upload(String title, String tags, String caption, File image) {
+	public static void upload(String title, String tags, String caption, File image) throws NoSuchAlgorithmException {
 		if (image != null) {
 			User user = getCurrentUser();
 			String targetPath = "public/uploads/" + user.get_username().toString() + "/photos";
@@ -158,7 +179,19 @@ public class Application extends Controller {
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			targetPath += "/" + image.getName();
+			
+			String fileName = image.getName();
+			String extension = "";
+
+			int i = fileName.lastIndexOf('.');
+			if (i > 0) {
+			    extension = fileName.substring(i+1);
+			}
+
+			MessageDigest md5 = MessageDigest.getInstance("MD5");
+			String hex = (new HexBinaryAdapter()).marshal(md5.digest(fileName.getBytes()));
+			
+			targetPath += "/" + hex + "." + extension;
 			image.renameTo(new File(targetPath));
 			Photo photo = new Photo(targetPath, title, caption, user);
 			photo.save();
@@ -184,19 +217,72 @@ public class Application extends Controller {
 		home();
 	}
 	
-	public static void serchResult(){
+	public static void deletephoto() {
+		long photoid = Long.parseLong(params.get("photoid"));
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Photo photo = Photo.find("id = ?", photoid).first();
+		
+		if (photo != null) {
+			File dir = new File(photo.get_url());
+			if (dir.delete()) {
+				Photo.delete("id = ?", photoid);
+				map.put("result", "OK");
+			} else {
+				map.put("result", "Error : unable to delete file from server");
+			}
+		} else {
+			map.put("result", "error");
+		}
+		renderJSON(map);
+	}
+	
+	public static void addcomment() {
+		long photoid = Long.parseLong(params.get("photoid"));
+		String content = params.get("content");
+		long userid = Long.parseLong(params.get("userid"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Photo photo = Photo.find("id = ?", photoid).first();
+		User user = User.find("id = ?", userid).first();
+		
+		Comment comment = new Comment(user, content, photo);
+		
+		photo.addComment(comment);
+		comment.save();
+		map.put("result", "OK");
+		map.put("uri", photoid + "&" + userid + "&" + content);
+		
+		/*
+		if (photo != null) {
+			File dir = new File(photo.get_url());
+			if (dir.delete()) {
+				Photo.delete("id = ?", photoid);
+				map.put("result", "OK");
+			} else {
+				map.put("result", "Error : unable to delete file from server");
+			}
+		} else {
+			map.put("result", "error");
+		}
+		*/
+		renderJSON(map);
+	}
+	
+	public static void searchResult(String search, String searchType){
 		User user = getCurrentUser();
 		int count = 0;
 		
-		
-		String search = params.get("serch");
+		//String search = params.get("serch");
 		String[] searchs = search.replaceAll("　", " ").split(" ");
 		for (int i=0; i<searchs.length; i++){
 			searchs[i] = "%" + searchs[i] + "%";
 		}
 		
 		
-		String type = params.get("searchType");
+		//String type = params.get("searchType");
+		String type = searchType;
 		//ユーザー検索の場合
 		if (type.equals("user")){
 			HashSet<User> userSet = new HashSet();
@@ -212,8 +298,8 @@ public class Application extends Controller {
 				count++;
 			}
 			
-			List<User> userList = SetToList(userSet);
-			render(user, userList);
+			List<User> userList = SetToList(userSet);			
+			render(user, userList, search, searchType);
 			return;
 		}
 		
@@ -300,7 +386,8 @@ public class Application extends Controller {
 		User user = getCurrentUser();
 		Photo photo = Photo.find("url = ?", url).first();
 		
-		List<Comment> comments = Comment.find("photo = ?", photo).fetch();
+		List<Comment> comments = Comment.find("photo = ? order by date desc", photo).fetch();
+		List<Tag> tags = photo.getTags();
 		
 		/*
 		if (comments.size() < 1) {
@@ -308,12 +395,12 @@ public class Application extends Controller {
 			comments = photo.getComment();
 		}
 		*/
-			
+		
 		// render
 		if (user == null)
-			render(photo, comments);
+			render(photo, comments, tags);
 		else
-			render(photo, comments, user);
+			render(photo, comments, tags, user);
 	}
 	
 	public static void user(long id) {
@@ -328,9 +415,9 @@ public class Application extends Controller {
 
 	public static void follower(){
 		User user = getCurrentUser();
-		//List<User> followings=user.getFollowing();
-		List<Photo> photos = Photo.find("user = ?", user).fetch();
-		render(user, photos);
+		List<FollowingData> following_data=FollowingData.find("follower = ?", user).fetch();
+	
+		render(user, following_data);
 	}
 	
 	public static void follow(long id) {
@@ -348,7 +435,69 @@ public class Application extends Controller {
 
 		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
 		data.delete();
-
 		user(id);
+	}
+	
+	public static void followInSearchResultTab(long id, String search, String searchType) {
+		//フォロワーページ専用
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = new FollowingData(currentUser, user);
+		data.save();
+		searchResult(search, searchType);
+	}
+	
+	public static void unFollowInSearchResultTab(long id, String search, String searchType) {
+		//フォロワーページ専用
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
+		data.delete();
+		searchResult(search, searchType);
+	}
+	
+	public static void unFollowInFollowerTab(long id) {
+		//フォロワーページ専用
+		User currentUser = getCurrentUser();
+		User user = User.find("id = ?", id).first();
+
+		FollowingData data = FollowingData.find("follower = ? AND followee = ?", currentUser, user).first();
+		data.delete();
+		follower();
+	}
+	
+	public static void timeline() {
+		User user = getCurrentUser();
+		List<Photo> photos = Photo.find("order by date desc").fetch();
+
+		
+		//List<User> users = user.getFollowings();
+		
+		List<User> users = User.findAll();
+		users.remove(user);
+		
+		render(photos, user, users);
+	}
+	
+	public static void user_delete(){
+		User user = getCurrentUser();
+		List<FollowingData> following_data=FollowingData.find("follower = ?", user).fetch();
+		for(FollowingData following_data_i : following_data){//お互いのフォロー削除
+			following_data_i.delete();
+		}
+		List<FollowingData> following_data_2=FollowingData.find("followee = ?", user).fetch();
+		for(FollowingData following_data_i : following_data_2){//お互いのフォロー削除
+			following_data_i.delete();
+		}
+		List<Photo> photos = Photo.find("user = ?",user).fetch();
+		for(Photo photo:photos){//写真削除
+			photo.delete();
+		}
+		
+		
+		user.delete();
+		renderJSON(new ArrayList());
 	}
 }

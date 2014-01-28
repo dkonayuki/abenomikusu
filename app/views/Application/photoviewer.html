@@ -11,8 +11,6 @@
 	<script type="text/javascript" src="@{'/public/javascripts/jquery-1.10.2.js'}"></script>
   	<script type="text/javascript" src="@{'/public/javascripts/bootstrap.js'}"></script>
   	<script type="text/javascript" src="@{'/public/javascripts/jquery.colorbox.js'}"></script>
-  	<script type="text/javascript" src="@{'/public/javascripts/jquery.wookmark.js'}"></script>
-  	<script type="text/javascript" src="@{'/public/javascripts/jqueryplugin.js'}"></script>
   	<script type="text/javascript" src="@{'/public/javascripts/exp4main.js'}"></script>
   
 	<title>${photo.title}</title>
@@ -20,17 +18,17 @@
 </head>
 <body>
 <div class="mediaDetail">
-    <div class="bigPhoto" style="z-index: 8008;">
+    <div class="bigPhoto" style="z-index: 8006;">
         <img id=${photo.id} src=${photo.url} onclick="onOpenPhotoPage()">
     </div>
     <div class="detailSidebar">
         <div class="userInfoBar clearfix"> 
-        	<a class="userAvatarLink" href="javascript:onOpenUserPage(${user.id})" title=${user.username} rel="nofollow">
-            	<img src=${user.avatar}>
+        	<a class="userAvatarLink" href="javascript:onOpenUserPage(${photo.user.id})" title=${photo.user.username}>
+            	<img src=${photo.user.avatar}>
             </a>
 
-            <div class="userRightInfo"> <a class="userAvatarLink" href="javascript:onOpenUserPage(${user.id})" rel="nofollow">${user.username}</a>
-
+            <div class="userRightInfo" style="bottom:5px"> <a class="userAvatarLink" href="javascript:onOpenUserPage(${photo.user.id})">${photo.user.username}</a>
+			
             </div>
         </div>
         
@@ -40,23 +38,15 @@
         </div>
         
         <div class="detailStats">
-            
-            <div class="btn-group tasksButton"> 
-            	<a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
-            		<i class="icon-tasks icon-white">
-            		</i>
-        			<>span class="caret"></span>
+            <div class="btn-group" style="width:160px; display:inline; overflow-x:auto; overflow-y: hidden; white-space: nowrap;">
+            	#{list items:tags, as: 'tag'} 
+            	<a href="@{searchResult(tag.name, photo)}" target="_top" class="btn btn-info btn-mini" style="border-radius: 5px;">
+            		${tag.name}
     			</a>
-
-                <ul class="dropdown-menu">
-                    <li><a href="javascript:deleteMedia()"><i class="icon-remove"></i>Delete</a>
-                    </li>
-                </ul>
-                
-                
+				#{/list}
             </div>
             
-            <a href="javascript:void(0)" class="sendButton btn btn-success" rel="nofollow">
+            <a href="javascript:onAddComment(${photo.id}, ${user.id})" class="sendButton btn btn-success" rel="nofollow">
                 	<i class="icon-comment icon-white"></i>
                 	Comment
             </a>
@@ -71,15 +61,14 @@
                 	<div class="comment clearfix" id=${comment.id} fromid=${comment.user.id} commentid=${comment.id}>
         				<div class="commentProfileImage">
             				<a href="@{user(comment.user.id)}" title="${comment.user.username}" target="_blank">
-                				<img src=${user.avatar}>
+                				<img src=${comment.user.avatar}>
                 			</a>
         				</div>
         				<div class="commentBody">
             				<a class="commentUserName" href="javascript:onOpenUserPage(${comment.user.id})" target="_blank">${comment.user.username}</a>
-            				<!--
-            				<a href="javascript:void(0);" class="commentTinyButton mentionUser btn btn-info btn-mini" rel="nofollow">@mention</a>
-            				<a href="javascript:void(0);" class="commentTinyButton deleteComment btn btn-danger btn-mini" rel="nofollow">Delete</a><span class="commentCreateTime">3 weeks ago </span>
-            				-->
+            				
+            				<a href="javascript:void(0);" class="commentTinyButton deleteComment btn btn-danger btn-mini" rel="nofollow">Delete</a><span class="commentCreateTime">${comment.date}</span>
+            				
             				<br>
             				<span class="detailCommentText emojstext">${comment.content}</span>
         				</div>
@@ -97,14 +86,22 @@ $(function(){
 	var img = document.getElementById('${photo.id}');
 	
 	img.onload = function() {
+		var height = $('body').height();
+		if (height < 333) { height = 333 };
 		
-		var height = img.height + 28;
+		var imgWidth = $('body').width() - 28 - 330;
+		
+		if (img.width > imgWidth) img.style.width = imgWidth.toString() + 'px';
+		
+		var width = img.width + 380;
+		
 		parent.$.colorbox.resize({
-        	innerWidth:$('body').width(),
+        	innerWidth:width,
         	innerHeight:height
     	});
     	
     	height = height - 277;
+    	
     	document.getElementById('commentsofphotoid${photo.id}').style.height = height.toString() + "px";
 	};
 	

@@ -1,28 +1,31 @@
 *{<meta charset="utf-8">}*
 #{extends 'Application/header.html' /}
 <div id="follower">
-#{list items: followings, as: 'following'}
-	<div class="row" style="margin:10px;">
-		<div class="col-md-10 col-md-offset-1" style="min-height:200px; background-image: url(http://farm6.staticflickr.com/5477/coverphoto/12521320@N08_h.jpg?1376067409#12521320@N08); border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;">
+#{list items: following_data, as: 'following'}
+	<div class="row" style="margin:15px;">
+		<!--<div class="col-md-10 col-md-offset-1" style="min-height:200px; background-image: url(http://upload.wikimedia.org/wikipedia/ja/7/7e/Titech_new_lib.jpg); border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px;">-->
+		<div class="col-md-10 col-md-offset-1" style="min-height:182px; background-image: url(${following.followee.cover}); border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; border-style:solid; border-width:1px;">
 			<div class="row">
 				<div class="col-md-2">
-					<div style="position:absolute; top:25px">
-							<img height="auto" width="100%" src="${following.avatar}">
+					<div style="position:absolute; top:15px">
+							<a href="@{user(following.followee.id)}"><img height="150px" width="150px" src="${following.followee.avatar}"></a>
 					</div>
 				</div>
-				<div class="col-md-9" style="color:#ffffff; top:25px;">
-					<div>
-						<h1 style="display:inline">${following.nickname} </h1>
-						<h4 style="display:inline">${following.profile}</h4>
+				<div class="col-md-9" style="color:#ffffff; top:15px; margin-left:165px;">
+					<div style = "padding-left: 10px; padding-bottom:4px; background-color:rgba(0, 0, 0, 0.4);">
+						<a href="@{user(following.followee.id)}"><h2 style="display:inline; color:#fff">${following.followee.username}</h2></a>
+						<h5 style="display:inline">${following.followee.nickname}</h5>
 					</div>
-					<div style="margin:10px">
-					#{list items: photos, as: 'photo'}
-						<img height="100px" width="auto" src="${photo.url}">
+					<div style="margin-top:12px; height: 100px; overflow-x:auto; overflow-y: hidden; white-space: nowrap;">
+					#{list items: following.followee.photos, as: 'photo'}
+						<a class="image" href="@{photoViewer(photo.url)}" onclick='imgClicked()'>
+         					<img height="100px" width="auto" src="${photo.url}" alt="...">
+      					</a>
 					#{/list}
 					</div>
 				</div>
-				<div class="col-md-1" style="position:absolute; top:90px; right:40px">
-					<button class="btn btn-primary" onclick="unfollow(${following.id})">Unfollow</button>
+				<div class="col-md-1" style="position:absolute; padding:0px; top:15px; right:15px; height:37px; width:auto">
+					<a href="@{unFollowInFollowerTab(following.followee.id)}"><button class="btn btn-warning" style="height:100%; border-radius: 0 !important;">Unfollow</button></a>
 				</div>
 			</div>
 		</div>
