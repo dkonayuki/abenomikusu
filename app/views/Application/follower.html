@@ -11,10 +11,10 @@
 							<a href="@{user(following.followee.id)}"><img height="150px" width="150px" src="${following.followee.avatar}"></a>
 					</div>
 				</div>
-				<div class="col-md-9" style="color:#ffffff; top:15px;">
+				<div class="col-md-9" style="color:#ffffff; top:15px; margin-left:165px;">
 					<div style = "padding-left: 10px; padding-bottom:4px; background-color:rgba(0, 0, 0, 0.4);">
-						<a href="@{user(following.followee.id)}"><h2 style="display:inline; color:#fff">${following.followee.nickname}</h2></a>
-						<h5 style="display:inline">${following.followee.profile}</h5>
+						<a href="@{user(following.followee.id)}"><h2 style="display:inline; color:#fff">${following.followee.username}</h2></a>
+						<h5 style="display:inline">${following.followee.nickname}</h5>
 					</div>
 					<div style="margin-top:12px; height: 100px; overflow-x:auto; overflow-y: hidden; white-space: nowrap;">
 					#{list items: following.followee.photos, as: 'photo'}
