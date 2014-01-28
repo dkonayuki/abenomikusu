@@ -4,6 +4,7 @@
 /tmp/*
 /test-result
 conf/*
+README.md
 .DS_Store
 ._*
 *~
@@ -18,4 +19,3 @@ conf/*
 !/public/images/
 !/public/javascripts/
 !/public/stylesheets/
-README.md
