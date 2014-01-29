@@ -3,7 +3,6 @@
 /logs/*
 /tmp/*
 /test-result
-conf/*
 README.md
 .DS_Store
 ._*
